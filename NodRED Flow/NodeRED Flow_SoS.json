@@ -1,0 +1,1858 @@
+[
+    {
+        "id": "9740324aa376621b",
+        "type": "mqtt in",
+        "z": "a732102bf3579cf6",
+        "name": "Receive From Broker",
+        "topic": "/companies/0/sites/1/config",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4e3cd5f24c0dd600",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2620,
+        "y": 2300,
+        "wires": [
+            [
+                "39c25ed3a46f33af"
+            ]
+        ]
+    },
+    {
+        "id": "39c25ed3a46f33af",
+        "type": "simple-queue",
+        "z": "a732102bf3579cf6",
+        "name": "Message Queue",
+        "firstMessageBypass": false,
+        "bypassInterval": "0",
+        "x": 2960,
+        "y": 2340,
+        "wires": [
+            [
+                "94ea738aa9678d03"
+            ]
+        ]
+    },
+    {
+        "id": "9c1fc3bb3330db97",
+        "type": "inject",
+        "z": "a732102bf3579cf6",
+        "name": "Trigger queue",
+        "props": [
+            {
+                "p": "trigger",
+                "v": "true",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "0.1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 2600,
+        "y": 2340,
+        "wires": [
+            [
+                "39c25ed3a46f33af"
+            ]
+        ]
+    },
+    {
+        "id": "94ea738aa9678d03",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Site Gateway",
+        "func": "// IPs and PORTs definition for UDP messages\nvar BROADCAST_IP = flow.get(\"BROADCAST_IP\")                   \nvar ZONEs_CONFIG_PORT = flow.get(\"ZONEs_CONFIG_PORT\");          \n\n// Topics definition for MQTT messages\nvar configTopic = flow.get(\"topicBasePath\") + \"config\";         \nvar statusTopic = flow.get(\"topicBasePath\") + \"status\";  \n\n// Flow Variables Names\nvar ZONE_NUM = \"ZoneNumber\";          // Number of Zones in the site\nvar ZONE_ACK = \"ZoneACK\";             // Number of Acks received from zones\nvar ZONEs_IPs = \"ZonesIpsMap\";        // Map Zones-Ips\n\n// Check messages from MQTT\nif (msg.hasOwnProperty(\"topic\")) {\n    switch (msg.topic) {\n        case configTopic:\n            // Save the number of zones in the site\n            flow.set(ZONE_NUM, msg.payload.zones.length);\n\n            // Return MQTT:null - UDP:Configuration \n            return [\n                null, \n                {\n                    ip: BROADCAST_IP,           \n                    port: ZONEs_CONFIG_PORT,\n                    payload: msg.payload,\n                    _msgid: msg._msgid\n                }\n            ];\n\n        default:\n            break;\n    }\n}\n\n// Check messages from UDP\nif (msg.hasOwnProperty(\"port\")) {\n    switch (msg.payload.data) {\n        case \"ACK\":\n            // Count the number of ACKs received\n            flow.set(ZONE_ACK, flow.get(ZONE_ACK) + 1);\n            // Map the Zones with its IP\n            flow.set(ZONEs_IPs, flow.get(ZONEs_IPs).set(msg.payload.zoneId, flow.get(msg.payload.zoneId + \"Port\")));\n\n            // Check if all zones sent an ACK\n            if (flow.get(ZONE_ACK) === flow.get(ZONE_NUM)){\n                // Return MQTT:ACK - UDP:null \n                return [\n                    {\n                        topic: statusTopic,\n                        payload: \"ACK\",\n                        _msgid: msg._msgid\n                    }, \n                    null\n                ];\n            }\n            break;\n\n        default:\n            break;\n    }\n}",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3170,
+        "y": 2340,
+        "wires": [
+            [
+                "09f933dad4c91662",
+                "4f20f46c5dd93428"
+            ],
+            [
+                "42241e825a1fdc27",
+                "09f933dad4c91662"
+            ]
+        ]
+    },
+    {
+        "id": "5a891f6467634b7e",
+        "type": "udp out",
+        "z": "a732102bf3579cf6",
+        "name": "UDP Out",
+        "addr": "",
+        "iface": "",
+        "port": "",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 3520,
+        "y": 2380,
+        "wires": []
+    },
+    {
+        "id": "353937a3a0cc4bbb",
+        "type": "udp in",
+        "z": "a732102bf3579cf6",
+        "name": "UDP in 10000",
+        "iface": "",
+        "port": "10000",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 2590,
+        "y": 2620,
+        "wires": [
+            [
+                "5b24ebf9f7a98efd"
+            ]
+        ]
+    },
+    {
+        "id": "d203f38fcfcfe301",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Zone 1 Manager",
+        "func": "// Zone ID\nconst ZONE_ID_NAME = \"1\";\n\n// IPs and PORTs definition for UDP messages\nvar BROADCAST_IP = flow.get(\"BROADCAST_IP\")\nvar ZONEs_PORT = flow.get(\"ZONEs_CONFIG_PORT\");\n\n// Flow Variables Names\nvar ZONE_MACHINE_CONFIG_FILE = ZONE_ID_NAME + \"MachineConfig\";\nvar ZONE_TOPIC = ZONE_ID_NAME + \"Topic\";\nvar MACHINES_IPS = ZONE_ID_NAME + \"MachinesIpsMap\";\nvar ZONE_PERIMETER = ZONE_ID_NAME + \"Perimeter\";\n\n// Topics definition for MQTT messages\nvar configTopic = flow.get(ZONE_TOPIC) + \"config\";\nvar statusTopic = flow.get(ZONE_TOPIC) + \"status\";\n\n// Flow Functions Import\nlet saveMachineConfig = flow.get(\"saveMachineConfig\");\nlet processGPSMessage = flow.get(\"processGPSMessage\");\nlet checkMachineInZone = flow.get(\"checkMachineInZone\")\nlet isMachineInZone = flow.get(\"isMachineInZone\");\n\n// Check messages from MQTT\nif (msg.hasOwnProperty(\"topic\")) {\n    switch(msg.topic) {\n        case configTopic:\n            // Sav the configuration of machines disposition inside the zone\n            saveMachineConfig(msg, ZONE_MACHINE_CONFIG_FILE);\n            node.log(msg);\n            \n            // Return MQTT:ACK - UDP:null \n            return [ \n                {\n                    topic: statusTopic,\n                    payload: \"ACK\",\n                    _msgid: msg._msgid\n                }, \n                null\n            ];\n        \n        default:\n            return;\n    }\n}\n\n// Check messages from UDP\nif (msg.hasOwnProperty(\"port\")) {\n    switch(msg.payload.status){\n        case \"START_UP\":\n            // If the machine do not belog to the zone, return\n            if (!checkMachineInZone(msg.payload.machineId, ZONE_MACHINE_CONFIG_FILE)){\n                return;\n            }\n\n            // Map the Machines with its IP\n            flow.set(MACHINES_IPS, flow.get(MACHINES_IPS).set(msg.payload.machineId, flow.get(msg.payload.machineId + \"Port\")));\n\n            // Return MQTT:null - UDP:Connect \n            return [\n                null,\n                {\n                    ip: msg.ip,\n                    port: flow.get(msg.payload.machineId + \"Port\"),\n                    payload: {\n                        status: \"CONNECTED\",\n                        zoneId: ZONE_ID_NAME,\n                        machineId: msg.payload.machineId\n                    },\n                    _msgid: msg._msgid\n                }\n            ];\n\n        case \"START_POS\":\n        case \"CURRENT_POS\":\n        case \"STOP\":\n            // If the machine do not belog to the zone, return\n            if (!checkMachineInZone(msg.payload.machineId, ZONE_MACHINE_CONFIG_FILE)) {\n                return;\n            }\n\n            //node.log(\"Machine: \" + msg.payload.machineId + \" is in \" + ZONE_ID_NAME);\n\n            // Check if the machine is inside the zone\n            //      - no stop\n            //      - si continuo\n            if (isMachineInZone(flow.get(ZONE_PERIMETER), msg.payload.coord)){\n                //node.log(\"Machine: \" + msg.payload.machineId + \" has coord \" + msg.payload.coord[0] + \", \" + msg.payload.coord[1]);\n                node.log(\"Inside the zone\");\n            }\n\n            // Check conditions and send to the Unity platform\n            var gpsResult = processGPSMessage(msg, ZONE_MACHINE_CONFIG_FILE);\n\n            return [\n                {\n                    topic: statusTopic,\n                    payload: gpsResult.payload,\n                    _msgid: gpsResult._msgid\n                },\n                null\n            ];\n    }\n}",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3180,
+        "y": 2540,
+        "wires": [
+            [
+                "118cdfa1936ae166",
+                "216c2025849871ce"
+            ],
+            [
+                "9d13ef56447173b2",
+                "216c2025849871ce"
+            ]
+        ]
+    },
+    {
+        "id": "f261c54c583f2312",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Zone 2 Manager",
+        "func": "// Zone ID\nconst ZONE_ID_NAME = \"2\";\n\n// IPs and PORTs definition for UDP messages\nvar BROADCAST_IP = flow.get(\"BROADCAST_IP\")\nvar ZONEs_PORT = flow.get(\"ZONEs_CONFIG_PORT\");\n\n// Flow Variables Names\nvar ZONE_MACHINE_CONFIG_FILE = ZONE_ID_NAME + \"MachineConfig\";\nvar ZONE_TOPIC = ZONE_ID_NAME + \"Topic\";\nvar MACHINES_IPS = ZONE_ID_NAME + \"MachinesIpsMap\";\nvar ZONE_PERIMETER = ZONE_ID_NAME + \"Perimeter\";\n\n// Topics definition for MQTT messages\nvar configTopic = flow.get(ZONE_TOPIC) + \"config\";\nvar statusTopic = flow.get(ZONE_TOPIC) + \"status\";\n\n// Flow Functions Import\nlet saveMachineConfig = flow.get(\"saveMachineConfig\");\nlet processGPSMessage = flow.get(\"processGPSMessage\");\nlet checkMachineInZone = flow.get(\"checkMachineInZone\")\nlet isMachineInZone = flow.get(\"isMachineInZone\");\n\n// Check messages from MQTT\nif (msg.hasOwnProperty(\"topic\")) {\n    switch(msg.topic) {\n        case configTopic:\n            // Sav the configuration of machines disposition inside the zone\n            saveMachineConfig(msg, ZONE_MACHINE_CONFIG_FILE);\n            node.log(msg);\n            \n            // Return MQTT:ACK - UDP:null \n            return [ \n                {\n                    topic: statusTopic,\n                    payload: \"ACK\",\n                    _msgid: msg._msgid\n                }, \n                null\n            ];\n        \n        default:\n            return;\n    }\n}\n\n// Check messages from UDP\nif (msg.hasOwnProperty(\"port\")) {\n    switch(msg.payload.status){\n        case \"START_UP\":\n            // If the machine do not belog to the zone, return\n            if (!checkMachineInZone(msg.payload.machineId, ZONE_MACHINE_CONFIG_FILE)){\n                return;\n            }\n\n            // Map the Machines with its IP\n            flow.set(MACHINES_IPS, flow.get(MACHINES_IPS).set(msg.payload.machineId, flow.get(msg.payload.machineId + \"Port\")));\n\n            // Return MQTT:null - UDP:Connect \n            return [\n                null,\n                {\n                    ip: msg.ip,\n                    port: flow.get(msg.payload.machineId + \"Port\"),\n                    payload: {\n                        status: \"CONNECTED\",\n                        zoneId: ZONE_ID_NAME,\n                        machineId: msg.payload.machineId\n                    },\n                    _msgid: msg._msgid\n                }\n            ];\n\n        case \"START_POS\":\n        case \"CURRENT_POS\":\n        case \"STOP\":\n            // If the machine do not belog to the zone, return\n            if (!checkMachineInZone(msg.payload.machineId, ZONE_MACHINE_CONFIG_FILE)) {\n                return;\n            }\n\n            //node.log(\"Machine: \" + msg.payload.machineId + \" is in \" + ZONE_ID_NAME);\n\n            // Check if the machine is inside the zone\n            //      - no stop\n            //      - si continuo\n            if (isMachineInZone(flow.get(ZONE_PERIMETER), msg.payload.coord)){\n                //node.log(\"Machine: \" + msg.payload.machineId + \" has coord \" + msg.payload.coord[0] + \", \" + msg.payload.coord[1]);\n                node.log(\"Inside the zone\");\n            }\n\n            // Check conditions and send to the Unity platform\n            var gpsResult = processGPSMessage(msg, ZONE_MACHINE_CONFIG_FILE);\n\n            return [\n                {\n                    topic: statusTopic,\n                    payload: gpsResult.payload,\n                    _msgid: gpsResult._msgid\n                },\n                null\n            ];\n    }\n}",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 4460,
+        "y": 2540,
+        "wires": [
+            [
+                "fbd4967c7ed48a7a",
+                "c34795dfc0b20112"
+            ],
+            [
+                "250175e8c58c0c50",
+                "fbd4967c7ed48a7a"
+            ]
+        ]
+    },
+    {
+        "id": "83e9d9f8450bdf32",
+        "type": "mqtt in",
+        "z": "a732102bf3579cf6",
+        "name": "Receive From Broker",
+        "topic": "/companies/0/sites/1/zones/1/config",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4e3cd5f24c0dd600",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2940,
+        "y": 2500,
+        "wires": [
+            [
+                "d203f38fcfcfe301"
+            ]
+        ]
+    },
+    {
+        "id": "04702a4591effa69",
+        "type": "mqtt in",
+        "z": "a732102bf3579cf6",
+        "name": "Receive From Broker",
+        "topic": "/companies/0/sites/1/zones/2/config",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4e3cd5f24c0dd600",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 4220,
+        "y": 2500,
+        "wires": [
+            [
+                "f261c54c583f2312"
+            ]
+        ]
+    },
+    {
+        "id": "09f933dad4c91662",
+        "type": "debug",
+        "z": "a732102bf3579cf6",
+        "name": "GateWay",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3360,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "42241e825a1fdc27",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 3350,
+        "y": 2380,
+        "wires": [
+            [
+                "5a891f6467634b7e"
+            ]
+        ]
+    },
+    {
+        "id": "5b24ebf9f7a98efd",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 2770,
+        "y": 2620,
+        "wires": [
+            [
+                "a12ab0492ed92b9a"
+            ]
+        ]
+    },
+    {
+        "id": "4b509aa96cc12d81",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 4050,
+        "y": 2620,
+        "wires": [
+            [
+                "9c2adbfac8346941"
+            ]
+        ]
+    },
+    {
+        "id": "a12ab0492ed92b9a",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Zone 1 Config",
+        "func": "// Zone ID\nconst ZONE_ID_NAME = \"1\";\n\n// IPs and PORTs definition for UDP messages\nvar CONTROLLER_PORT = flow.get(\"CONTROLLER_PORT\");\n\n// Flow Variables Names\nvar ZONE_GPS_POS = ZONE_ID_NAME + \"GPS\";\nvar ZONE_ID = ZONE_ID_NAME + \"ID\";\nvar ZONE_TOPIC = ZONE_ID_NAME + \"Topic\";\nvar ZONE_PERIMETER = ZONE_ID_NAME + \"Perimeter\";\n\n// Flow Variables Import\nvar zonesBaseTopic = flow.get(\"topicBasePath\") + \"zones/\";\n\n// Flow Functions Import\nlet isPointInPolygon = flow.get(\"isPointInPolygon\");\n\n// Assign Zone ID based on HW GPS position\nvar id = isPointInPolygon(msg.payload.zones, flow.get(ZONE_GPS_POS));\nif(id === null) return;\nnode.log(id);\nflow.set(ZONE_ID, id.replace(/\\s/g, ''));\nflow.set(ZONE_PERIMETER, msg.payload.zones.find(zone => zone.id === id).vertexs);\n\n// Define Zone Topic once define the Zone ID\nflow.set(ZONE_TOPIC, zonesBaseTopic + flow.get(ZONE_ID) + \"/\" );\n\n// If the Zone ID is set send an ACK\nif(flow.get(ZONE_ID) !== null){\n    return {\n        ip: msg.ip,\n        port: CONTROLLER_PORT,\n        payload: {\n            data: \"ACK\",\n            zoneId: flow.get(ZONE_ID)\n        },\n        _msgid: msg._msgid\n    };\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3180,
+        "y": 2620,
+        "wires": [
+            [
+                "94fd9755e0bd4257",
+                "216c2025849871ce"
+            ]
+        ]
+    },
+    {
+        "id": "21347be4b9396f0b",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Flow Variables",
+        "func": "function printFlowData(msg) {\n    // Array di tutte le chiavi salvate nel flow\n    const flowKeys = [\n        \"companyId\", \"siteId\",\n        \"BROADCAST_IP\", \"ZONEs_CONFIG_PORT\", \"ZONEs_MACHINES_CONFIG_PORT\", \"CONTROLLER_PORT\",\n        \"topicBasePath\",\n        \"ZoneNumber\", \"ZoneACK\", \"ZonesIpsMap\",\n        \"1Port\", \"1GPS\", \"1Perimeter\", \"1ID\", \"1Topic\", \"1MachineConfig\", \"1MachinesIpsMap\",\n        \"2Port\", \"2GPS\", \"2Perimeter\", \"2ID\", \"2Topic\", \"2MachineConfig\", \"2MachinesIpsMap\",\n        \"M001Port\", \"M001ZoneIps\", \"M001Connections\", \"M001CurrentPos\", \"M001START\",\n        \"M002Port\", \"M002ZoneIps\", \"M002Connections\", \"M002CurrentPos\", \"M002START\",\n        \"M003Port\", \"M003ZoneIps\", \"M003Connections\", \"M003CurrentPos\", \"M003START\",\n        \"M004Port\", \"M004ZoneIps\", \"M004Connections\", \"M004CurrentPos\", \"M004START\",\n        \"PositionMsgFrequence\"\n    ];\n\n    // Oggetto per raccogliere i dati\n    const flowData = {};\n\n    // Recupera e salva ogni valore del flow\n    flowKeys.forEach(key => {\n        let value = flow.get(key);\n\n        // Gestione specifica per le Map\n        if (value instanceof Map) {\n            // Converti la Map in un oggetto normale\n            value = Object.fromEntries(value);\n        }\n\n        flowData[key] = value;\n    });\n\n    // Stampa i dati nel debug\n    node.warn(\"Flow Data: \" + JSON.stringify(flowData, null, 2));\n\n    return msg;\n}\n\nprintFlowData(msg);",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Site informations\nflow.set(\"companyId\", \"0\");\nflow.set(\"siteId\", \"1\");\n\n// UDP\nflow.set(\"BROADCAST_IP\", \"192.168.56.255\");\nflow.set(\"ZONEs_CONFIG_PORT\", \"10000\");\nflow.set(\"ZONEs_MACHINES_CONFIG_PORT\", \"20000\");\nflow.set(\"CONTROLLER_PORT\", \"50000\");\n\n// Topics\nflow.set(\"topicBasePath\", \"/companies/\" + flow.get(\"companyId\") + \"/sites/\" + flow.get(\"siteId\") + \"/\");\n\n// Gateway\nflow.set(\"ZoneNumber\", 0);\nflow.set(\"ZoneACK\", 0);\nflow.set(\"ZonesIpsMap\", new Map());\n\n// Zone 1 \nflow.set(\"1Port\", \"10001\");\nflow.set(\"1GPS\", [400, -250]);\nflow.set(\"1Perimeter\", []);\nflow.set(\"1ID\", \"\");\nflow.set(\"1Topic\", \"\");\nflow.set(\"1MachineConfig\", \"\");\nflow.set(\"1MachinesIpsMap\", new Map());\n\n// Zone 2\nflow.set(\"2Port\", \"10002\");\nflow.set(\"2GPS\", [550, -550]);\nflow.set(\"2Perimeter\", []);\nflow.set(\"2ID\", \"\");\nflow.set(\"2Topic\", \"\");\nflow.set(\"2MachineConfig\", \"\");\nflow.set(\"2MachinesIpsMap\", new Map());\n\n// Machines PORTs\nflow.set(\"M001Port\", \"30001\");\nflow.set(\"M001ZoneIps\", new Map());\nflow.set(\"M001Connections\", -1);\nflow.set(\"M001CurrentPos\", [0, 0]);\nflow.set(\"M001START\", false);\n\nflow.set(\"M002Port\", \"30002\");\nflow.set(\"M002ZoneIps\", new Map());\nflow.set(\"M002Connections\", -1);\nflow.set(\"M002CurrentPos\", [0, 0]);\nflow.set(\"M002START\", false);\n\nflow.set(\"M003Port\", \"30003\");\nflow.set(\"M003ZoneIps\", new Map());\nflow.set(\"M003Connections\", -1);\nflow.set(\"M003CurrentPos\", [0, 0]);\nflow.set(\"M003START\", false);\n\nflow.set(\"M004Port\", \"30004\");\nflow.set(\"M004ZoneIps\", new Map());\nflow.set(\"M004Connections\", -1);\nflow.set(\"M004CurrentPos\", [0, 0]);\nflow.set(\"M004START\", false);\n\nflow.set(\"PositionMsgFrequence\", 1000);",
+        "finalize": "",
+        "libs": [],
+        "x": 2780,
+        "y": 2180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f29905ac13a0817",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Flow Functions",
+        "func": "",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "flow.set(\"isPointInPolygon\", function isPointInPolygon(zones, point) {\n    const px = point[0];\n    const pz = point[1];\n\n    for (let zone of zones) {\n        node.log(JSON.stringify(zone))\n        node.log(point)\n\n        const vertices = zone.vertexs;\n        let intersections = 0;\n\n        for (let i = 0; i < vertices.length; i++) {\n            const v1 = vertices[i];\n            const v2 = vertices[(i + 1) % vertices.length];\n\n            const belowFirst = v1.z <= pz;\n            const belowSecond = v2.z <= pz;\n\n            if (belowFirst !== belowSecond) {\n                const intersectX = v1.x + ((pz - v1.z) * (v2.x - v1.x)) / (v2.z - v1.z);\n                if (px <= intersectX) intersections++;\n            }\n        }\n\n        if (intersections % 2 === 1) return zone.id;\n    }\n\n    return null;\n});\n\n\nflow.set(\"saveMachineConfig\", function saveMachineConfig(msg, zoneMachineConfig) {\n    flow.set(zoneMachineConfig, msg.payload);\n});\n\n\nflow.set(\"processGPSMessage\", function processGPSMessage(msg, zoneMachineConfig) {\n    var machineConfigs = flow.get(zoneMachineConfig);\n\n    var mId = msg.payload.machineId;\n    var pos = msg.payload.coord;\n\n    var machineMatch = machineConfigs.machines.find(machine =>\n        machine.machineId === mId\n    );\n\n    if (!machineMatch) return null;\n\n    var matchedTask = machineMatch.tasks.find(task =>\n        task.coord[0] === pos[0] && task.coord[1] === pos[1]\n    );\n\n    if(msg.payload.hasOwnProperty(\"task\")){\n        node.log(\"stop da zone\")\n        return {\n            payload: {\n                machineId: mId,\n                task: msg.payload.task,\n                coord: pos\n            },\n            _msgid: msg._msgid\n        };\n    }\n\n    if (matchedTask) {\n        node.log(\"Id: \" + mId + \" - task: \" + matchedTask.task);\n        return {\n            payload: {\n                machineId: mId,\n                task: matchedTask.task,\n                coord: pos\n            },\n            _msgid: msg._msgid\n        };\n    } else {\n        node.log(\"Id: \" + mId + \" - task: move\");\n\n        return {\n            payload: {\n                machineId: mId,\n                task: \"move\",\n                coord: pos,\n                _msgid: msg._msgid\n            }\n        };\n    }\n});\n\n\nflow.set(\"checkMachineInZone\", function checkMachineInZone(machineId, zoneMachineConfig) {\n    return flow.get(zoneMachineConfig).machines.some(machine => machine.machineId === machineId);\n});\n\nflow.set(\"isMachineInZone\", function isMachineInZone(polygon, point) {\n    var px = point[0];\n    var pz = point[1];\n\n    const vertices = polygon;\n    let intersections = 0;\n\n    for (let i = 0; i < vertices.length; i++) {\n        const v1 = vertices[i];\n        const v2 = vertices[(i + 1) % vertices.length];\n\n        const belowFirst = v1.z <= pz;\n        const belowSecond = v2.z <= pz;\n\n        if (belowFirst !== belowSecond) {\n            const intersectX = v1.x + ((pz - v1.z) * (v2.x - v1.x)) / (v2.z - v1.z);\n            if (px <= intersectX) intersections++;\n        }\n    }\n\n    if (intersections % 2 === 1) return true;\n\n    return false;\n});",
+        "finalize": "",
+        "libs": [],
+        "x": 3000,
+        "y": 2180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c2adbfac8346941",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Zone 2 Config",
+        "func": "// Zone ID\nconst ZONE_ID_NAME = \"2\";\n\n// IPs and PORTs definition for UDP messages\nvar CONTROLLER_PORT = flow.get(\"CONTROLLER_PORT\");\n\n// Flow Variables Names\nvar ZONE_GPS_POS = ZONE_ID_NAME + \"GPS\";\nvar ZONE_ID = ZONE_ID_NAME + \"ID\";\nvar ZONE_TOPIC = ZONE_ID_NAME + \"Topic\";\nvar ZONE_PERIMETER = ZONE_ID_NAME + \"Perimeter\";\n\n// Flow Variables Import\nvar zonesBaseTopic = flow.get(\"topicBasePath\") + \"zones/\";\n\n// Flow Functions Import\nlet isPointInPolygon = flow.get(\"isPointInPolygon\");\n\n// Assign Zone ID based on HW GPS position\nvar id = isPointInPolygon(msg.payload.zones, flow.get(ZONE_GPS_POS));\nif(id === null) return;\n\nflow.set(ZONE_ID, id.replace(/\\s/g, ''));\nflow.set(ZONE_PERIMETER, msg.payload.zones.find(zone => zone.id === id).vertexs);\n\n// Define Zone Topic once define the Zone ID\nflow.set(ZONE_TOPIC, zonesBaseTopic + flow.get(ZONE_ID) + \"/\");\n\n// If the Zone ID is set send an ACK\nif (flow.get(ZONE_ID) !== null) {\n    return {\n        ip: msg.ip,\n        port: CONTROLLER_PORT,\n        payload: {\n            data: \"ACK\",\n            zoneId: flow.get(ZONE_ID)\n        },\n        _msgid: msg._msgid\n    };\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 4460,
+        "y": 2620,
+        "wires": [
+            [
+                "fbd4967c7ed48a7a",
+                "b1442723a050dc36"
+            ]
+        ]
+    },
+    {
+        "id": "30b9687ca7c2120c",
+        "type": "udp out",
+        "z": "a732102bf3579cf6",
+        "name": "UPD Out",
+        "addr": "",
+        "iface": "",
+        "port": "",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 3540,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "9aadc4af63a05be8",
+        "type": "udp in",
+        "z": "a732102bf3579cf6",
+        "name": "UDP in 10000",
+        "iface": "",
+        "port": "10000",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 3870,
+        "y": 2620,
+        "wires": [
+            [
+                "4b509aa96cc12d81"
+            ]
+        ]
+    },
+    {
+        "id": "b15173c1fd8d9756",
+        "type": "udp out",
+        "z": "a732102bf3579cf6",
+        "name": "UPD Out",
+        "addr": "",
+        "iface": "",
+        "port": "",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 4820,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "fbd4967c7ed48a7a",
+        "type": "debug",
+        "z": "a732102bf3579cf6",
+        "name": "Zone 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 4660,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "fdc6bd43dbeed43f",
+        "type": "udp in",
+        "z": "a732102bf3579cf6",
+        "name": "UDP in 50000",
+        "iface": "",
+        "port": "50000",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 2590,
+        "y": 2380,
+        "wires": [
+            [
+                "e1f5568b40119326"
+            ]
+        ]
+    },
+    {
+        "id": "e1f5568b40119326",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 2770,
+        "y": 2380,
+        "wires": [
+            [
+                "39c25ed3a46f33af"
+            ]
+        ]
+    },
+    {
+        "id": "94fd9755e0bd4257",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 3370,
+        "y": 2620,
+        "wires": [
+            [
+                "30b9687ca7c2120c"
+            ]
+        ]
+    },
+    {
+        "id": "b1442723a050dc36",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 4650,
+        "y": 2620,
+        "wires": [
+            [
+                "b15173c1fd8d9756"
+            ]
+        ]
+    },
+    {
+        "id": "4f20f46c5dd93428",
+        "type": "mqtt out",
+        "z": "a732102bf3579cf6",
+        "name": "Send To Broker",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4e3cd5f24c0dd600",
+        "x": 3380,
+        "y": 2240,
+        "wires": []
+    },
+    {
+        "id": "216c2025849871ce",
+        "type": "debug",
+        "z": "a732102bf3579cf6",
+        "name": "Zone 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3380,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "30312055b7ca4ac5",
+        "type": "udp in",
+        "z": "a732102bf3579cf6",
+        "name": "UDP in 10001",
+        "iface": "",
+        "port": "10001",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 2590,
+        "y": 2580,
+        "wires": [
+            [
+                "2fb49d2dcb186776"
+            ]
+        ]
+    },
+    {
+        "id": "fe464ef9eee95b64",
+        "type": "udp in",
+        "z": "a732102bf3579cf6",
+        "name": "UDP in 10002",
+        "iface": "",
+        "port": "10002",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 3870,
+        "y": 2580,
+        "wires": [
+            [
+                "e895dc2ffc4e5db2"
+            ]
+        ]
+    },
+    {
+        "id": "4dae121aa8895832",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Excavator",
+        "func": "// Machine ID\nconst mId = \"M001\";\n\n// IPs and PORTs definition for UDP messages\nvar BROADCAST_IP = flow.get(\"BROADCAST_IP\")\nvar ZONEs_MACHINES_CONFIG_PORT = flow.get(\"ZONEs_MACHINES_CONFIG_PORT\");\n\n// Flow Variables Names\nvar ZONES_IPS = mId + \"ZoneIps\";      // Map Zones - Ips\nvar POS = mId + \"CurrentPos\";         // Current position of the machine\nvar CONNECTIONS = mId + \"Connections\";\nvar STATE = mId + \"START\";\n\n// Flow Variables Import\nvar DELAY = flow.get(\"PositionMsgFrequence\");     // Delay between machine messages\n\n// Variables\nvar startingPos = [330, -35];          // Machine initial position\n\n// Check messages\nswitch (msg.payload.status) {\n  // Machine start up\n  case \"START_UP\":\n    // Send a message to find the zone it belogs to\n    return {\n      ip: BROADCAST_IP,\n      port: ZONEs_MACHINES_CONFIG_PORT,\n      payload: {\n        machineId: mId,\n        status: msg.payload.status\n      },\n      _msgid: msg._msgid,\n    };\n\n  case \"CONNECTED\":\n    // Save Zone Ip \n    flow.set(ZONES_IPS, flow.get(ZONES_IPS).set(msg.payload.zoneId, flow.get(msg.payload.zoneId + \"Port\")));\n\n    flow.set(CONNECTIONS, flow.get(CONNECTIONS) + 1);\n\n    // Send starting position to locate the machine\n    return {\n      ip: msg.ip,\n      port: flow.get(msg.payload.zoneId + \"Port\"),\n      delay: DELAY,\n      msgNum: flow.get(CONNECTIONS),\n      payload: {\n        machineId: mId,\n        coord: startingPos,\n        status: \"START_POS\"\n      },\n      _msgid: msg._msgid,\n    };\n\n  // Send current position every DELAY seconds\n  case \"START_POS\":\n    flow.set(POS, startingPos);\n  case \"CURRENT_POS\":\n    var currentPos = flow.get(POS);\n    flow.set(CONNECTIONS, 0);\n\n    var messages = [];\n    flow.get(ZONES_IPS).forEach((port, zoneId) => {\n\n      node.log(flow.get(STATE));\n      if (!flow.get(STATE)){\n        messages.push({\n          ip: msg.ip,\n          port: port,\n          delay: DELAY,\n          msgNum: flow.get(CONNECTIONS),\n          payload: {\n            machineId: mId,\n            coord: currentPos,\n            task: \"stop\",\n            status: \"STOP\"\n          },\n          _msgid: msg._msgid,\n        });\n      } else {\n        messages.push({\n          ip: msg.ip,\n          port: port,\n          delay: DELAY,\n          msgNum: flow.get(CONNECTIONS),\n          payload: {\n            machineId: mId,\n            coord: currentPos,\n            status: \"CURRENT_POS\"\n          },\n          _msgid: msg._msgid,\n        });\n      }\n\n      flow.set(CONNECTIONS, flow.get(CONNECTIONS) + 1);\n    });\n\n    messages.forEach((message) => {\n      node.send(message);\n    });\n    return;\n\n  case \"STOP\":\n    node.log(\"Stop\");\n    if (flow.get(STATE)){\n      msg.payload.status = \"START_UP\";\n    }\n    return;\n\n  default:\n    break;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2980,
+        "y": 2800,
+        "wires": [
+            [
+                "5af3cbb118921e46",
+                "28b6aa5adfb94bba",
+                "0ef14446abc72da2",
+                "25196da44d975721"
+            ]
+        ]
+    },
+    {
+        "id": "ea7d21a88cb4ae46",
+        "type": "udp out",
+        "z": "a732102bf3579cf6",
+        "name": "UPD Out",
+        "addr": "",
+        "iface": "",
+        "port": "",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 3320,
+        "y": 2800,
+        "wires": []
+    },
+    {
+        "id": "bc790df177c9ef86",
+        "type": "udp in",
+        "z": "a732102bf3579cf6",
+        "name": "UDP in 30001",
+        "iface": "",
+        "port": "30001",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 2570,
+        "y": 2840,
+        "wires": [
+            [
+                "7bb8c8c91f6d6bf1"
+            ]
+        ]
+    },
+    {
+        "id": "4259b6d3cc6f2e88",
+        "type": "inject",
+        "z": "a732102bf3579cf6",
+        "name": "START UP",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"status\":\"START_UP\"}",
+        "payloadType": "json",
+        "x": 2600,
+        "y": 2800,
+        "wires": [
+            [
+                "4dae121aa8895832"
+            ]
+        ]
+    },
+    {
+        "id": "28b6aa5adfb94bba",
+        "type": "debug",
+        "z": "a732102bf3579cf6",
+        "name": "Excavator",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2980,
+        "y": 2840,
+        "wires": []
+    },
+    {
+        "id": "2fb49d2dcb186776",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 2770,
+        "y": 2540,
+        "wires": [
+            [
+                "ab18b92911116937"
+            ]
+        ]
+    },
+    {
+        "id": "7bb8c8c91f6d6bf1",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 2770,
+        "y": 2840,
+        "wires": [
+            [
+                "4dae121aa8895832"
+            ]
+        ]
+    },
+    {
+        "id": "9d13ef56447173b2",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 3370,
+        "y": 2540,
+        "wires": [
+            [
+                "30b9687ca7c2120c"
+            ]
+        ]
+    },
+    {
+        "id": "5af3cbb118921e46",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 3150,
+        "y": 2800,
+        "wires": [
+            [
+                "ea7d21a88cb4ae46"
+            ]
+        ]
+    },
+    {
+        "id": "e895dc2ffc4e5db2",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 4050,
+        "y": 2540,
+        "wires": [
+            [
+                "c6691f15584bf673"
+            ]
+        ]
+    },
+    {
+        "id": "250175e8c58c0c50",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 4650,
+        "y": 2540,
+        "wires": [
+            [
+                "b15173c1fd8d9756"
+            ]
+        ]
+    },
+    {
+        "id": "3d919c6f781ba2f3",
+        "type": "udp out",
+        "z": "a732102bf3579cf6",
+        "name": "UPD Out",
+        "addr": "",
+        "iface": "",
+        "port": "",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 3320,
+        "y": 3020,
+        "wires": []
+    },
+    {
+        "id": "a1ae712137a17fc4",
+        "type": "udp in",
+        "z": "a732102bf3579cf6",
+        "name": "UDP in 30004",
+        "iface": "",
+        "port": "30004",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 2570,
+        "y": 3060,
+        "wires": [
+            [
+                "f23599bf6be3e8a6"
+            ]
+        ]
+    },
+    {
+        "id": "28bbad04c0a41416",
+        "type": "debug",
+        "z": "a732102bf3579cf6",
+        "name": "Wheel Loader",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2960,
+        "y": 3060,
+        "wires": []
+    },
+    {
+        "id": "f23599bf6be3e8a6",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 2750,
+        "y": 3060,
+        "wires": [
+            [
+                "a625399d3657c2f4"
+            ]
+        ]
+    },
+    {
+        "id": "67d14851359500a2",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 3150,
+        "y": 3020,
+        "wires": [
+            [
+                "3d919c6f781ba2f3"
+            ]
+        ]
+    },
+    {
+        "id": "a625399d3657c2f4",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Wheel Loader",
+        "func": "// Machine ID\nconst mId = \"M004\";\n\n// IPs and PORTs definition for UDP messages\nvar BROADCAST_IP = flow.get(\"BROADCAST_IP\")\nvar ZONEs_MACHINES_CONFIG_PORT = flow.get(\"ZONEs_MACHINES_CONFIG_PORT\");\n\n// Flow Variables Names\nvar ZONES_IPS = mId + \"ZoneIps\";      // Map Zones - Ips\nvar POS = mId + \"CurrentPos\";         // Current position of the machine\nvar CONNECTIONS = mId + \"Connections\";\nvar STATE = mId + \"START\";\n\n// Flow Variables Import\nvar DELAY = flow.get(\"PositionMsgFrequence\");     // Delay between machine messages\n\n// Variables\nvar startingPos = [300, -50];          // Machine initial position\n\n// Check messages\nswitch (msg.payload.status) {\n  // Machine start up\n  case \"START_UP\":\n    // Send a message to find the zone it belogs to\n    return {\n      ip: BROADCAST_IP,\n      port: ZONEs_MACHINES_CONFIG_PORT,\n      payload: {\n        machineId: mId,\n        status: msg.payload.status\n      },\n      _msgid: msg._msgid,\n    };\n\n  case \"CONNECTED\":\n    // Save Zone Ip \n    flow.set(ZONES_IPS, flow.get(ZONES_IPS).set(msg.payload.zoneId, flow.get(msg.payload.zoneId + \"Port\")));\n\n    flow.set(CONNECTIONS, flow.get(CONNECTIONS) + 1);\n\n    // Send starting position to locate the machine\n    return {\n      ip: msg.ip,\n      port: flow.get(msg.payload.zoneId + \"Port\"),\n      delay: DELAY,\n      msgNum: flow.get(CONNECTIONS),\n      payload: {\n        machineId: mId,\n        coord: startingPos,\n        status: \"START_POS\"\n      },\n      _msgid: msg._msgid,\n    };\n\n  // Send current position every DELAY seconds\n  case \"START_POS\":\n    flow.set(POS, startingPos);\n  case \"CURRENT_POS\":\n    var currentPos = flow.get(POS);\n    flow.set(CONNECTIONS, 0);\n\n    var messages = [];\n    flow.get(ZONES_IPS).forEach((port, zoneId) => {\n\n      if (!flow.get(STATE)) {\n        messages.push({\n          ip: msg.ip,\n          port: port,\n          delay: DELAY,\n          msgNum: flow.get(CONNECTIONS),\n          payload: {\n            machineId: mId,\n            coord: currentPos,\n            task: \"stop\",\n            status: \"STOP\"\n          },\n          _msgid: msg._msgid,\n        });\n      } else {\n        messages.push({\n          ip: msg.ip,\n          port: port,\n          delay: DELAY,\n          msgNum: flow.get(CONNECTIONS),\n          payload: {\n            machineId: mId,\n            coord: currentPos,\n            status: \"CURRENT_POS\"\n          },\n          _msgid: msg._msgid,\n        });\n      }\n\n      flow.set(CONNECTIONS, flow.get(CONNECTIONS) + 1);\n    });\n\n    messages.forEach((message) => {\n      node.send(message);\n    });\n    return;\n\n  case \"STOP\":\n    node.log(\"Stop\");\n    if (flow.get(STATE)) {\n      msg.payload.status = \"START_UP\";\n    }\n    return;\n\n  default:\n    break;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2960,
+        "y": 3020,
+        "wires": [
+            [
+                "67d14851359500a2",
+                "28bbad04c0a41416",
+                "cefb802b55e21c56",
+                "0ab1bf4caf83c7d2"
+            ]
+        ]
+    },
+    {
+        "id": "3cafd49df9b248c1",
+        "type": "udp out",
+        "z": "a732102bf3579cf6",
+        "name": "UPD Out",
+        "addr": "",
+        "iface": "",
+        "port": "",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 3320,
+        "y": 3280,
+        "wires": []
+    },
+    {
+        "id": "c895b101aae2ad96",
+        "type": "udp in",
+        "z": "a732102bf3579cf6",
+        "name": "UDP in 30002",
+        "iface": "",
+        "port": "30002",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 2590,
+        "y": 3320,
+        "wires": [
+            [
+                "71cce76104c0f488"
+            ]
+        ]
+    },
+    {
+        "id": "5007b567cbef1a7e",
+        "type": "debug",
+        "z": "a732102bf3579cf6",
+        "name": "Truck",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2990,
+        "y": 3320,
+        "wires": []
+    },
+    {
+        "id": "71cce76104c0f488",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 2770,
+        "y": 3320,
+        "wires": [
+            [
+                "4dc87868a81f7466"
+            ]
+        ]
+    },
+    {
+        "id": "adc3b5842206a97d",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 3150,
+        "y": 3280,
+        "wires": [
+            [
+                "3cafd49df9b248c1"
+            ]
+        ]
+    },
+    {
+        "id": "4dc87868a81f7466",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Truck",
+        "func": "// Machine ID\nconst mId = \"M002\";\n\n// IPs and PORTs definition for UDP messages\nvar BROADCAST_IP = flow.get(\"BROADCAST_IP\")\nvar ZONEs_MACHINES_CONFIG_PORT = flow.get(\"ZONEs_MACHINES_CONFIG_PORT\");\n\n// Flow Variables Names\nvar ZONES_IPS = mId + \"ZoneIps\";      // Map Zones - Ips\nvar POS = mId + \"CurrentPos\";         // Current position of the machine\nvar CONNECTIONS = mId + \"Connections\";\nvar STATE = mId + \"START\";\n\n// Flow Variables Import\nvar DELAY = flow.get(\"PositionMsgFrequence\");     // Delay between machine messages\n\n// Variables\nvar startingPos = [270, -70];          // Machine initial position\n\n// Check messages\nswitch (msg.payload.status) {\n  // Machine start up\n  case \"START_UP\":\n    // Send a message to find the zone it belogs to\n    return {\n      ip: BROADCAST_IP,\n      port: ZONEs_MACHINES_CONFIG_PORT,\n      payload: {\n        machineId: mId,\n        status: msg.payload.status\n      },\n      _msgid: msg._msgid,\n    };\n\n  case \"CONNECTED\":\n    // Save Zone Ip \n    flow.set(ZONES_IPS, flow.get(ZONES_IPS).set(msg.payload.zoneId, flow.get(msg.payload.zoneId + \"Port\")));\n\n    flow.set(CONNECTIONS, flow.get(CONNECTIONS) + 1);\n\n    // Send starting position to locate the machine\n    return {\n      ip: msg.ip,\n      port: flow.get(msg.payload.zoneId + \"Port\"),\n      delay: DELAY,\n      msgNum: flow.get(CONNECTIONS),\n      payload: {\n        machineId: mId,\n        coord: startingPos,\n        status: \"START_POS\"\n      },\n      _msgid: msg._msgid,\n    };\n\n  // Send current position every DELAY seconds\n  case \"START_POS\":\n    flow.set(POS, startingPos);\n  case \"CURRENT_POS\":\n    var currentPos = flow.get(POS);\n    flow.set(CONNECTIONS, 0);\n\n    var messages = [];\n    flow.get(ZONES_IPS).forEach((port, zoneId) => {\n\n      if (!flow.get(STATE)) {\n        messages.push({\n          ip: msg.ip,\n          port: port,\n          delay: DELAY,\n          msgNum: flow.get(CONNECTIONS),\n          payload: {\n            machineId: mId,\n            coord: currentPos,\n            task: \"stop\",\n            status: \"STOP\"\n          },\n          _msgid: msg._msgid,\n        });\n      } else {\n        messages.push({\n          ip: msg.ip,\n          port: port,\n          delay: DELAY,\n          msgNum: flow.get(CONNECTIONS),\n          payload: {\n            machineId: mId,\n            coord: currentPos,\n            status: \"CURRENT_POS\"\n          },\n          _msgid: msg._msgid,\n        });\n      }\n\n      flow.set(CONNECTIONS, flow.get(CONNECTIONS) + 1);\n    });\n\n    messages.forEach((message) => {\n      node.send(message);\n    });\n    return;\n\n  case \"STOP\":\n    node.log(\"Stop\");\n    if (flow.get(STATE)) {\n      msg.payload.status = \"START_UP\";\n    }\n    return;\n\n  default:\n    break;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2990,
+        "y": 3280,
+        "wires": [
+            [
+                "adc3b5842206a97d",
+                "5007b567cbef1a7e",
+                "2f1470abcbf722e8",
+                "b6190cb6bd1c45d5"
+            ]
+        ]
+    },
+    {
+        "id": "a0fec711abc181eb",
+        "type": "udp out",
+        "z": "a732102bf3579cf6",
+        "name": "UPD Out",
+        "addr": "",
+        "iface": "",
+        "port": "",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 4600,
+        "y": 2780,
+        "wires": []
+    },
+    {
+        "id": "c7559c4dc8c94362",
+        "type": "udp in",
+        "z": "a732102bf3579cf6",
+        "name": "UDP in 30003",
+        "iface": "",
+        "port": "30003",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 3850,
+        "y": 2820,
+        "wires": [
+            [
+                "d59583a5760c7100"
+            ]
+        ]
+    },
+    {
+        "id": "6f54936f8374a3dd",
+        "type": "debug",
+        "z": "a732102bf3579cf6",
+        "name": "Wheel Loader",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 4240,
+        "y": 2820,
+        "wires": []
+    },
+    {
+        "id": "d59583a5760c7100",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 4050,
+        "y": 2820,
+        "wires": [
+            [
+                "22f272cf5f195ef9"
+            ]
+        ]
+    },
+    {
+        "id": "7fa8bc364c0f7df9",
+        "type": "json",
+        "z": "a732102bf3579cf6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 4430,
+        "y": 2780,
+        "wires": [
+            [
+                "a0fec711abc181eb"
+            ]
+        ]
+    },
+    {
+        "id": "22f272cf5f195ef9",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Wheel Loader",
+        "func": "// Machine ID\nconst mId = \"M003\";\n\n// IPs and PORTs definition for UDP messages\nvar BROADCAST_IP = flow.get(\"BROADCAST_IP\")\nvar ZONEs_MACHINES_CONFIG_PORT = flow.get(\"ZONEs_MACHINES_CONFIG_PORT\");\n\n// Flow Variables Names\nvar ZONES_IPS = mId + \"ZoneIps\";      // Map Zones - Ips\nvar POS = mId + \"CurrentPos\";         // Current position of the machine\nvar CONNECTIONS = mId + \"Connections\";\nvar STATE = mId + \"START\";\n\n// Flow Variables Import\nvar DELAY = flow.get(\"PositionMsgFrequence\");     // Delay between machine messages\n\n// Variables\nvar startingPos = [720, -700];          // Machine initial position\n\n// Check messages\nswitch (msg.payload.status) {\n  // Machine start up\n  case \"START_UP\":\n    // Send a message to find the zone it belogs to\n    return {\n      ip: BROADCAST_IP,\n      port: ZONEs_MACHINES_CONFIG_PORT,\n      payload: {\n        machineId: mId,\n        status: msg.payload.status\n      },\n      _msgid: msg._msgid,\n    };\n\n  case \"CONNECTED\":\n    // Save Zone Ip \n    flow.set(ZONES_IPS, flow.get(ZONES_IPS).set(msg.payload.zoneId, flow.get(msg.payload.zoneId + \"Port\")));\n\n    flow.set(CONNECTIONS, flow.get(CONNECTIONS) + 1);\n\n    // Send starting position to locate the machine\n    return {\n      ip: msg.ip,\n      port: flow.get(msg.payload.zoneId + \"Port\"),\n      delay: DELAY,\n      msgNum: flow.get(CONNECTIONS),\n      payload: {\n        machineId: mId,\n        coord: startingPos,\n        status: \"START_POS\"\n      },\n      _msgid: msg._msgid,\n    };\n\n  // Send current position every DELAY seconds\n  case \"START_POS\":\n    flow.set(POS, startingPos);\n  case \"CURRENT_POS\":\n    var currentPos = flow.get(POS);\n    flow.set(CONNECTIONS, 0);\n\n    var messages = [];\n    flow.get(ZONES_IPS).forEach((port, zoneId) => {\n\n      if (!flow.get(STATE)) {\n        messages.push({\n          ip: msg.ip,\n          port: port,\n          delay: DELAY,\n          msgNum: flow.get(CONNECTIONS),\n          payload: {\n            machineId: mId,\n            coord: currentPos,\n            task: \"stop\",\n            status: \"STOP\"\n          },\n          _msgid: msg._msgid,\n        });\n      } else {\n        messages.push({\n          ip: msg.ip,\n          port: port,\n          delay: DELAY,\n          msgNum: flow.get(CONNECTIONS),\n          payload: {\n            machineId: mId,\n            coord: currentPos,\n            status: \"CURRENT_POS\"\n          },\n          _msgid: msg._msgid,\n        });\n      }\n\n      flow.set(CONNECTIONS, flow.get(CONNECTIONS) + 1);\n    });\n\n    messages.forEach((message) => {\n      node.send(message);\n    });\n    return;\n\n  case \"STOP\":\n    node.log(\"Stop\");\n    if (flow.get(STATE)) {\n      msg.payload.status = \"START_UP\";\n    }\n    return;\n\n  default:\n    break;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "flow.set(\"M003-ZoneIp\", new Map());",
+        "finalize": "",
+        "libs": [],
+        "x": 4240,
+        "y": 2780,
+        "wires": [
+            [
+                "7fa8bc364c0f7df9",
+                "6f54936f8374a3dd",
+                "b06092719930bc52",
+                "4b41a14c86ab96e5"
+            ]
+        ]
+    },
+    {
+        "id": "7e281a26536bc1f6",
+        "type": "inject",
+        "z": "a732102bf3579cf6",
+        "name": "START UP",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"status\":\"START_UP\"}",
+        "payloadType": "json",
+        "x": 2600,
+        "y": 3020,
+        "wires": [
+            [
+                "a625399d3657c2f4"
+            ]
+        ]
+    },
+    {
+        "id": "dd8b2770ddd160fe",
+        "type": "inject",
+        "z": "a732102bf3579cf6",
+        "name": "START UP",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"status\":\"START_UP\"}",
+        "payloadType": "json",
+        "x": 2580,
+        "y": 3280,
+        "wires": [
+            [
+                "4dc87868a81f7466"
+            ]
+        ]
+    },
+    {
+        "id": "450907a8a2e27cc0",
+        "type": "inject",
+        "z": "a732102bf3579cf6",
+        "name": "START UP",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"status\":\"START_UP\"}",
+        "payloadType": "json",
+        "x": 3860,
+        "y": 2780,
+        "wires": [
+            [
+                "22f272cf5f195ef9"
+            ]
+        ]
+    },
+    {
+        "id": "118cdfa1936ae166",
+        "type": "mqtt out",
+        "z": "a732102bf3579cf6",
+        "name": "Send To Broker",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4e3cd5f24c0dd600",
+        "x": 3400,
+        "y": 2500,
+        "wires": []
+    },
+    {
+        "id": "c34795dfc0b20112",
+        "type": "mqtt out",
+        "z": "a732102bf3579cf6",
+        "name": "Send To Broker",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4e3cd5f24c0dd600",
+        "x": 4680,
+        "y": 2500,
+        "wires": []
+    },
+    {
+        "id": "2eb03e8810d0167d",
+        "type": "udp in",
+        "z": "a732102bf3579cf6",
+        "name": "UDP in 20000",
+        "iface": "",
+        "port": "20000",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 2590,
+        "y": 2540,
+        "wires": [
+            [
+                "2fb49d2dcb186776"
+            ]
+        ]
+    },
+    {
+        "id": "d34e009c7f0a7b25",
+        "type": "udp in",
+        "z": "a732102bf3579cf6",
+        "name": "UDP in 20000",
+        "iface": "",
+        "port": "20000",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 3870,
+        "y": 2540,
+        "wires": [
+            [
+                "e895dc2ffc4e5db2"
+            ]
+        ]
+    },
+    {
+        "id": "8fdab5da02213381",
+        "type": "inject",
+        "z": "a732102bf3579cf6",
+        "name": "Print",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 2590,
+        "y": 2180,
+        "wires": [
+            [
+                "21347be4b9396f0b"
+            ]
+        ]
+    },
+    {
+        "id": "c7ebf3190362192c",
+        "type": "delay",
+        "z": "a732102bf3579cf6",
+        "name": "GPS Rate",
+        "pauseType": "delayv",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3040,
+        "y": 2760,
+        "wires": [
+            [
+                "4dae121aa8895832"
+            ]
+        ]
+    },
+    {
+        "id": "0ef14446abc72da2",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Filter Msg",
+        "func": "switch (msg.payload.status){\n  case \"START_UP\":\n    return;    \n\n  default:\n    if (msg.msgNum === 0)\n      return msg;\n    else\n      return;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2880,
+        "y": 2760,
+        "wires": [
+            [
+                "c7ebf3190362192c"
+            ]
+        ]
+    },
+    {
+        "id": "68d5905aa8781533",
+        "type": "delay",
+        "z": "a732102bf3579cf6",
+        "name": "GPS Rate",
+        "pauseType": "delayv",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3040,
+        "y": 2980,
+        "wires": [
+            [
+                "a625399d3657c2f4"
+            ]
+        ]
+    },
+    {
+        "id": "cefb802b55e21c56",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Filter Msg",
+        "func": "switch (msg.payload.status){\n  case \"START_UP\":\n    return;    \n\n  default:\n    if (msg.msgNum === 0)\n      return msg;\n    else\n      return;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2880,
+        "y": 2980,
+        "wires": [
+            [
+                "68d5905aa8781533"
+            ]
+        ]
+    },
+    {
+        "id": "e8cd649e6cdd1cf5",
+        "type": "delay",
+        "z": "a732102bf3579cf6",
+        "name": "GPS Rate",
+        "pauseType": "delayv",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3040,
+        "y": 3240,
+        "wires": [
+            [
+                "4dc87868a81f7466"
+            ]
+        ]
+    },
+    {
+        "id": "2f1470abcbf722e8",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Filter Msg",
+        "func": "switch (msg.payload.status){\n  case \"START_UP\":\n    return;    \n\n  default:\n    if (msg.msgNum === 0)\n      return msg;\n    else\n      return;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2880,
+        "y": 3240,
+        "wires": [
+            [
+                "e8cd649e6cdd1cf5"
+            ]
+        ]
+    },
+    {
+        "id": "59f2bf831bee7535",
+        "type": "delay",
+        "z": "a732102bf3579cf6",
+        "name": "GPS Rate",
+        "pauseType": "delayv",
+        "timeout": "1",
+        "timeoutUnits": "hours",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 4320,
+        "y": 2740,
+        "wires": [
+            [
+                "22f272cf5f195ef9"
+            ]
+        ]
+    },
+    {
+        "id": "b06092719930bc52",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Filter Msg",
+        "func": "switch (msg.payload.status){\n  case \"START_UP\":\n    return;    \n\n  default:\n    if (msg.msgNum === 0)\n      return msg;\n    else\n      return;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 4160,
+        "y": 2740,
+        "wires": [
+            [
+                "59f2bf831bee7535"
+            ]
+        ]
+    },
+    {
+        "id": "ab18b92911116937",
+        "type": "simple-queue",
+        "z": "a732102bf3579cf6",
+        "name": "Message Queue",
+        "firstMessageBypass": false,
+        "bypassInterval": "0",
+        "x": 2960,
+        "y": 2540,
+        "wires": [
+            [
+                "d203f38fcfcfe301"
+            ]
+        ]
+    },
+    {
+        "id": "69254b1a3f0249f7",
+        "type": "inject",
+        "z": "a732102bf3579cf6",
+        "name": "Trigger queue",
+        "props": [
+            {
+                "p": "trigger",
+                "v": "true",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "0.1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 2700,
+        "y": 2500,
+        "wires": [
+            [
+                "ab18b92911116937"
+            ]
+        ]
+    },
+    {
+        "id": "c3d71f335022685d",
+        "type": "inject",
+        "z": "a732102bf3579cf6",
+        "name": "Trigger queue",
+        "props": [
+            {
+                "p": "trigger",
+                "v": "true",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "0.1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 3980,
+        "y": 2500,
+        "wires": [
+            [
+                "c6691f15584bf673"
+            ]
+        ]
+    },
+    {
+        "id": "c6691f15584bf673",
+        "type": "simple-queue",
+        "z": "a732102bf3579cf6",
+        "name": "Message Queue",
+        "firstMessageBypass": false,
+        "bypassInterval": "0",
+        "x": 4240,
+        "y": 2540,
+        "wires": [
+            [
+                "f261c54c583f2312"
+            ]
+        ]
+    },
+    {
+        "id": "25196da44d975721",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Excavator Logic",
+        "func": "// Machine ID\nconst mId = \"M001\";\n\n// Flow variables\nconst STATUS = mId + \"START\";\nconst timeStep = flow.get(\"PositionMsgFrequence\");      // milliseconds\n\n// Node Constants\nconst machineSpeed = context.get(\"SPEED\");\nconst speedInMetersPerSecond = (machineSpeed * 1000) / 3600;    // Convert speed from km/h to m/s      \n\n// Constants\nconst DISTANCE_FACTOR = 5;\nconst DIG_TIME_UNIT = 2;\nconst UNLOAD_TIME_UNIT = 2;\n\n// Move function - Update machine current position at each time unit when it moves\nfunction move(currentPos, endPos) {\n    // Calculate the distance between the current and end positions\n    const deltaX = (endPos[0] - currentPos[0]) * DISTANCE_FACTOR;\n    const deltaY = (endPos[1] - currentPos[1]) * DISTANCE_FACTOR;\n    const distanceToTarget = Math.sqrt(deltaX ** 2 + deltaY ** 2);\n\n    // If the distance is less than the step the machine can take in this time, stop at the target\n    const maxStepDistance = (speedInMetersPerSecond * (timeStep/1000)) / DISTANCE_FACTOR;\n    if (distanceToTarget <= maxStepDistance) {\n        context.set(\"TEMP_POS\", [endPos[0], endPos[1]]);\n        context.set(\"STATUS_INDEX\", 1)                          // DIGs\n        context.set(\"MSG_COUNT\", 0);\n        return;\n    }\n\n    // Calculate the new current position\n    const directionX = deltaX / distanceToTarget;\n    const directionY = deltaY / distanceToTarget;\n    var newX = currentPos[0] + (directionX * maxStepDistance);\n    var newY = currentPos[1] + (directionY * maxStepDistance);\n\n    // Check if the new position is over the expected final one\n    if (\n        (directionX > 0 && newX > context.get(\"FinalPosition\")[0]) ||\n        (directionX < 0 && newX < context.get(\"FinalPosition\")[0]) ||\n        (directionY > 0 && newY > context.get(\"FinalPosition\")[1]) ||\n        (directionY < 0 && newY < context.get(\"FinalPosition\")[1])\n    ) {\n        newX = context.get(\"FinalPosition\")[0];\n        newY = context.get(\"FinalPosition\")[1];\n        context.set(\"TEMP_POS\", [newX, newY]);\n        context.set(\"STATUS_INDEX\", 1);\n        context.set(\"MSG_COUNT\", 0);\n    }\n\n    // Set the new position as temporary, it will be updated, as current position, once a new message is received\n    context.set(\"TEMP_POS\", [newX, newY]);\n    return;\n}\n\n\n// If the machine is Turned On update the status based on its tasks\nif (msg.payload.status === \"START_POS\" || flow.get(STATUS)) {\n    // Return if the messgges comes from Excavator node\n    if (flow.get(STATUS) && msg.payload.hasOwnProperty(\"status\")) {\n        return;\n    }\n\n    // First startup\n    if (msg.payload.status === \"START_POS\" && !flow.get(STATUS)) {\n        flow.set(STATUS, true);\n        context.set(\"TEMP_POS\", msg.payload.coord);\n        \n        // TODO : Automate the end position definition\n        context.set(\"FinalPosition\", [450, -200]);     \n        \n        return {\n            payload: \"STARTED\",\n            delay: timeStep,\n            _msgid: msg._msgid\n        };\n    }\n\n    // Update current position and message counter when a new message incomes\n    flow.set(mId + \"CurrentPos\", context.get(\"TEMP_POS\"));\n    context.set(\"MSG_COUNT\", context.get(\"MSG_COUNT\") + 1);\n\n    // Get current and final position\n    var currentPos = flow.get(mId + \"CurrentPos\");         \n    var finalPos = context.get(\"FinalPosition\");\n\n    node.log(\"Epoch: \" + context.get(\"MSG_COUNT\"));\n    node.log(\"Final Pos to reach  - \" + \" X: \" + finalPos[0] + \" - Y: \" + finalPos[1]);\n    node.log(\"Current Machine Pos - \" + \" X: \" + currentPos[0] + \" - Y: \" + currentPos[1]);\n\n    // Get machine status and update it based on its actions\n    var currentStatus = context.get(\"STATUS\")[context.get(\"STATUS_INDEX\")];\n\n    switch (currentStatus) {\n        case \"MOVE\":\n            // Calculate machine future position \n            move(currentPos, finalPos)\n            break;\n\n        case \"DIG\":\n            // Dig until the digging area is empty\n            if (flow.get(\"DIG_AREA\") === 0){\n                context.set(\"STATUS_INDEX\", 3);     // GOTO Stop task\n                context.set(\"MSG_COUNT\", 0);\n                break;\n            }\n\n            // If the digging area is not empty, dig\n            if (context.get(\"MSG_COUNT\") === DIG_TIME_UNIT){\n                flow.set(\"DIG_AREA\", flow.get(\"DIG_AREA\") - context.get(\"BUCKET_CAPACITY\"))        // Remove material\n                node.log(\"---------------------------------------------------------------------------------------------------------------------------DIG:AREA \" + flow.get(\"DIG_AREA\"));\n                context.set(\"STATUS_INDEX\", 2);         // GOTO Unload task\n                // TODO: Define it dynamically\n                context.set(\"TEMP_POS\", [430, -200]);   // Unload position\n                context.set(\"MSG_COUNT\", 0);\n            }            \n            break;\n\n        case \"UNLOAD\":       \n            // Unload excavator bucket\n            if (context.get(\"MSG_COUNT\") == UNLOAD_TIME_UNIT) {\n                flow.set(\"PILE\", flow.get(\"PILE\") + context.get(\"BUCKET_CAPACITY\"))                 // Add material to che pile\n                node.log(\"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PILE \" + flow.get(\"PILE\"));\n\n                // Dig the digging area is not empty\n                if (flow.get(\"DIG_AREA\") !== 0){\n                    context.set(\"STATUS_INDEX\", 1);             // GOTO Dig task\n                    // TODO: Define it dynamically\n                    context.set(\"TEMP_POS\", [450, -200]);       // Dig position\n                } else {\n                    context.set(\"STATUS_INDEX\", 3);             // GOTO Stop task\n                }\n\n                context.set(\"MSG_COUNT\", 0);\n            }\n            break;\n\n        case \"STOP\":\n            node.log(\"Material left in the dig area: \" + flow.get(\"DIG_AREA\") + \" Material left in the pile: \" + flow.get(\"PILE\"));\n            flow.set(STATUS, false);           // Stop the excavator\n            break;\n    }\n\n    // Return a message with the current machine status\n    return {\n        payload: currentStatus,\n        delay: timeStep,\n        _msgid: msg._msgid\n    }\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "context.set(\"STATUS\", [\"MOVE\", \"DIG\", \"UNLOAD\", \"STOP\"]);      \ncontext.set(\"STATUS_INDEX\", 0);      \n\ncontext.set(\"FinalPosition\", [0, 0]);     \ncontext.set(\"TEMP_POS\", [0, 0]);\ncontext.set(\"MSG_COUNT\", 0);\n\ncontext.set(\"SPEED\", 200);              // 10 km/h\ncontext.set(\"BUCKET_CAPACITY\", 1)       // 1m^2",
+        "finalize": "",
+        "libs": [],
+        "x": 3180,
+        "y": 2880,
+        "wires": [
+            [
+                "2bfd3b881797d9d1",
+                "d895674e7b3ad962"
+            ]
+        ]
+    },
+    {
+        "id": "2bfd3b881797d9d1",
+        "type": "delay",
+        "z": "a732102bf3579cf6",
+        "name": "GPS Rate",
+        "pauseType": "delayv",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3180,
+        "y": 2840,
+        "wires": [
+            [
+                "25196da44d975721"
+            ]
+        ]
+    },
+    {
+        "id": "d895674e7b3ad962",
+        "type": "debug",
+        "z": "a732102bf3579cf6",
+        "name": "Excavator LOG",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3420,
+        "y": 2880,
+        "wires": []
+    },
+    {
+        "id": "b3d814e897bb718e",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Flow Variable Logic",
+        "func": "function printFlowData(msg) {\n    // Array di tutte le chiavi salvate nel flow\n    const flowKeys = [\n        \"DIG_AREA\",\n        \"PILE\", \n        \"BED\",\n        \"PILE1\" \n    ];\n\n    // Oggetto per raccogliere i dati\n    const flowData = {};\n\n    // Recupera e salva ogni valore del flow\n    flowKeys.forEach(key => {\n        let value = flow.get(key);\n\n        // Gestione specifica per le Map\n        if (value instanceof Map) {\n            // Converti la Map in un oggetto normale\n            value = Object.fromEntries(value);\n        }\n\n        flowData[key] = value;\n    });\n\n    // Stampa i dati nel debug\n    node.warn(\"Flow Data: \" + JSON.stringify(flowData, null, 2));\n\n    return msg;\n}\n\nprintFlowData(msg);",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "flow.set(\"DIG_AREA\", 20)    // 20 m^2\nflow.set(\"PILE\", 0)         //  0 m^2\nflow.set(\"BED\", 0)          //  0 m^2\nflow.set(\"PILE1\", 0)         //  0 m^2\nflow.set(\"PILE2\", 0)         //  0 m^2\n\nflow.set(\"WAIT_MATERIAL\", true)\n",
+        "finalize": "",
+        "libs": [],
+        "x": 2790,
+        "y": 2220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0ab1bf4caf83c7d2",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Wheel Loader Logic",
+        "func": "// Machine ID\nconst mId = \"M004\";\n\n// Flow variables\nconst STATUS = mId + \"START\";\nconst timeStep = flow.get(\"PositionMsgFrequence\");      // milliseconds\n\n// Node Constants\nconst machineSpeed = context.get(\"SPEED\");\nconst speedInMetersPerSecond = (machineSpeed * 1000) / 3600;    // Convert speed from km/h to m/s      \n\n// Constants\nconst DISTANCE_FACTOR = 5;\nconst LOAD_TIME_UNIT = 2;\nconst UNLOAD_TIME_UNIT = 2;\n\n// Move function - Update machine current position at each time unit when it moves\nfunction move(currentPos, endPos, nextTask) {\n    // Calculate the distance between the current and end positions\n    const deltaX = (endPos[0] - currentPos[0]) * DISTANCE_FACTOR;\n    const deltaY = (endPos[1] - currentPos[1]) * DISTANCE_FACTOR;\n    const distanceToTarget = Math.sqrt(deltaX ** 2 + deltaY ** 2);\n\n    // If the distance is less than the step the machine can take in this time, stop at the target\n    const maxStepDistance = (speedInMetersPerSecond * (timeStep/1000)) / DISTANCE_FACTOR;\n    if (distanceToTarget <= maxStepDistance) {\n        context.set(\"TEMP_POS\", [endPos[0], endPos[1]]);\n        context.set(\"STATUS_INDEX\", nextTask)                          \n        context.set(\"MSG_COUNT\", 0);\n        return;\n    }\n\n    // Calculate the new current position\n    const directionX = deltaX / distanceToTarget;\n    const directionY = deltaY / distanceToTarget;\n    var newX = currentPos[0] + (directionX * maxStepDistance);\n    var newY = currentPos[1] + (directionY * maxStepDistance);\n\n    // Check if the new position is over the expected final one\n    if (\n        (directionX > 0 && newX > context.get(\"FinalPosition\")[0]) ||\n        (directionX < 0 && newX < context.get(\"FinalPosition\")[0]) ||\n        (directionY > 0 && newY > context.get(\"FinalPosition\")[1]) ||\n        (directionY < 0 && newY < context.get(\"FinalPosition\")[1])\n    ) {\n        newX = context.get(\"FinalPosition\")[0];\n        newY = context.get(\"FinalPosition\")[1];\n        context.set(\"TEMP_POS\", [newX, newY]);\n        context.set(\"STATUS_INDEX\", nextTask);\n        context.set(\"MSG_COUNT\", 0);\n    }\n\n    // Set the new position as temporary, it will be updated, as current position, once a new message is received\n    context.set(\"TEMP_POS\", [newX, newY]);\n    return;\n}\n\n\n// If the machine is Turned On update the status based on its tasks\nif (msg.payload.status === \"START_POS\" || flow.get(STATUS)) {\n    // Return if the messgges comes from Excavator node\n    if (flow.get(STATUS) && msg.payload.hasOwnProperty(\"status\")) {\n        return;\n    }\n\n    // First startup\n    if (msg.payload.status === \"START_POS\" && !flow.get(STATUS)) {\n        flow.set(STATUS, true);\n        context.set(\"TEMP_POS\", msg.payload.coord);\n        context.set(\"NEXT_STATUS_INDEX\", 1);      \n        \n        // TODO : Automate the end position definition\n        context.set(\"FinalPosition\", [430, -200]);     \n        \n        return {\n            payload: \"STARTED\",\n            delay: timeStep,\n            _msgid: msg._msgid\n        };\n    }\n\n    // Update current position and message counter when a new message incomes\n    flow.set(mId + \"CurrentPos\", context.get(\"TEMP_POS\"));\n    context.set(\"MSG_COUNT\", context.get(\"MSG_COUNT\") + 1);\n\n    // Get current and final position\n    var currentPos = flow.get(mId + \"CurrentPos\");         \n    var finalPos = context.get(\"FinalPosition\");\n\n    node.log(\"Epoch: \" + context.get(\"MSG_COUNT\"));\n    node.log(\"Final Pos to reach  - \" + \" X: \" + finalPos[0] + \" - Y: \" + finalPos[1]);\n    node.log(\"Current Machine Pos - \" + \" X: \" + currentPos[0] + \" - Y: \" + currentPos[1]);\n\n    // Get machine status and update it based on its actions\n    var currentStatus = context.get(\"STATUS\")[context.get(\"STATUS_INDEX\")];\n\n    switch (currentStatus) {\n        case \"MOVE\":\n            // Calculate machine future position \n            move(currentPos, finalPos, context.get(\"NEXT_STATUS_INDEX\"));          // 1 == LOAD\n            break;\n\n        case \"LOAD\":\n            // Dig until the digging area is empty\n            if (flow.get(\"PILE\") === 0 && flow.get(\"DIG_AREA\") === 0) {\n                context.set(\"STATUS_INDEX\", 3);     // GOTO Stop task\n                context.set(\"MSG_COUNT\", 0);\n                break;\n            }\n\n            if(flow.get(\"PILE\") < context.get(\"BUCKET_CAPACITY\")) {\n                node.log(\"Wait: \" + flow.get(\"PILE\") + \"<\" + context.get(\"BUCKET_CAPACITY\") )\n                break;\n            }\n\n            // If the pile is not empty, load\n            if (context.get(\"MSG_COUNT\") >= LOAD_TIME_UNIT){\n                // LOAD SOLO SE CI SONO BUCKECT CAPCITY o PILE\n                flow.set(\"PILE\", flow.get(\"PILE\") - context.get(\"BUCKET_CAPACITY\"))        // Remove material\n                node.log(\"---------------------------------------------------------------------------------------------PILE\" + flow.get(\"PILE\"));\n                context.set(\"STATUS_INDEX\", 0);\n                context.set(\"NEXT_STATUS_INDEX\", 2); \n                // TODO: Define it dynamically\n                context.set(\"FinalPosition\", [340, -440])\n                context.set(\"TEMP_POS\", [430, -200]);   // Unload position\n                context.set(\"MSG_COUNT\", 0);\n            }            \n            break;\n\n        case \"UNLOAD\":       \n            // Unload excavator bucket\n            if (context.get(\"MSG_COUNT\") === UNLOAD_TIME_UNIT) {\n                // TODO: Gestire BUCKET_CAPACITY oppure RESTO PILA\n                flow.set(\"BED\", flow.get(\"BED\") + context.get(\"BUCKET_CAPACITY\"))                 // Add material to che pile\n                node.log(\"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++BED: \" + flow.get(\"BED\"));\n                // Dig the digging area is not empty\n                if (flow.get(\"PILE\") !== 0 || flow.get(\"DIG_AREA\") !== 0){\n                    // TODO: Define it dynamically\n                    context.set(\"FinalPosition\", [430, -200]);\n                    context.set(\"TEMP_POS\", [340, -440]);   // Unload position\n\n                    context.set(\"STATUS_INDEX\", 0);\n                    context.set(\"NEXT_STATUS_INDEX\", 1);\n                } else {\n                    context.set(\"STATUS_INDEX\", 3);             // GOTO Stop task\n                }\n\n                context.set(\"MSG_COUNT\", 0);\n            }\n            break;\n\n        case \"STOP\":\n            node.log(\"Material left in the dig area: \" + flow.get(\"DIG_AREA\") + \" Material left in the pile: \" + flow.get(\"PILE\") + \" Material in bed: \" + flow.get(\"BED\"));\n            flow.set(STATUS, false);           // Stop the excavator\n            break;\n    }\n\n    // Return a message with the current machine status\n    return {\n        payload: currentStatus,\n        delay: timeStep,\n        _msgid: msg._msgid\n    }\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "context.set(\"STATUS\", [\"MOVE\", \"LOAD\", \"UNLOAD\", \"STOP\"]);      \ncontext.set(\"STATUS_INDEX\", 0); \ncontext.set(\"NEXT_STATUS_INDEX\", 0);      \n\ncontext.set(\"FinalPosition\", [0, 0]);     \ncontext.set(\"TEMP_POS\", [0, 0]);\ncontext.set(\"MSG_COUNT\", 0);\n\ncontext.set(\"SPEED\", 220);               // 20 km/h\ncontext.set(\"BUCKET_CAPACITY\", 4)        //  4 m^2",
+        "finalize": "",
+        "libs": [],
+        "x": 3200,
+        "y": 3100,
+        "wires": [
+            [
+                "ed864664ec00e026",
+                "df76d73a892cf0eb"
+            ]
+        ]
+    },
+    {
+        "id": "ed864664ec00e026",
+        "type": "delay",
+        "z": "a732102bf3579cf6",
+        "name": "GPS Rate",
+        "pauseType": "delayv",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3200,
+        "y": 3060,
+        "wires": [
+            [
+                "0ab1bf4caf83c7d2"
+            ]
+        ]
+    },
+    {
+        "id": "df76d73a892cf0eb",
+        "type": "debug",
+        "z": "a732102bf3579cf6",
+        "name": "Wheel Loader LOG",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3470,
+        "y": 3100,
+        "wires": []
+    },
+    {
+        "id": "c6cf735771b42716",
+        "type": "inject",
+        "z": "a732102bf3579cf6",
+        "name": "Print",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 2590,
+        "y": 2220,
+        "wires": [
+            [
+                "b3d814e897bb718e"
+            ]
+        ]
+    },
+    {
+        "id": "b6190cb6bd1c45d5",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Truck Logic",
+        "func": "// Machine ID\nconst mId = \"M002\";\n\n// Flow variables\nconst STATUS = mId + \"START\";\nconst timeStep = flow.get(\"PositionMsgFrequence\");      // milliseconds\n\n// Node Constants\nconst machineSpeed = context.get(\"SPEED\");\nconst speedInMetersPerSecond = (machineSpeed * 1000) / 3600;    // Convert speed from km/h to m/s      \n\n// Constants\nconst DISTANCE_FACTOR = 5;\nconst LOAD_TIME_UNIT = 2;\nconst UNLOAD_TIME_UNIT = 2;\n\n// Move function - Update machine current position at each time unit when it moves\nfunction move(currentPos, endPos, nextTask) {\n    // Calculate the distance between the current and end positions\n    const deltaX = (endPos[0] - currentPos[0]) * DISTANCE_FACTOR;\n    const deltaY = (endPos[1] - currentPos[1]) * DISTANCE_FACTOR;\n    const distanceToTarget = Math.sqrt(deltaX ** 2 + deltaY ** 2);\n\n    // If the distance is less than the step the machine can take in this time, stop at the target\n    const maxStepDistance = (speedInMetersPerSecond * (timeStep/1000)) / DISTANCE_FACTOR;\n    if (distanceToTarget <= maxStepDistance) {\n        context.set(\"TEMP_POS\", [endPos[0], endPos[1]]);\n        context.set(\"STATUS_INDEX\", nextTask)                          \n        context.set(\"MSG_COUNT\", 0);\n        return;\n    }\n\n    // Calculate the new current position\n    const directionX = deltaX / distanceToTarget;\n    const directionY = deltaY / distanceToTarget;\n    var newX = currentPos[0] + (directionX * maxStepDistance);\n    var newY = currentPos[1] + (directionY * maxStepDistance);\n\n    // Check if the new position is over the expected final one\n    if (\n        (directionX > 0 && newX > context.get(\"FinalPosition\")[0]) ||\n        (directionX < 0 && newX < context.get(\"FinalPosition\")[0]) ||\n        (directionY > 0 && newY > context.get(\"FinalPosition\")[1]) ||\n        (directionY < 0 && newY < context.get(\"FinalPosition\")[1])\n    ) {\n        newX = context.get(\"FinalPosition\")[0];\n        newY = context.get(\"FinalPosition\")[1];\n        context.set(\"TEMP_POS\", [newX, newY]);\n        context.set(\"STATUS_INDEX\", nextTask);\n        context.set(\"MSG_COUNT\", 0);\n    }\n\n    // Set the new position as temporary, it will be updated, as current position, once a new message is received\n    context.set(\"TEMP_POS\", [newX, newY]);\n    return;\n}\n\n\n// If the machine is Turned On update the status based on its tasks\nif (msg.payload.status === \"START_POS\" || flow.get(STATUS)) {\n    // Return if the messgges comes from Excavator node\n    if (flow.get(STATUS) && msg.payload.hasOwnProperty(\"status\")) {\n        return;\n    }\n\n    // First startup\n    if (msg.payload.status === \"START_POS\" && !flow.get(STATUS)) {\n        flow.set(STATUS, true);\n        context.set(\"TEMP_POS\", msg.payload.coord);\n        context.set(\"NEXT_STATUS_INDEX\", 1);  \n\n        context.set(\"TOTAL_MATERIAL\", flow.get(\"DIG_AREA\"));\n        \n        // TODO : Automate the end position definition\n        context.set(\"FinalPosition\", [340, -440]);     \n        \n        return {\n            payload: \"STARTED\",\n            delay: timeStep,\n            _msgid: msg._msgid\n        };\n    }\n\n    // Update current position and message counter when a new message incomes\n    flow.set(mId + \"CurrentPos\", context.get(\"TEMP_POS\"));\n    context.set(\"MSG_COUNT\", context.get(\"MSG_COUNT\") + 1);\n\n    // Get current and final position\n    var currentPos = flow.get(mId + \"CurrentPos\");         \n    var finalPos = context.get(\"FinalPosition\");\n\n    node.log(\"Epoch: \" + context.get(\"MSG_COUNT\"));\n    node.log(\"Final Pos to reach  - \" + \" X: \" + finalPos[0] + \" - Y: \" + finalPos[1]);\n    node.log(\"Current Machine Pos - \" + \" X: \" + currentPos[0] + \" - Y: \" + currentPos[1]);\n\n    // Get machine status and update it based on its actions\n    var currentStatus = context.get(\"STATUS\")[context.get(\"STATUS_INDEX\")];\n\n    switch (currentStatus) {\n        case \"MOVE\":\n            // Calculate machine future position \n            move(currentPos, finalPos, context.get(\"NEXT_STATUS_INDEX\"));          // 1 == LOAD\n            break;\n\n        case \"LOAD\":\n            if(flow.get(\"BED\") < context.get(\"BED_CAPACITY\")) {\n                node.log(\"Wait: \" + flow.get(\"BED\") + \"<\" + context.get(\"BED_CAPACITY\") )\n            }\n\n            // If the pile is not empty, load\n            if (context.get(\"BED\") >= context.get(\"BED_CAPACITY\") || (flow.get(\"PILE\") === 0 && flow.get(\"DIG_AREA\") === 0) && (flow.get(\"BED\") - context.get(\"TOTAL_MATERIAL\") === 0)){\n                // LOAD SOLO SE CI SONO BUCKECT CAPCITY o PILE\n                node.log(\"______________________________________________________________________________________________BED\" + flow.get(\"BED\"));\n                context.set(\"TOTAL_MATERIAL\", 0);\n                context.set(\"STATUS_INDEX\", 0);\n                context.set(\"NEXT_STATUS_INDEX\", 2); \n                // TODO: Define it dynamically\n                context.set(\"FinalPosition\", [560, -600])\n                context.set(\"TEMP_POS\", [340, -440]);   // Unload position\n                context.set(\"MSG_COUNT\", 0);\n            }            \n            break;\n\n        case \"UNLOAD\":       \n            // Unload excavator bucket\n            if (context.get(\"MSG_COUNT\") === UNLOAD_TIME_UNIT) {\n                // TODO: Gestire BUCKET_CAPACITY oppure RESTO PILA\n                flow.set(\"PILE1\", flow.get(\"BED\"));\n                flow.set(\"BED\", 0)                 // Add material to che pile\n                node.log(\"------------------------------------------------------------------------------------------------------BED: \" + flow.get(\"BED\"));\n                node.log(\"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PILE1: \" + flow.get(\"PILE1\"));\n\n                // Dig the digging area is not empty\n                if (flow.get(\"PILE\") !== 0 || flow.get(\"DIG_AREA\") !== 0){\n                    // TODO: Define it dynamically\n                    context.set(\"FinalPosition\", [340, -440]);\n                    context.set(\"TEMP_POS\", [500, -600]);   // Unload position\n\n                    context.set(\"STATUS_INDEX\", 0);\n                    context.set(\"NEXT_STATUS_INDEX\", 1);\n                } else {\n                    context.set(\"STATUS_INDEX\", 3);             // GOTO Stop task\n                }\n\n                context.set(\"MSG_COUNT\", 0);\n            }\n            break;\n\n        case \"STOP\":\n            node.log(\"Material left in the dig area: \" + flow.get(\"DIG_AREA\") + \" Material left in the pile: \" + flow.get(\"PILE\") + \" Material in bed: \" + flow.get(\"BED\"));\n            flow.set(STATUS, false);           // Stop the excavator\n            break;\n    }\n\n    // Return a message with the current machine status\n    return {\n        payload: currentStatus,\n        delay: timeStep,\n        _msgid: msg._msgid\n    }\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "context.set(\"STATUS\", [\"MOVE\", \"LOAD\", \"UNLOAD\", \"STOP\"]);      \ncontext.set(\"STATUS_INDEX\", 0); \ncontext.set(\"NEXT_STATUS_INDEX\", 0);      \n\ncontext.set(\"FinalPosition\", [0, 0]);     \ncontext.set(\"TEMP_POS\", [0, 0]);\ncontext.set(\"MSG_COUNT\", 0);\n\ncontext.set(\"SPEED\", 180);               // 20 km/h\ncontext.set(\"BED_CAPACITY\", 40)         // 40 m^2\ncontext.set(\"TOTAL_MATERIAL\", 0)",
+        "finalize": "",
+        "libs": [],
+        "x": 3170,
+        "y": 3360,
+        "wires": [
+            [
+                "967125f6278ed536",
+                "3730f28b70930840"
+            ]
+        ]
+    },
+    {
+        "id": "967125f6278ed536",
+        "type": "delay",
+        "z": "a732102bf3579cf6",
+        "name": "GPS Rate",
+        "pauseType": "delayv",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3180,
+        "y": 3320,
+        "wires": [
+            [
+                "b6190cb6bd1c45d5"
+            ]
+        ]
+    },
+    {
+        "id": "3730f28b70930840",
+        "type": "debug",
+        "z": "a732102bf3579cf6",
+        "name": "Truck LOG",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3390,
+        "y": 3360,
+        "wires": []
+    },
+    {
+        "id": "4b41a14c86ab96e5",
+        "type": "function",
+        "z": "a732102bf3579cf6",
+        "name": "Wheel Loader Logic",
+        "func": "// Machine ID\nconst mId = \"M003\";\n\n// Flow variables\nconst STATUS = mId + \"START\";\nconst timeStep = flow.get(\"PositionMsgFrequence\");      // milliseconds\n\n// Node Constants\nconst machineSpeed = context.get(\"SPEED\");\nconst speedInMetersPerSecond = (machineSpeed * 1000) / 3600;    // Convert speed from km/h to m/s      \n\n// Constants\nconst DISTANCE_FACTOR = 5;\nconst LOAD_TIME_UNIT = 2;\nconst UNLOAD_TIME_UNIT = 2;\n\n// Move function - Update machine current position at each time unit when it moves\nfunction move(currentPos, endPos, nextTask) {\n    // Calculate the distance between the current and end positions\n    const deltaX = (endPos[0] - currentPos[0]) * DISTANCE_FACTOR;\n    const deltaY = (endPos[1] - currentPos[1]) * DISTANCE_FACTOR;\n    const distanceToTarget = Math.sqrt(deltaX ** 2 + deltaY ** 2);\n\n    // If the distance is less than the step the machine can take in this time, stop at the target\n    const maxStepDistance = (speedInMetersPerSecond * (timeStep/1000)) / DISTANCE_FACTOR;\n    if (distanceToTarget <= maxStepDistance) {\n        context.set(\"TEMP_POS\", [endPos[0], endPos[1]]);\n        context.set(\"STATUS_INDEX\", nextTask)                          \n        context.set(\"MSG_COUNT\", 0);\n        return;\n    }\n\n    // Calculate the new current position\n    const directionX = deltaX / distanceToTarget;\n    const directionY = deltaY / distanceToTarget;\n    var newX = currentPos[0] + (directionX * maxStepDistance);\n    var newY = currentPos[1] + (directionY * maxStepDistance);\n\n    // Check if the new position is over the expected final one\n    if (\n        (directionX > 0 && newX > context.get(\"FinalPosition\")[0]) ||\n        (directionX < 0 && newX < context.get(\"FinalPosition\")[0]) ||\n        (directionY > 0 && newY > context.get(\"FinalPosition\")[1]) ||\n        (directionY < 0 && newY < context.get(\"FinalPosition\")[1])\n    ) {\n        newX = context.get(\"FinalPosition\")[0];\n        newY = context.get(\"FinalPosition\")[1];\n        context.set(\"TEMP_POS\", [newX, newY]);\n        context.set(\"STATUS_INDEX\", nextTask);\n        context.set(\"MSG_COUNT\", 0);\n    }\n\n    // Set the new position as temporary, it will be updated, as current position, once a new message is received\n    context.set(\"TEMP_POS\", [newX, newY]);\n    return;\n}\n\n\n// If the machine is Turned On update the status based on its tasks\nif (msg.payload.status === \"START_POS\" || flow.get(STATUS)) {\n    // Return if the messgges comes from Excavator node\n    if (flow.get(STATUS) && msg.payload.hasOwnProperty(\"status\")) {\n        return;\n    }\n\n    // First startup\n    if (msg.payload.status === \"START_POS\" && !flow.get(STATUS)) {\n        flow.set(STATUS, true);\n        context.set(\"TEMP_POS\", msg.payload.coord);\n        context.set(\"NEXT_STATUS_INDEX\", 1);      \n        \n        // TODO : Automate the end position definition\n        context.set(\"FinalPosition\", [500, -600]);     \n        \n        return {\n            payload: \"STARTED\",\n            delay: timeStep,\n            _msgid: msg._msgid\n        };\n    }\n\n    // Update current position and message counter when a new message incomes\n    flow.set(mId + \"CurrentPos\", context.get(\"TEMP_POS\"));\n    context.set(\"MSG_COUNT\", context.get(\"MSG_COUNT\") + 1);\n\n    // Get current and final position\n    var currentPos = flow.get(mId + \"CurrentPos\");         \n    var finalPos = context.get(\"FinalPosition\");\n\n    node.log(\"Epoch: \" + context.get(\"MSG_COUNT\"));\n    node.log(\"Final Pos to reach  - \" + \" X: \" + finalPos[0] + \" - Y: \" + finalPos[1]);\n    node.log(\"Current Machine Pos - \" + \" X: \" + currentPos[0] + \" - Y: \" + currentPos[1]);\n\n    // Get machine status and update it based on its actions\n    var currentStatus = context.get(\"STATUS\")[context.get(\"STATUS_INDEX\")];\n\n    switch (currentStatus) {\n        case \"MOVE\":\n            // Calculate machine future position \n            move(currentPos, finalPos, context.get(\"NEXT_STATUS_INDEX\"));          // 1 == LOAD\n            break;\n\n        case \"LOAD\":\n            // Dig until the digging area is empty\n            if (flow.get(\"PILE\") === 0 && flow.get(\"PILE1\") === 0 && flow.get(\"DIG_AREA\") === 0 && flow.get(\"PILE2\") > 0) {\n                context.set(\"STATUS_INDEX\", 3);     // GOTO Stop task\n                context.set(\"MSG_COUNT\", 0);\n                break;\n            }\n\n            if(flow.get(\"PILE1\") < context.get(\"BUCKET_CAPACITY\")) {\n                node.log(\"Wait: \" + flow.get(\"PILE1\") + \"<\" + context.get(\"BUCKET_CAPACITY\") )\n                break;\n            }\n\n            // If the pile is not empty, load\n            if (context.get(\"MSG_COUNT\") >= LOAD_TIME_UNIT){\n                // LOAD SOLO SE CI SONO BUCKECT CAPCITY o PILE\n                flow.set(\"PILE1\", flow.get(\"PILE1\") - context.get(\"BUCKET_CAPACITY\"))        // Remove material\n                node.log(\"---------------------------------------------------------------------------------------------PILE1\" + flow.get(\"PILE1\"));\n                context.set(\"STATUS_INDEX\", 0);\n                context.set(\"NEXT_STATUS_INDEX\", 2); \n                // TODO: Define it dynamically\n                context.set(\"FinalPosition\", [580, -440])\n                context.set(\"TEMP_POS\", [500, -600]);   // Unload position\n                context.set(\"MSG_COUNT\", 0);\n            }            \n            break;\n\n        case \"UNLOAD\":       \n            // Unload excavator bucket\n            if (context.get(\"MSG_COUNT\") === UNLOAD_TIME_UNIT) {\n                // TODO: Gestire BUCKET_CAPACITY oppure RESTO PILA\n                flow.set(\"PILE2\", flow.get(\"PILE2\") + context.get(\"BUCKET_CAPACITY\"))                 // Add material to che pile\n                node.log(\"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PILE2: \" + flow.get(\"PILE2\"));\n                // Dig the digging area is not empty\n                if (flow.get(\"PILE\") !== 0 || flow.get(\"PILE1\") !== 0 || flow.get(\"DIG_AREA\") !== 0){\n                    // TODO: Define it dynamically\n                    context.set(\"FinalPosition\", [500, -600]);\n                    context.set(\"TEMP_POS\", [580, -440]);   // Unload position\n\n                    context.set(\"STATUS_INDEX\", 0);\n                    context.set(\"NEXT_STATUS_INDEX\", 1);\n                } else {\n                    context.set(\"STATUS_INDEX\", 3);             // GOTO Stop task\n                }\n\n                context.set(\"MSG_COUNT\", 0);\n            }\n            break;\n\n        case \"STOP\":\n            node.log(\"Material left in the dig area: \" + flow.get(\"DIG_AREA\") + \" Material left in the pile: \" + flow.get(\"PILE\") + \" Material in bed: \" + flow.get(\"BED\") + \" Material left in the pile: \" + flow.get(\"PILE1\") + \" Material left in the pile: \" + flow.get(\"PILE2\"));\n            flow.set(STATUS, false);           // Stop the excavator\n            break;\n    }\n\n    // Return a message with the current machine status\n    return {\n        payload: currentStatus,\n        delay: timeStep,\n        _msgid: msg._msgid\n    }\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "context.set(\"STATUS\", [\"MOVE\", \"LOAD\", \"UNLOAD\", \"STOP\"]);      \ncontext.set(\"STATUS_INDEX\", 0); \ncontext.set(\"NEXT_STATUS_INDEX\", 0);      \n\ncontext.set(\"FinalPosition\", [0, 0]);     \ncontext.set(\"TEMP_POS\", [0, 0]);\ncontext.set(\"MSG_COUNT\", 0);\n\ncontext.set(\"SPEED\", 200);               // 20 km/h\ncontext.set(\"BUCKET_CAPACITY\", 2)       //  4 m^2",
+        "finalize": "",
+        "libs": [],
+        "x": 4480,
+        "y": 2860,
+        "wires": [
+            [
+                "9074f508501c426b",
+                "2555f223adbba0a7"
+            ]
+        ]
+    },
+    {
+        "id": "9074f508501c426b",
+        "type": "delay",
+        "z": "a732102bf3579cf6",
+        "name": "GPS Rate",
+        "pauseType": "delayv",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 4480,
+        "y": 2820,
+        "wires": [
+            [
+                "4b41a14c86ab96e5"
+            ]
+        ]
+    },
+    {
+        "id": "2555f223adbba0a7",
+        "type": "debug",
+        "z": "a732102bf3579cf6",
+        "name": "Wheel Loader LOG",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 4730,
+        "y": 2860,
+        "wires": []
+    },
+    {
+        "id": "4e3cd5f24c0dd600",
+        "type": "mqtt-broker",
+        "name": "EMQX-Broker",
+        "broker": "jca8ae90.ala.eu-central-1.emqxsl.com",
+        "port": "8883",
+        "tls": "1939ab89b3aede7c",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "1939ab89b3aede7c",
+        "type": "tls-config",
+        "name": "EMQX - CA",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "emqxsl-ca.crt",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    }
+]
