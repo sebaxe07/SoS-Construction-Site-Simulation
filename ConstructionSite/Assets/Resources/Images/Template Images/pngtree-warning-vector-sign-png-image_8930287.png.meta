@@ -1,0 +1,967 @@
+fileFormatVersion: 2
+guid: ec53eaf0cc84b4f72b1ca5ef22f60e50
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 28, y: 415, z: 12, w: 410}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 947
+        width: 246
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acbeddea9d629469e81e0550215f4813
+      internalID: 1287727631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_1
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 1067
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e61e5c6571993482db5315dadce1e48b
+      internalID: -1091223235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_2
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 1091
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd3104836520d4eed8f4fc0e13efdb25
+      internalID: 188471529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_3
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 947
+        width: 246
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2c2ecabbf4ba4f08920a8f29db27bb5
+      internalID: 1604660256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_4
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 1067
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 829d1fb27b0f74e7c9dbcff2c9a89832
+      internalID: 1181295615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_5
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 1091
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84d7b2d18e88a47d99a288f1026d74d3
+      internalID: -897870939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_6
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 1009
+        width: 50
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c303c5bbd4214723a6f8ff8ccc25c61
+      internalID: 1065212157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_7
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 1047
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6865d19f2a5ac4e9fbad4bef51ca01c8
+      internalID: -279293070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_8
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 1009
+        width: 50
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b4555a962f1c448da386433ed871558
+      internalID: -1684841265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_9
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 1047
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8104ded04121441979b9415d73146e1d
+      internalID: -1272902632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_10
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 948
+        width: 40
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1a49caf7983048929889f6019fc3a20
+      internalID: -2001003546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_11
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 979
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 709e7241a397b48c8b7b9d946e01be9d
+      internalID: -1895969737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_12
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 949
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63ccfc991bf984f98905a5de1077ab08
+      internalID: 1487653278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_13
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 979
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a313625445b7847b1929d618c5a80a2c
+      internalID: -842823377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_14
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 346
+        width: 1176
+        height: 521
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7af3badad621b48be8e2ef6ce59b0ba3
+      internalID: 2115877006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_15
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 863
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 501c6c1542bc2493393704eecf466e5e
+      internalID: -1230294538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_16
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 863
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db4dba942abb543d2beb1956647bff2c
+      internalID: 949739311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_17
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 615
+        width: 253
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9db71facdeee44848966cf601d16359c
+      internalID: -304321727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_18
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 408
+        width: 401
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 707fdad2aba384071913b623f563e2bf
+      internalID: -1299900269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_19
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 378
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 903b00b82a6dd4892a5b4451e8af99f3
+      internalID: 32860347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_20
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 347
+        width: 40
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cce3004df924247848a9886c9149d5e8
+      internalID: -1692585954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_21
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 262
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 558fd67aee73340f4931aef893c2d750
+      internalID: 2083413570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_22
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 14
+        width: 253
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 147d2944e7f1c453b8aba9550fedaef8
+      internalID: -108863332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_23
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 262
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6906d1808248f46f7a9a13d96a1a0f2e
+      internalID: -1204887069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_24
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 14
+        width: 253
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e82c885ad9dde455d856495b032041d2
+      internalID: -612010486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_25
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 186
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 837dec2e37b244e559f557e11a879a1e
+      internalID: -821674797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_26
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 211
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fbf168f6cbab4c979f3a26bfe145b71
+      internalID: -1968297286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_27
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 186
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f464468f99f6d446cadf492d70e4564c
+      internalID: 1496728033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_28
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 211
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 258aec33be2c44f5eab2bc3d125ece47
+      internalID: 2042912294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_29
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 128
+        width: 50
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eaa1563195574aada2f5aacf28766fb
+      internalID: -2144386538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_30
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 166
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 475671af1c2f8438e8946e0cfe3dc748
+      internalID: -707699892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_31
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 128
+        width: 50
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8379c368142254ee3b1fc00f4dc67839
+      internalID: 883102378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_32
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 166
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4917fd1375fdc422aa2ee62e53bf6172
+      internalID: -587745716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_33
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 68
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f2ecab238d234145a173c3a3f367002
+      internalID: -394877707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_34
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 99
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c911f193aac442b98ae85f1f27747ea
+      internalID: -546787406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_35
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 68
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918418f70d99d4aa5a03bf72f7b30d20
+      internalID: -107023141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-warning-vector-sign-png-image_8930287_36
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 99
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe0b07e8315ef47f4bfe5e492afcf526
+      internalID: 1636618966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      pngtree-warning-vector-sign-png-image_8930287_0: 1287727631
+      pngtree-warning-vector-sign-png-image_8930287_1: -1091223235
+      pngtree-warning-vector-sign-png-image_8930287_10: -2001003546
+      pngtree-warning-vector-sign-png-image_8930287_11: -1895969737
+      pngtree-warning-vector-sign-png-image_8930287_12: 1487653278
+      pngtree-warning-vector-sign-png-image_8930287_13: -842823377
+      pngtree-warning-vector-sign-png-image_8930287_14: 2115877006
+      pngtree-warning-vector-sign-png-image_8930287_15: -1230294538
+      pngtree-warning-vector-sign-png-image_8930287_16: 949739311
+      pngtree-warning-vector-sign-png-image_8930287_17: -304321727
+      pngtree-warning-vector-sign-png-image_8930287_18: -1299900269
+      pngtree-warning-vector-sign-png-image_8930287_19: 32860347
+      pngtree-warning-vector-sign-png-image_8930287_2: 188471529
+      pngtree-warning-vector-sign-png-image_8930287_20: -1692585954
+      pngtree-warning-vector-sign-png-image_8930287_21: 2083413570
+      pngtree-warning-vector-sign-png-image_8930287_22: -108863332
+      pngtree-warning-vector-sign-png-image_8930287_23: -1204887069
+      pngtree-warning-vector-sign-png-image_8930287_24: -612010486
+      pngtree-warning-vector-sign-png-image_8930287_25: -821674797
+      pngtree-warning-vector-sign-png-image_8930287_26: -1968297286
+      pngtree-warning-vector-sign-png-image_8930287_27: 1496728033
+      pngtree-warning-vector-sign-png-image_8930287_28: 2042912294
+      pngtree-warning-vector-sign-png-image_8930287_29: -2144386538
+      pngtree-warning-vector-sign-png-image_8930287_3: 1604660256
+      pngtree-warning-vector-sign-png-image_8930287_30: -707699892
+      pngtree-warning-vector-sign-png-image_8930287_31: 883102378
+      pngtree-warning-vector-sign-png-image_8930287_32: -587745716
+      pngtree-warning-vector-sign-png-image_8930287_33: -394877707
+      pngtree-warning-vector-sign-png-image_8930287_34: -546787406
+      pngtree-warning-vector-sign-png-image_8930287_35: -107023141
+      pngtree-warning-vector-sign-png-image_8930287_36: 1636618966
+      pngtree-warning-vector-sign-png-image_8930287_4: 1181295615
+      pngtree-warning-vector-sign-png-image_8930287_5: -897870939
+      pngtree-warning-vector-sign-png-image_8930287_6: 1065212157
+      pngtree-warning-vector-sign-png-image_8930287_7: -279293070
+      pngtree-warning-vector-sign-png-image_8930287_8: -1684841265
+      pngtree-warning-vector-sign-png-image_8930287_9: -1272902632
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
