@@ -70,3 +70,14 @@ ConstructionSite/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 # Temporary auto-generated Android Assets
 ConstructionSite/[Aa]ssets/[Ss]treamingAssets/aa.meta
 ConstructionSite/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Large files (over 50MB) - to be handled separately
+ConstructionSite/Assets/ALP_Assets/Realistic\ Terrain\ Textures\ Lite/Textures/Ground002.tif
+ConstructionSite/Assets/Resources/Models/bricks-heap/bricks-heap.jpg
+ConstructionSite/Assets/Resources/Models/bricks-heap/bricks-heap1.jpg
+ConstructionSite/Assets/Resources/Models/bricks-heap/bricks-heap2.jpg
+ConstructionSite/Assets/Resources/Models/broken-lumber/broken-lumber.fbx
+ConstructionSite/Assets/Resources/Models/waste-lumber/waste-lumber.fbx
+
+# OS specific files
+.DS_Store
