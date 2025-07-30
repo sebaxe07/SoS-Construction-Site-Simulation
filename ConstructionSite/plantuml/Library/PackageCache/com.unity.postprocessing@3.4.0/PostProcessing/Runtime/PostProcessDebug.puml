@@ -1,0 +1,11 @@
+@startuml
+class PostProcessDebug <<sealed>> {
+    + lightMeter : bool
+    + histogram : bool
+    + waveform : bool
+    + vectorscope : bool
+}
+MonoBehaviour <|-- PostProcessDebug
+PostProcessDebug --> "postProcessLayer" PostProcessLayer
+PostProcessDebug o-> "debugOverlay" DebugOverlay
+@enduml

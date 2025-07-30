@@ -1,0 +1,11 @@
+@startuml
+class VolumePriorityUsageAnalytic {
+    + {static} Send(volume:Volume) : void
+}
+class Data {
+    + volume_name : string
+    + scene_name : string
+    + priority : float
+}
+VolumePriorityUsageAnalytic +-- Data
+@enduml

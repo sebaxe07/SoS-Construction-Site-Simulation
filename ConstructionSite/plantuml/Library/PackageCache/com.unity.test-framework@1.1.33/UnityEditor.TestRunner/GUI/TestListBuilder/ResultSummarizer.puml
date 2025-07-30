@@ -1,0 +1,18 @@
+@startuml
+class ResultSummarizer {
+    + ResultSummarizer(results:IEnumerable<TestRunnerResult>)
+    + success : bool <<get>>
+    + ResultCount : int <<get>>
+    + TestsRun : int <<get>>
+    + Passed : int <<get>>
+    + errors : int <<get>>
+    + failures : int <<get>>
+    + inconclusive : int <<get>>
+    + notRunnable : int <<get>>
+    + Skipped : int <<get>>
+    + ignored : int <<get>>
+    + duration : double <<get>>
+    + testsNotRun : int <<get>>
+    + Summarize(result:TestRunnerResult) : void
+}
+@enduml

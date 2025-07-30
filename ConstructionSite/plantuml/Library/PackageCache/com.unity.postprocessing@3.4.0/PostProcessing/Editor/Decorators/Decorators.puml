@@ -1,0 +1,22 @@
+@startuml
+class RangeDecorator <<sealed>> {
+    + <<override>> OnGUI(property:SerializedProperty, overrideState:SerializedProperty, title:GUIContent, attribute:Attribute) : bool
+}
+class MinDecorator <<sealed>> {
+    + <<override>> OnGUI(property:SerializedProperty, overrideState:SerializedProperty, title:GUIContent, attribute:Attribute) : bool
+}
+class MaxDecorator <<sealed>> {
+    + <<override>> OnGUI(property:SerializedProperty, overrideState:SerializedProperty, title:GUIContent, attribute:Attribute) : bool
+}
+class MinMaxDecorator <<sealed>> {
+    + <<override>> OnGUI(property:SerializedProperty, overrideState:SerializedProperty, title:GUIContent, attribute:Attribute) : bool
+}
+class ColorUsageDecorator <<sealed>> {
+    + <<override>> OnGUI(property:SerializedProperty, overrideState:SerializedProperty, title:GUIContent, attribute:Attribute) : bool
+}
+AttributeDecorator <|-- RangeDecorator
+AttributeDecorator <|-- MinDecorator
+AttributeDecorator <|-- MaxDecorator
+AttributeDecorator <|-- MinMaxDecorator
+AttributeDecorator <|-- ColorUsageDecorator
+@enduml

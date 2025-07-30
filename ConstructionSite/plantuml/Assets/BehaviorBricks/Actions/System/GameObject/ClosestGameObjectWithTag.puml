@@ -1,0 +1,9 @@
+@startuml
+class ClosestGameObjectWithTag {
+    + tag : string
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- ClosestGameObjectWithTag
+ClosestGameObjectWithTag --> "foundGameObject" GameObject
+@enduml

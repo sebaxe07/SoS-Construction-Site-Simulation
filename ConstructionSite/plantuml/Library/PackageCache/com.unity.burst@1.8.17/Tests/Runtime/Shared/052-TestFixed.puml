@@ -1,0 +1,44 @@
+@startuml
+class TestFixed {
+    + {static} <<unsafe>> ReadInts() : int
+    + {static} <<unsafe>> ReadIntsElement() : int
+    + {static} <<unsafe>> ReadStructs() : int
+    + {static} <<unsafe>> ReadStructsElement() : int
+    + {static} <<unsafe>> ReadFromFixedArray(s:SomeStruct) : ushort
+    + {static} <<unsafe>> IndexerReadFromSByteArrayWithByteOffset(s:IndexerStructTestSByte, offset:byte) : sbyte
+    + {static} <<unsafe>> IndexerReadFromSByteArrayWithSByteOffset(s:IndexerStructTestSByte, offset:sbyte) : sbyte
+    + {static} <<unsafe>> IndexerReadFromByteArrayWithByteOffset(s:IndexerStructTestByte, offset:byte) : byte
+    + {static} <<unsafe>> IndexerReadFromByteArrayWithSByteOffset(s:IndexerStructTestByte, offset:sbyte) : byte
+}
+struct SomeStruct {
+    + <<fixed>> array : ushort
+}
+struct IndexerStructTestSByte {
+    + <<fixed>> sbyteArray : sbyte
+}
+struct IndexerStructTestByte {
+    + <<fixed>> byteArray : byte
+}
+struct OtherStruct {
+    + x : int
+}
+struct Provider {
+    + Value : object <<get>>
+}
+struct Provider {
+    + Value : object <<get>>
+}
+struct Provider {
+    + Value : object <<get>>
+}
+TestFixed +-- SomeStruct
+TestFixed +-- IndexerStructTestSByte
+TestFixed +-- IndexerStructTestByte
+SomeStruct +-- OtherStruct
+SomeStruct +-- Provider
+IArgumentProvider <|-- Provider
+IndexerStructTestSByte +-- Provider
+IArgumentProvider <|-- Provider
+IndexerStructTestByte +-- Provider
+IArgumentProvider <|-- Provider
+@enduml

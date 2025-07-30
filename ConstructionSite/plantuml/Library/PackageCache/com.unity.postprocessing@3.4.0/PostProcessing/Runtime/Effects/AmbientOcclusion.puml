@@ -1,0 +1,52 @@
+@startuml
+enum AmbientOcclusionMode {
+    ScalableAmbientObscurance,
+    MultiScaleVolumetricObscurance,
+}
+enum AmbientOcclusionQuality {
+    Lowest,
+    Low,
+    Medium,
+    High,
+    Ultra,
+}
+class AmbientOcclusionModeParameter <<sealed>> {
+}
+class AmbientOcclusionQualityParameter <<sealed>> {
+}
+class AmbientOcclusion <<sealed>> {
+    + <<override>> IsEnabledAndSupported(context:PostProcessRenderContext) : bool
+}
+interface IAmbientOcclusionMethod {
+}
+class AmbientOcclusionRenderer <<sealed>> {
+    + <<override>> Init() : void
+    + IsAmbientOnly(context:PostProcessRenderContext) : bool
+    + Get() : IAmbientOcclusionMethod
+    + <<override>> GetCameraFlags() : DepthTextureMode
+    + <<override>> Release() : void
+    + GetScalableAO() : ScalableAO
+    + GetMultiScaleVO() : MultiScaleVO
+    + <<override>> Render(context:PostProcessRenderContext) : void
+}
+class "ParameterOverride`1"<T> {
+}
+class "PostProcessEffectRenderer`1"<T> {
+}
+"ParameterOverride`1" "<AmbientOcclusionMode>" <|-- AmbientOcclusionModeParameter
+"ParameterOverride`1" "<AmbientOcclusionQuality>" <|-- AmbientOcclusionQualityParameter
+PostProcessEffectSettings <|-- AmbientOcclusion
+AmbientOcclusion o-> "mode" AmbientOcclusionModeParameter
+AmbientOcclusion o-> "intensity" FloatParameter
+AmbientOcclusion o-> "color" ColorParameter
+AmbientOcclusion o-> "ambientOnly" BoolParameter
+AmbientOcclusion o-> "noiseFilterTolerance" FloatParameter
+AmbientOcclusion o-> "blurTolerance" FloatParameter
+AmbientOcclusion o-> "upsampleTolerance" FloatParameter
+AmbientOcclusion o-> "thicknessModifier" FloatParameter
+AmbientOcclusion o-> "zBias" FloatParameter
+AmbientOcclusion o-> "directLightingStrength" FloatParameter
+AmbientOcclusion o-> "radius" FloatParameter
+AmbientOcclusion o-> "quality" AmbientOcclusionQualityParameter
+"PostProcessEffectRenderer`1" "<AmbientOcclusion>" <|-- AmbientOcclusionRenderer
+@enduml

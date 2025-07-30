@@ -1,0 +1,20 @@
+@startuml
+interface IAssemblyNameProvider {
+}
+interface IPackageInfoCache {
+}
+class AssemblyNameProvider {
+    + GetAssemblyNameFromScriptPath(path:string) : string
+    + GetAssemblies(shouldFileBePartOfSolution:Func<string, bool>) : IEnumerable<Assembly>
+    + GetAllAssetPaths() : IEnumerable<string>
+    + ResetPackageInfoCache() : void
+    + FindForAssetPath(assetPath:string) : UnityEditor.PackageManager.PackageInfo
+    + ParseResponseFile(responseFilePath:string, projectDirectory:string, systemReferenceDirectories:string[]) : ResponseFileData
+    + IsInternalizedPackagePath(path:string) : bool
+    + ToggleProjectGeneration(preference:ProjectGenerationFlag) : void
+    + GetRoslynAnalyzerPaths() : IEnumerable<string>
+}
+IAssemblyNameProvider <|-- AssemblyNameProvider
+IPackageInfoCache <|-- AssemblyNameProvider
+AssemblyNameProvider --> "ProjectGenerationFlag" ProjectGenerationFlag
+@enduml

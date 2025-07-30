@@ -1,0 +1,5 @@
+@startuml
+class "BaseEditor`1"<T> {
+}
+Editor <|-- "BaseEditor`1"
+@enduml

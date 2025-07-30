@@ -1,0 +1,7 @@
+@startuml
+class DisplayNameAttribute <<sealed>> {
+    + <<readonly>> displayName : string
+    + DisplayNameAttribute(displayName:string)
+}
+Attribute <|-- DisplayNameAttribute
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class DefaultPostProcessEffectEditor {
+    + <<override>> OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+}
+PostProcessEffectBaseEditor <|-- DefaultPostProcessEffectEditor
+@enduml

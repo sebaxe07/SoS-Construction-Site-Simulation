@@ -1,0 +1,15 @@
+@startuml
+class BurstDisassemblerTests {
+    + SetUp() : void
+    + GetBlockIdxFromTextIdxTest() : void
+    + InstantiateRegistersUsedTest() : void
+    + CleanRegisterListTest() : void
+    + IndexOfRegisterTest() : void
+    + RegisterEqualityTest(assemblyName:string, assemblyLine:string[], register:string) : void
+    + RegisterEqualTest() : void
+    + InstructionAlignmentTest() : void
+    + X86AsmTokenProviderSimdKindTest() : void
+    + ARMAsmTokenProviderSimdKindTest() : void
+    + AssemblyColouringSmellTest(asm:string, asmkind:int, colorTag:string, lineIdx:int) : void
+}
+@enduml

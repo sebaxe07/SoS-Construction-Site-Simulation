@@ -1,0 +1,12 @@
+@startuml
+class SnapManager {
+    + snapRadius : float = 1.0f
+    + SetMainPerimeterVertices(mainPerimeter:PolygonData) : void
+    + GetSnappedPoint(mousePosition:Vector3) : Vector3
+    + HighlightSelectedPoint(position:Vector3) : void
+}
+MonoBehaviour <|-- SnapManager
+SnapManager --> "highlightColor" Color
+SnapManager --> "highlightObject" GameObject
+SnapManager --> "selectedPointPrefab" GameObject
+@enduml

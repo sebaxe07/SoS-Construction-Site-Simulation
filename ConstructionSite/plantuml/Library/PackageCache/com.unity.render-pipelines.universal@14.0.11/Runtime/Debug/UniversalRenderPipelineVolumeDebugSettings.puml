@@ -1,0 +1,11 @@
+@startuml
+class UniversalRenderPipelineVolumeDebugSettings {
+}
+class "VolumeDebugSettings`1"<T> {
+}
+"VolumeDebugSettings`1" "<UniversalAdditionalCameraData>" <|-- UniversalRenderPipelineVolumeDebugSettings
+UniversalRenderPipelineVolumeDebugSettings --> "targetRenderPipeline" Type
+UniversalRenderPipelineVolumeDebugSettings --> "selectedCameraVolumeStack" VolumeStack
+UniversalRenderPipelineVolumeDebugSettings --> "selectedCameraLayerMask" LayerMask
+UniversalRenderPipelineVolumeDebugSettings --> "selectedCameraPosition" Vector3
+@enduml

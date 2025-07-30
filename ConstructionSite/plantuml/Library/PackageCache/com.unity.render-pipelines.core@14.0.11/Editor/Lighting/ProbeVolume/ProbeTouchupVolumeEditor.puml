@@ -1,0 +1,29 @@
+@startuml
+class ProbeTouchupColorPreferences {
+}
+class ProbeTouchupVolumeEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+class "CoreEditorDrawer`1"<T> {
+}
+class Styles <<static>> {
+}
+class ProbeTouchupVolumeUI <<static>> {
+    + {static} RegisterEditor(editor:ProbeTouchupVolumeEditor) : void
+    + {static} UnregisterEditor(editor:ProbeTouchupVolumeEditor) : void
+    + {static} SetAdditionalPropertiesVisibility(value:bool) : void
+    + {static} DrawTouchupAdditionalContent(serialized:SerializedProbeTouchupVolume, owner:Editor) : void
+    + {static} DrawTouchupContent(serialized:SerializedProbeTouchupVolume, owner:Editor) : void
+}
+enum AdditionalProperties {
+    Touchup= 1 << 0,
+}
+enum Expandable {
+    Touchup= 1 << 0,
+}
+Editor <|-- ProbeTouchupVolumeEditor
+ProbeTouchupVolumeEditor +-- Styles
+ProbeTouchupVolumeEditor +-- ProbeTouchupVolumeUI
+ProbeTouchupVolumeUI +-- AdditionalProperties
+ProbeTouchupVolumeUI +-- Expandable
+@enduml

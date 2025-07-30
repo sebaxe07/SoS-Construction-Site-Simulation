@@ -1,0 +1,5 @@
+@startuml
+class "PostProcessEffectEditor`1"<T> {
+}
+PostProcessEffectBaseEditor <|-- "PostProcessEffectEditor`1"
+@enduml

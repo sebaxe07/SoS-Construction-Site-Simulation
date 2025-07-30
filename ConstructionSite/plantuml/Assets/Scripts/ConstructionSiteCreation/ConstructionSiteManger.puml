@@ -1,0 +1,11 @@
+@startuml
+class ConstructionSiteManager {
+    + EndZoneCreation() : void
+}
+MonoBehaviour <|-- ConstructionSiteManager
+ConstructionSiteManager --> "perimeterManager" PerimeterManager
+ConstructionSiteManager --> "snapManager" SnapManager
+ConstructionSiteManager --> "zoneManager" ZoneManager
+ConstructionSiteManager --> "createZoneButton" Button
+ConstructionSiteManager --> "cam" Camera
+@enduml

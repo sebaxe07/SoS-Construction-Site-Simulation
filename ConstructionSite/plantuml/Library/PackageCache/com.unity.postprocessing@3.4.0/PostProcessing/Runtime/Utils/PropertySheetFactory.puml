@@ -1,0 +1,8 @@
+@startuml
+class PropertySheetFactory <<sealed>> {
+    + PropertySheetFactory()
+    + Get(shaderName:string) : PropertySheet
+    + Get(shader:Shader) : PropertySheet
+    + Release() : void
+}
+@enduml

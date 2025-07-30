@@ -1,0 +1,9 @@
+@startuml
+class SetFloat {
+    + var : float
+    + value : float
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+BasePrimitiveAction <|-- SetFloat
+@enduml

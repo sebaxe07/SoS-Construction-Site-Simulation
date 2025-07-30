@@ -1,0 +1,11 @@
+@startuml
+class PlayAnimation {
+    + crossFadeTime : float = 0.25f
+    + waitUntilFinish : bool
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- PlayAnimation
+PlayAnimation --> "animationClip" AnimationClip
+PlayAnimation o-> "animationWrap" WrapMode
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+class TestCompilerAttribute {
+    + TestCompilerAttribute(arguments:object[])
+}
+class TestCompilerCommand {
+    + TestCompilerCommand(attribute:TestCompilerAttributeBase, test:Test, originalMethod:TestMethod)
+}
+TestCompilerAttributeBase <|-- TestCompilerAttribute
+TestCompilerAttribute +-- TestCompilerCommand
+TestCompilerCommandBase <|-- TestCompilerCommand
+@enduml

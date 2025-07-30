@@ -1,0 +1,77 @@
+@startuml
+enum GradingMode {
+    LowDefinitionRange,
+    HighDefinitionRange,
+    External,
+}
+enum Tonemapper {
+    None,
+    Neutral,
+    ACES,
+    Custom,
+}
+class GradingModeParameter <<sealed>> {
+}
+class TonemapperParameter <<sealed>> {
+}
+class ColorGrading <<sealed>> {
+    + <<override>> IsEnabledAndSupported(context:PostProcessRenderContext) : bool
+}
+class ColorGradingRenderer <<sealed>> {
+    + <<override>> Render(context:PostProcessRenderContext) : void
+    + <<override>> Release() : void
+}
+class "ParameterOverride`1"<T> {
+}
+class "PostProcessEffectRenderer`1"<T> {
+}
+enum Pass {
+    LutGenLDRFromScratch,
+    LutGenLDR,
+    LutGenHDR2D,
+}
+"ParameterOverride`1" "<GradingMode>" <|-- GradingModeParameter
+"ParameterOverride`1" "<Tonemapper>" <|-- TonemapperParameter
+PostProcessEffectSettings <|-- ColorGrading
+ColorGrading o-> "gradingMode" GradingModeParameter
+ColorGrading o-> "externalLut" TextureParameter
+ColorGrading o-> "tonemapper" TonemapperParameter
+ColorGrading o-> "toneCurveToeStrength" FloatParameter
+ColorGrading o-> "toneCurveToeLength" FloatParameter
+ColorGrading o-> "toneCurveShoulderStrength" FloatParameter
+ColorGrading o-> "toneCurveShoulderLength" FloatParameter
+ColorGrading o-> "toneCurveShoulderAngle" FloatParameter
+ColorGrading o-> "toneCurveGamma" FloatParameter
+ColorGrading o-> "ldrLut" TextureParameter
+ColorGrading o-> "ldrLutContribution" FloatParameter
+ColorGrading o-> "temperature" FloatParameter
+ColorGrading o-> "tint" FloatParameter
+ColorGrading o-> "colorFilter" ColorParameter
+ColorGrading o-> "hueShift" FloatParameter
+ColorGrading o-> "saturation" FloatParameter
+ColorGrading o-> "brightness" FloatParameter
+ColorGrading o-> "postExposure" FloatParameter
+ColorGrading o-> "contrast" FloatParameter
+ColorGrading o-> "mixerRedOutRedIn" FloatParameter
+ColorGrading o-> "mixerRedOutGreenIn" FloatParameter
+ColorGrading o-> "mixerRedOutBlueIn" FloatParameter
+ColorGrading o-> "mixerGreenOutRedIn" FloatParameter
+ColorGrading o-> "mixerGreenOutGreenIn" FloatParameter
+ColorGrading o-> "mixerGreenOutBlueIn" FloatParameter
+ColorGrading o-> "mixerBlueOutRedIn" FloatParameter
+ColorGrading o-> "mixerBlueOutGreenIn" FloatParameter
+ColorGrading o-> "mixerBlueOutBlueIn" FloatParameter
+ColorGrading o-> "lift" Vector4Parameter
+ColorGrading o-> "gamma" Vector4Parameter
+ColorGrading o-> "gain" Vector4Parameter
+ColorGrading o-> "masterCurve" SplineParameter
+ColorGrading o-> "redCurve" SplineParameter
+ColorGrading o-> "greenCurve" SplineParameter
+ColorGrading o-> "blueCurve" SplineParameter
+ColorGrading o-> "hueVsHueCurve" SplineParameter
+ColorGrading o-> "hueVsSatCurve" SplineParameter
+ColorGrading o-> "satVsSatCurve" SplineParameter
+ColorGrading o-> "lumVsSatCurve" SplineParameter
+"PostProcessEffectRenderer`1" "<ColorGrading>" <|-- ColorGradingRenderer
+ColorGradingRenderer +-- Pass
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+struct XRPassCreateInfo {
+}
+class XRPass {
+    + XRPass()
+    + {static} CreateDefault(createInfo:XRPassCreateInfo) : XRPass
+    <<virtual>> + Release() : void
+    + enabled : bool <<get>>
+    + supportsFoveatedRendering : bool <<get>>
+    + copyDepth : bool <<get>>
+    + multipassId : int <<get>>
+    + cullingPassId : int <<get>>
+    + viewCount : int <<get>>
+    + singlePassEnabled : bool <<get>>
+    + isHDRDisplayOutputActive : bool <<get>>
+    + occlusionMeshScale : float <<get>>
+    + GetProjMatrix(viewIndex:int) : Matrix4x4
+    + GetViewMatrix(viewIndex:int) : Matrix4x4
+    + GetViewport(viewIndex:int) : Rect
+    + GetOcclusionMesh(viewIndex:int) : Mesh
+    + GetTextureArraySlice(viewIndex:int) : int
+    + StartSinglePass(cmd:CommandBuffer) : void
+    + StopSinglePass(cmd:CommandBuffer) : void
+    + hasValidOcclusionMesh : bool <<get>>
+    + RenderOcclusionMesh(cmd:CommandBuffer, renderIntoTexture:bool) : void
+    + ApplyXRViewCenterOffset(center:Vector2) : Vector4
+    + InitBase(createInfo:XRPassCreateInfo) : void
+}
+XRPass --> "renderTarget" RenderTargetIdentifier
+XRPass --> "renderTargetDesc" RenderTextureDescriptor
+XRPass --> "cullingParams" ScriptableCullingParameters
+XRPass --> "foveatedRenderingInfo" IntPtr
+XRPass --> "hdrDisplayOutputColorGamut" ColorGamut
+@enduml

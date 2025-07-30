@@ -1,0 +1,9 @@
+@startuml
+class PostProcessVolumeEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<PostProcessVolume>" <|-- PostProcessVolumeEditor
+PostProcessVolumeEditor --> "profileRef" PostProcessProfile
+@enduml

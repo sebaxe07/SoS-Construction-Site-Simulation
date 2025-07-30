@@ -1,0 +1,9 @@
+@startuml
+class PostProcessingTests {
+    + Profile_AddSettings() : void
+    + Profile_HasSettings() : void
+    + Profile_GetSettings() : void
+    + Profile_TryGetSettings() : void
+    + Profile_RemoveSettings() : void
+}
+@enduml

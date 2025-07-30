@@ -1,0 +1,7 @@
+@startuml
+class VectorscopeMonitor <<sealed>> {
+    + size : int = 256
+    + exposure : float = 0.12f
+}
+Monitor <|-- VectorscopeMonitor
+@enduml

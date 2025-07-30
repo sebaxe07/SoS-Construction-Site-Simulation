@@ -1,0 +1,6 @@
+@startuml
+class FastApproximateAntialiasing <<sealed>> {
+    + fastMode : bool = false
+    + keepAlpha : bool = false
+}
+@enduml

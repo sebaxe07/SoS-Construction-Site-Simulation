@@ -1,0 +1,8 @@
+@startuml
+class IsTargetInSight {
+    + angle : float
+    + <<override>> Check() : bool
+}
+GOCondition <|-- IsTargetInSight
+IsTargetInSight --> "target" GameObject
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class MinAttribute <<sealed>> {
+    + <<readonly>> min : float
+    + MinAttribute(min:float)
+}
+Attribute <|-- MinAttribute
+@enduml

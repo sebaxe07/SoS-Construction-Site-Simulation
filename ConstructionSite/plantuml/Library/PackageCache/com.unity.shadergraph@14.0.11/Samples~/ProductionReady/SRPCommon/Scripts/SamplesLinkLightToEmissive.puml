@@ -1,0 +1,9 @@
+@startuml
+class PRSSamplesLinkLightToEmissive {
+    + emissionColorProperty : string = "_Emission_Color"
+    + emissionIntensityProperty : string = "_Intensity"
+}
+MonoBehaviour <|-- PRSSamplesLinkLightToEmissive
+PRSSamplesLinkLightToEmissive --> "emissiveObject" GameObject
+PRSSamplesLinkLightToEmissive --> "lightToLink" Light
+@enduml

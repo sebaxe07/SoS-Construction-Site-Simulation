@@ -1,0 +1,51 @@
+@startuml
+class ProbeVolumeBakingWindow {
+}
+struct SceneData {
+    + guid : string
+    + GetPath() : string
+}
+class Styles <<static>> {
+}
+enum ScenariosStatus {
+    Valid,
+    NotLoaded,
+    OutOfDate,
+    NotBaked,
+}
+enum Expandable {
+    RendererFilterSettings= 1 << 0,
+    Dilation= 1 << 1,
+    VirtualOffset= 1 << 2,
+}
+class ProbeVolumeOverlay {
+    + visible : bool <<get>>
+    + <<override>> OnCreated() : void
+    + <<override>> CreatePanelContent() : VisualElement
+}
+EditorWindow <|-- ProbeVolumeBakingWindow
+ProbeVolumeBakingWindow +-- SceneData
+SceneData --> "asset" SceneAsset
+ProbeVolumeBakingWindow +-- Styles
+Styles o-> "sceneIcon" Texture
+Styles o-> "probeVolumeIcon" Texture
+Styles o-> "debugIcon" Texture
+Styles o-> "sceneLightingSettings" GUIContent
+Styles o-> "activeScenarioLabel" GUIContent
+Styles o-> "sceneNotFound" GUIContent
+Styles o-> "bakingSetsTitle" GUIContent
+Styles o-> "debugButton" GUIContent
+Styles o-> "stats" GUIContent
+Styles o-> "scenarioCostStat" GUIContent
+Styles o-> "totalCostStat" GUIContent
+Styles o-> "invalidLabel" GUIContent
+Styles o-> "emptyLabel" GUIContent
+Styles o-> "notLoadedLabel" GUIContent
+Styles o-> "labelRed" GUIStyle
+Styles o-> "boldFoldout" GUIStyle
+ProbeVolumeBakingWindow +-- ScenariosStatus
+ProbeVolumeBakingWindow +-- Expandable
+ProbeVolumeBakingWindow +-- ProbeVolumeOverlay
+Overlay <|-- ProbeVolumeOverlay
+ITransientOverlay <|-- ProbeVolumeOverlay
+@enduml

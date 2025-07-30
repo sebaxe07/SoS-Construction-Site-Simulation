@@ -1,0 +1,30 @@
+@startuml
+enum EyeAdaptation {
+    Progressive,
+    Fixed,
+}
+class EyeAdaptationParameter <<sealed>> {
+}
+class AutoExposure <<sealed>> {
+    + <<override>> IsEnabledAndSupported(context:PostProcessRenderContext) : bool
+}
+class AutoExposureRenderer <<sealed>> {
+    + AutoExposureRenderer()
+    + <<override>> Render(context:PostProcessRenderContext) : void
+    + <<override>> Release() : void
+}
+class "ParameterOverride`1"<T> {
+}
+class "PostProcessEffectRenderer`1"<T> {
+}
+"ParameterOverride`1" "<EyeAdaptation>" <|-- EyeAdaptationParameter
+PostProcessEffectSettings <|-- AutoExposure
+AutoExposure o-> "filtering" Vector2Parameter
+AutoExposure o-> "minLuminance" FloatParameter
+AutoExposure o-> "maxLuminance" FloatParameter
+AutoExposure o-> "keyValue" FloatParameter
+AutoExposure o-> "eyeAdaptation" EyeAdaptationParameter
+AutoExposure o-> "speedUp" FloatParameter
+AutoExposure o-> "speedDown" FloatParameter
+"PostProcessEffectRenderer`1" "<AutoExposure>" <|-- AutoExposureRenderer
+@enduml

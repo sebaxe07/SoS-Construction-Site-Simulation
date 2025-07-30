@@ -1,0 +1,79 @@
+@startuml
+class NotSupported {
+    + InstanceMethod() : int
+    + {static} TestDelegate(data:int) : int
+    + {static} TestStructWithMarshalAs() : void
+    + {static} TestStructWithMarshalAsSysInt() : void
+    + {static} TestMethodWithMarshalAsParameter(x:int) : void
+    + {static} TestMethodWithMarshalAsReturnType() : int
+    + {static} TestStaticLoad() : bool
+    + {static} TestStaticStore() : void
+    + {static} TestStaticInterfaceStore() : void
+    + {static} TestStaticIntLoad() : int
+    + {static} TestStaticIntStore() : void
+    + {static} CharbyValue(c:char) : char
+    + {static} TestCharbyValue(fp:CharbyValueFunc, i:int) : int
+    + {static} TestStaticHalf3() : float
+    + {static} TestAreEqual(a:int, b:int) : void
+    + {static} TestTypeof() : bool
+    + {static} TestMixedStaticInits() : int
+    + <<unsafe>> {static} TestStaticArrayWrapper() : int
+    + <<unsafe>> {static} TestNestedManagedArrays() : int
+    + {static} TestMultiDimensionalArray() : int
+}
+struct HasMarshalAttribute {
+    + A : bool
+}
+struct HasMarshalAsSysIntAttribute {
+    + A : bool
+}
+interface ISomething {
+}
+struct Something {
+    + A : byte
+    + DoSomething() : void
+}
+struct CharbyValueFunc {
+    + FromIntPtr(ptr:IntPtr) : object
+}
+struct Halfs {
+}
+class AwfulClass {
+    + Foo : int
+}
+struct BetterStruct {
+    + Foo : int
+}
+struct MixedStaticInits {
+}
+struct StaticArrayWrapper {
+}
+class NestedArrayHolder {
+}
+class MultiDimensionalValue <<static>> {
+}
+class "FunctionPointer`1"<T> {
+}
+NotSupported +-- HasMarshalAttribute
+NotSupported +-- HasMarshalAsSysIntAttribute
+NotSupported +-- ISomething
+NotSupported +-- Something
+ISomething <|-- Something
+NotSupported +-- CharbyValueFunc
+IFunctionPointerProvider <|-- CharbyValueFunc
+CharbyValueFunc --> "FunctionPointer<CharbyValueDelegate>" "FunctionPointer`1"
+NotSupported +-- Halfs
+Halfs o-> "h3_h" half3
+Halfs o-> "h3_d" half3
+Halfs o-> "h3_v2s" half3
+Halfs o-> "h3_sv2" half3
+Halfs o-> "h3_v3" half3
+NotSupported +-- AwfulClass
+NotSupported +-- BetterStruct
+NotSupported +-- MixedStaticInits
+MixedStaticInits o-> "AC" AwfulClass
+MixedStaticInits o-> "BS" BetterStruct
+NotSupported +-- StaticArrayWrapper
+NotSupported +-- NestedArrayHolder
+NotSupported +-- MultiDimensionalValue
+@enduml

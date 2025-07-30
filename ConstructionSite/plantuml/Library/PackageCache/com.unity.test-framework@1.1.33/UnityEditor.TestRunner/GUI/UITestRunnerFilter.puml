@@ -1,0 +1,11 @@
+@startuml
+class UITestRunnerFilter {
+    + testRepetitions : int = 1
+    + synchronousOnly : bool = false
+    + {static} AssemblyNameFromPath(path:string) : string
+    + ClearResults(newResultList:List<IClearableResult>) : void
+}
+interface IClearableResult {
+}
+UITestRunnerFilter +-- IClearableResult
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class Object2Terrain {
+}
+EditorWindow <|-- Object2Terrain
+@enduml

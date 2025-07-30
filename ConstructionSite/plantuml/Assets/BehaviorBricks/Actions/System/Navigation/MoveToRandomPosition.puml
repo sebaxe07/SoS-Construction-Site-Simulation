@@ -1,0 +1,9 @@
+@startuml
+class MoveToRandomPosition {
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+    + <<override>> OnAbort() : void
+}
+GOAction <|-- MoveToRandomPosition
+MoveToRandomPosition --> "area" GameObject
+@enduml

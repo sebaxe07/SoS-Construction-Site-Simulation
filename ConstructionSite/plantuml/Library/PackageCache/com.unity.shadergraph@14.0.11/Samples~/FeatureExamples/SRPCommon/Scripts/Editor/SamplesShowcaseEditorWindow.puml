@@ -1,0 +1,6 @@
+@startuml
+class SamplesWindow {
+    + {static} OpenSamplesShowcaseWindow() : SamplesWindow
+}
+EditorWindow <|-- SamplesWindow
+@enduml

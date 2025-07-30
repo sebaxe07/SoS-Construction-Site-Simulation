@@ -1,0 +1,9 @@
+@startuml
+class AddComponent {
+    + type : string
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- AddComponent
+AddComponent --> "targetGameobject" GameObject
+@enduml

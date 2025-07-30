@@ -1,0 +1,11 @@
+@startuml
+class AssetReimporterAnalytic {
+    + {static} Send(duration:double, numberOfAssets:uint) : void
+}
+class Data {
+    + num_assets : uint
+    + duration : double
+    + asset_type : string
+}
+AssetReimporterAnalytic +-- Data
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class LegacyPlayModeRunTask {
+    + LegacyPlayModeRunTask()
+    + <<override>> Execute(testJobData:TestJobData) : IEnumerator
+}
+TestTaskBase <|-- LegacyPlayModeRunTask
+@enduml

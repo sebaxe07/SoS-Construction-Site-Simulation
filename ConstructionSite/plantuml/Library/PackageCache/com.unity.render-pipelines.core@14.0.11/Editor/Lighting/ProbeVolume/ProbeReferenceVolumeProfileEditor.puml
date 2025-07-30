@@ -1,0 +1,18 @@
+@startuml
+class ProbeReferenceVolumeProfileEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+class Styles <<static>> {
+    + {static} <<readonly>> simplificationLevelsHighWarning : string = "High simplification levels have a big memory overhead, they are not recommended except for testing purposes."
+}
+Editor <|-- ProbeReferenceVolumeProfileEditor
+ProbeReferenceVolumeProfileEditor +-- Styles
+Styles o-> "maxDistanceBetweenProbes" GUIContent
+Styles o-> "minDistanceBetweenProbes" GUIContent
+Styles o-> "indexDimensions" GUIContent
+Styles o-> "minRendererVolumeSize" GUIContent
+Styles o-> "renderersLayerMask" GUIContent
+Styles o-> "rendererFilterSettings" GUIContent
+Styles o-> "keepSamePlacement" GUIContent
+Styles o-> "labelFont" GUIStyle
+@enduml

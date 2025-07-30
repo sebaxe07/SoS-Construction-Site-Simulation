@@ -1,0 +1,7 @@
+@startuml
+class BurstStringSearchTests {
+    + FindLineNrTest() : void
+    + GetEndIndexOfPlainLineTest() : void
+    + FindMatchTest() : void
+}
+@enduml

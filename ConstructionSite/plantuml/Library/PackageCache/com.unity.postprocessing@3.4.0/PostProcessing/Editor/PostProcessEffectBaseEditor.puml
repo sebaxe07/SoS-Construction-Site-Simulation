@@ -1,0 +1,9 @@
+@startuml
+class PostProcessEffectBaseEditor {
+    + Repaint() : void
+    + <<virtual>> OnEnable() : void
+    + <<virtual>> OnDisable() : void
+    + <<virtual>> OnInspectorGUI() : void
+    + <<virtual>> GetDisplayTitle() : string
+}
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+abstract class TestListGUI {
+    + <<virtual>> PrintHeadPanel() : void
+    + HasTreeData() : bool
+    + <<virtual>> RenderTestList() : void
+    + <<virtual>> RenderNoTestsInfo() : void
+    + RenderDetails() : void
+    + Reload() : void
+    + Repaint() : void
+    + Init(window:TestRunnerWindow, rootTest:ITestAdaptor) : void
+    + UpdateResult(result:TestRunnerResult) : void
+    + UpdateTestTree(test:ITestAdaptor) : void
+    + RebuildUIFilter() : void
+    + RepaintIfProjectPathChanged() : void
+}
+class "List`1"<T> {
+}
+TestListGUI --> "newResultList<TestRunnerResult>" "List`1"
+TestListGUI --> "TestMode" TestMode
+TestListGUI --> "TestPlatform" TestPlatform
+@enduml

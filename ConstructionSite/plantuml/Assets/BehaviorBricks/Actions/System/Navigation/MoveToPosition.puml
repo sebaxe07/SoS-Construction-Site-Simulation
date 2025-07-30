@@ -1,0 +1,9 @@
+@startuml
+class MoveToPosition {
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+    + <<override>> OnAbort() : void
+}
+GOAction <|-- MoveToPosition
+MoveToPosition --> "target" Vector3
+@enduml

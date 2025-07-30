@@ -1,0 +1,10 @@
+@startuml
+class ProfileFactory <<sealed>> {
+    + {static} CreatePostProcessProfileAtPath(path:string) : PostProcessProfile
+    + {static} CreatePostProcessProfile(scene:Scene, targetName:string) : PostProcessProfile
+}
+class DoCreatePostProcessProfile {
+    + <<override>> Action(instanceId:int, pathName:string, resourceFile:string) : void
+}
+EndNameEditAction <|-- DoCreatePostProcessProfile
+@enduml

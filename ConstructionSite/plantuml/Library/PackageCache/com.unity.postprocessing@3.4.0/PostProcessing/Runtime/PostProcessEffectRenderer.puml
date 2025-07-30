@@ -1,0 +1,13 @@
+@startuml
+abstract class PostProcessEffectRenderer {
+    + <<virtual>> Init() : void
+    + <<virtual>> GetCameraFlags() : DepthTextureMode
+    + <<virtual>> ResetHistory() : void
+    + <<virtual>> Release() : void
+    + {abstract} Render(context:PostProcessRenderContext) : void
+}
+abstract class "PostProcessEffectRenderer`1"<T> {
+    + settings : T <<get>> <<internal set>>
+}
+PostProcessEffectRenderer <|-- "PostProcessEffectRenderer`1"
+@enduml

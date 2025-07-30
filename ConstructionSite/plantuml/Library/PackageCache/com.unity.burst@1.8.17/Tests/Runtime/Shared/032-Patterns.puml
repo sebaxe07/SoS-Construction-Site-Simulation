@@ -1,0 +1,18 @@
+@startuml
+class Patterns {
+    + {static} PropertyPattern(x:int) : int
+    + {static} TuplePattern(x:int, y:int) : int
+    + {static} PositionalPattern(pointX:int, pointY:int) : int
+}
+struct Point {
+    + X : int
+    + Y : int
+}
+struct DeconstructablePoint {
+    + X : int
+    + Y : int
+    + Deconstruct(x:int, y:int) : void
+}
+Patterns +-- Point
+Patterns +-- DeconstructablePoint
+@enduml

@@ -1,0 +1,45 @@
+@startuml
+class PostProcessLayer <<sealed>> {
+    + stopNaNPropagation : bool = true
+    + finalBlitToCameraTarget : bool = false
+    + breakBeforeColorGrading : bool = false
+    + haveBundlesBeenInited : bool <<get>>
+    + Init(resources:PostProcessResources) : void
+    + InitBundles() : void
+    + GetBundle() : PostProcessBundle
+    + GetBundle(settingsType:Type) : PostProcessBundle
+    + GetSettings() : T
+    + BakeMSVOMap(cmd:CommandBuffer, camera:Camera, destination:RenderTargetIdentifier, depthMap:RenderTargetIdentifier?, invert:bool, isMSAA:bool) : void
+    + ResetHistory() : void
+    + HasOpaqueOnlyEffects(context:PostProcessRenderContext) : bool
+    + HasActiveEffects(evt:PostProcessEvent, context:PostProcessRenderContext) : bool
+    + UpdateVolumeSystem(cam:Camera, cmd:CommandBuffer) : void
+    + RenderOpaqueOnly(context:PostProcessRenderContext) : void
+    + Render(context:PostProcessRenderContext) : void
+}
+enum Antialiasing {
+    None,
+    FastApproximateAntialiasing,
+    SubpixelMorphologicalAntialiasing,
+    TemporalAntialiasing,
+}
+class SerializedBundleRef <<sealed>> {
+    + assemblyQualifiedName : string
+}
+class "Dictionary`2"<T1,T2> {
+}
+MonoBehaviour <|-- PostProcessLayer
+PostProcessLayer --> "volumeTrigger" Transform
+PostProcessLayer --> "volumeLayer" LayerMask
+PostProcessLayer o-> "antialiasingMode" Antialiasing
+PostProcessLayer --> "temporalAntialiasing" TemporalAntialiasing
+PostProcessLayer --> "subpixelMorphologicalAntialiasing" SubpixelMorphologicalAntialiasing
+PostProcessLayer --> "fastApproximateAntialiasing" FastApproximateAntialiasing
+PostProcessLayer --> "fog" Fog
+PostProcessLayer --> "debugLayer" PostProcessDebugLayer
+PostProcessLayer --> "sortedBundles<PostProcessEvent,List<SerializedBundleRef>>" "Dictionary`2"
+PostProcessLayer --> "cameraDepthFlags" DepthTextureMode
+PostProcessLayer +-- Antialiasing
+PostProcessLayer +-- SerializedBundleRef
+SerializedBundleRef --> "bundle" PostProcessBundle
+@enduml

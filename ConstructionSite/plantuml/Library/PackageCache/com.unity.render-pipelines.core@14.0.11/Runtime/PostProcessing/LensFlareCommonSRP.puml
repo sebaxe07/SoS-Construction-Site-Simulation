@@ -1,0 +1,30 @@
+@startuml
+class LensFlareCommonSRP <<sealed>> {
+    + {static} maxLensFlareWithOcclusion : int = 128
+    + {static} maxLensFlareWithOcclusionTemporalSample : int = 8
+    + {static} mergeNeeded : int = 1
+    {static} + IsOcclusionRTCompatible() : bool
+    {static} + Initialize() : void
+    {static} + Dispose() : void
+    + IsEmpty() : bool
+    + AddData(newData:LensFlareComponentSRP) : void
+    + RemoveData(data:LensFlareComponentSRP) : void
+    {static} + ShapeAttenuationPointLight() : float
+    {static} + ShapeAttenuationDirLight(forward:Vector3, wo:Vector3) : float
+    {static} + ShapeAttenuationSpotConeLight(forward:Vector3, wo:Vector3, spotAngle:float, innerSpotPercent01:float) : float
+    {static} + ShapeAttenuationSpotBoxLight(forward:Vector3, wo:Vector3) : float
+    {static} + ShapeAttenuationSpotPyramidLight(forward:Vector3, wo:Vector3) : float
+    {static} + ShapeAttenuationAreaTubeLight(lightPositionWS:Vector3, lightSide:Vector3, lightWidth:float, cam:Camera) : float
+    {static} + ShapeAttenuationAreaRectangleLight(forward:Vector3, wo:Vector3) : float
+    {static} + ShapeAttenuationAreaDiscLight(forward:Vector3, wo:Vector3) : float
+    {static} + GetFlareData0(screenPos:Vector2, translationScale:Vector2, rayOff0:Vector2, vLocalScreenRatio:Vector2, angleDeg:float, position:float, angularOffset:float, positionOffset:Vector2, autoRotate:bool) : Vector4
+    {static} + IsCloudLayerOpacityNeeded(cam:Camera) : bool
+    {static} + ComputeOcclusion(lensFlareShader:Material, cam:Camera, actualWidth:float, actualHeight:float, usePanini:bool, paniniDistance:float, paniniCropToFit:float, isCameraRelative:bool, cameraPositionWS:Vector3, viewProjMatrix:Matrix4x4, cmd:Rendering.CommandBuffer, taaEnabled:bool, hasCloudLayer:bool, cloudOpacityTexture:Texture, sunOcclusionTexture:Texture, _FlareOcclusionTex:int, _FlareCloudOpacity:int, _FlareOcclusionIndex:int, _FlareTex:int, _FlareColorValue:int, _FlareSunOcclusionTex:int, _FlareData0:int, _FlareData1:int, _FlareData2:int, _FlareData3:int, _FlareData4:int) : void
+    {static} + DoLensFlareDataDrivenCommon(lensFlareShader:Material, cam:Camera, actualWidth:float, actualHeight:float, usePanini:bool, paniniDistance:float, paniniCropToFit:float, isCameraRelative:bool, cameraPositionWS:Vector3, viewProjMatrix:Matrix4x4, cmd:Rendering.CommandBuffer, taaEnabled:bool, hasCloudLayer:bool, cloudOpacityTexture:Texture, sunOcclusionTexture:Texture, colorBuffer:Rendering.RenderTargetIdentifier, GetLensFlareLightAttenuation:System.Func<Light, Camera, Vector3, float>, _FlareOcclusionRemapTex:int, _FlareOcclusionTex:int, _FlareOcclusionIndex:int, _FlareCloudOpacity:int, _FlareSunOcclusionTex:int, _FlareTex:int, _FlareColorValue:int, _FlareData0:int, _FlareData1:int, _FlareData2:int, _FlareData3:int, _FlareData4:int, debugView:bool) : void
+}
+class LensFlareCompInfo {
+}
+LensFlareCommonSRP o-> "occlusionRT" RTHandle
+LensFlareCommonSRP --> "Instance" LensFlareCommonSRP
+LensFlareCommonSRP +-- LensFlareCompInfo
+@enduml

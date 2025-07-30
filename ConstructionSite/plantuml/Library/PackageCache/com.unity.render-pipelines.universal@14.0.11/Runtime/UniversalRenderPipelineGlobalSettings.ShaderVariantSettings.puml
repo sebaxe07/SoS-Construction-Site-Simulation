@@ -1,0 +1,6 @@
+@startuml
+class UniversalRenderPipelineGlobalSettings <<partial>> {
+    + exportShaderVariants : bool <<get>> <<set>>
+}
+IShaderVariantSettings <|-- UniversalRenderPipelineGlobalSettings
+@enduml

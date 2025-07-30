@@ -1,0 +1,25 @@
+@startuml
+class LongTextAreaTests {
+    + SetUp() : void
+    + GetStartingColorTagTest(tag:string, text:string, textIdx:int, syntaxHighlight:bool) : void
+    + GetEndingColorTagTest(tag:string, text:string, textIdx:int, syntaxHighlight:bool) : void
+    + GetEndIndexOfColoredLineTest(text:string, line:int, resTotal:int, resRel:int) : void
+    + GetEndIndexOfPlainLineTest(text:string, line:int, resTotal:int, resRel:int) : void
+    + BumpSelectionXByColortagTest(text:string, lineNum:int, charsIn:int, colourTagFiller:int) : void
+    + SelectAllTest(text:string, useDisassembler:bool) : void
+    + CopyAllTest(useDisassembler:bool, coloured:bool, debugLvl:int) : void
+    + CopyAllTextWithoutColorTagsTest() : void
+    + CopyTextAfterSelectionMovedTest() : void
+    + CopyTextIdenticalWithAndWithoutColorTags() : void
+    + KeepingSelectionWhenMovingTest(useDisassembler:bool) : void
+    + GetFragNrFromBlockIdxTest() : void
+    + GetFragNrFromEnhancedTextIdxTest() : void
+    + SearchTextEnhancedTest(colored:bool) : void
+    + SelectOnOneLineTest() : void
+    + GetLineHighlightTest() : void
+    + GetRegRectsTest() : void
+    + RegsRectCacheTest() : void
+    + SameRegisterUsedTwiceTest(line:string, reg:string) : void
+    + ClearLinePressTest() : void
+}
+@enduml

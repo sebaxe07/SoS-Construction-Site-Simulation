@@ -1,0 +1,9 @@
+@startuml
+class ApplyForce {
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- ApplyForce
+ApplyForce --> "toApplyForce" GameObject
+ApplyForce --> "force" Vector3
+@enduml

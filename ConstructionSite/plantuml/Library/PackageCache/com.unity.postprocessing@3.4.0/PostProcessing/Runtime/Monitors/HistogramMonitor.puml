@@ -1,0 +1,15 @@
+@startuml
+class HistogramMonitor <<sealed>> {
+    + width : int = 512
+    + height : int = 256
+}
+enum Channel {
+    Red,
+    Green,
+    Blue,
+    Master,
+}
+Monitor <|-- HistogramMonitor
+HistogramMonitor o-> "channel" Channel
+HistogramMonitor +-- Channel
+@enduml

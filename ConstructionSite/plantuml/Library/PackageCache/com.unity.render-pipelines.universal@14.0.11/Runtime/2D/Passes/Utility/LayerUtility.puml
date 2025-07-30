@@ -1,0 +1,17 @@
+@startuml
+struct LayerBatch {
+    + startLayerID : int
+    + endLayerValue : int
+    + useNormals : bool
+    + InitRTIds(index:int) : void
+    + GetRTId(cmd:CommandBuffer, desc:RenderTextureDescriptor, index:int) : RenderTargetIdentifier
+    + ReleaseRT(cmd:CommandBuffer) : void
+}
+class LayerUtility <<static>> {
+    + {static} maxTextureCount : uint <<get>>
+    + {static} InitializeBudget(maxTextureCount:uint) : void
+    + {static} CalculateBatches(lightCullResult:ILight2DCullResult, batchCount:int) : LayerBatch[]
+}
+LayerBatch --> "layerRange" SortingLayerRange
+LayerBatch --> "lightStats" LightStats
+@enduml

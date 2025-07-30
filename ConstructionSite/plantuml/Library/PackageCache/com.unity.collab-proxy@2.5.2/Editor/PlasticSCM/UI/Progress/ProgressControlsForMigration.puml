@@ -1,0 +1,7 @@
+@startuml
+class ProgressControlsForMigration {
+}
+class Data {
+}
+ProgressControlsForMigration +-- Data
+@enduml

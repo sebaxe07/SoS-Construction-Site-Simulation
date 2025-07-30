@@ -1,0 +1,46 @@
+@startuml
+class ProbeBrickIndex {
+    + GetRemainingChunkCount() : int
+    + AddBricks(cell:Cell, bricks:NativeArray<Brick>, allocations:List<Chunk>, allocationSize:int, poolWidth:int, poolHeight:int, cellInfo:CellIndexUpdateInfo) : void
+    + RemoveBricks(cellInfo:CellInfo) : void
+}
+struct Brick {
+    + subdivisionLevel : int
+    + Equals(other:Brick) : bool
+}
+struct ReservedBrick {
+    + flattenedIdx : int
+}
+class VoxelMeta {
+    + Clear() : void
+}
+class BrickMeta {
+    + Clear() : void
+}
+struct CellIndexUpdateInfo {
+    + firstChunkIndex : int
+    + numberOfChunks : int
+    + minSubdivInCell : int
+}
+class "IEquatable`1"<T> {
+}
+class "List`1"<T> {
+}
+class "HashSet`1"<T> {
+}
+ProbeBrickIndex +-- Brick
+"IEquatable`1" "<Brick>" <|-- Brick
+Brick --> "position" Vector3Int
+ProbeBrickIndex +-- ReservedBrick
+ReservedBrick --> "brick" Brick
+ProbeBrickIndex +-- VoxelMeta
+VoxelMeta --> "cell" Cell
+VoxelMeta o-> "brickIndices<ushort>" "List`1"
+ProbeBrickIndex +-- BrickMeta
+BrickMeta o-> "voxels<Vector3Int>" "HashSet`1"
+BrickMeta o-> "bricks<ReservedBrick>" "List`1"
+ProbeBrickIndex +-- CellIndexUpdateInfo
+CellIndexUpdateInfo --> "minValidBrickIndexForCellAtMaxRes" Vector3Int
+CellIndexUpdateInfo --> "maxValidBrickIndexForCellAtMaxResPlusOne" Vector3Int
+CellIndexUpdateInfo --> "cellPositionInBricksAtMaxRes" Vector3Int
+@enduml

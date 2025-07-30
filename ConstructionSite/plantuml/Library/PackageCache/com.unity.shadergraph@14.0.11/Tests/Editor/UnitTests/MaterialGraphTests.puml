@@ -1,0 +1,7 @@
+@startuml
+class MaterialGraphTests {
+    + RunBeforeAnyTests() : void
+    + TestCreateMaterialGraph() : void
+    + TestUndoRedoPerformedMethod() : void
+}
+@enduml

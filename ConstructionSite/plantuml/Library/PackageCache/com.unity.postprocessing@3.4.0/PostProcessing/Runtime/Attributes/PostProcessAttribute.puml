@@ -1,0 +1,10 @@
+@startuml
+class PostProcessAttribute <<sealed>> {
+    + <<readonly>> menuItem : string
+    + <<readonly>> allowInSceneView : bool
+    + PostProcessAttribute(renderer:Type, eventType:PostProcessEvent, menuItem:string, allowInSceneView:bool)
+}
+Attribute <|-- PostProcessAttribute
+PostProcessAttribute --> "renderer" Type
+PostProcessAttribute --> "eventType" PostProcessEvent
+@enduml

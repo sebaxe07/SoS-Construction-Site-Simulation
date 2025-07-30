@@ -1,0 +1,15 @@
+@startuml
+class ProximityActivate {
+    + distance : float
+    + activeState : bool = false
+    + lookAtCamera : bool = true
+    + enableInfoPanel : bool = false
+}
+MonoBehaviour <|-- ProximityActivate
+ProximityActivate --> "distanceActivator" Transform
+ProximityActivate --> "lookAtActivator" Transform
+ProximityActivate --> "activator" Transform
+ProximityActivate --> "target" CanvasGroup
+ProximityActivate --> "infoIcon" GameObject
+ProximityActivate --> "infoPanel" CanvasGroup
+@enduml

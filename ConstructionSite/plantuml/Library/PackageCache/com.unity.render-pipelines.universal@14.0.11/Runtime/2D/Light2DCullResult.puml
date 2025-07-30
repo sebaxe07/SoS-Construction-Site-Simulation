@@ -1,0 +1,22 @@
+@startuml
+struct LightStats {
+    + totalLights : int
+    + totalNormalMapUsage : int
+    + totalVolumetricUsage : int
+    + blendStylesUsed : uint
+    + blendStylesWithLights : uint
+    + useNormalMap : bool <<get>>
+}
+interface ILight2DCullResult {
+}
+class Light2DCullResult {
+    + IsSceneLit() : bool
+    + GetLightStatsByLayer(layer:int) : LightStats
+    + SetupCulling(cullingParameters:ScriptableCullingParameters, camera:Camera) : void
+}
+class "List`1"<T> {
+}
+ILight2DCullResult <|-- Light2DCullResult
+Light2DCullResult --> "visibleLights<Light2D>" "List`1"
+Light2DCullResult --> "visibleShadows<ShadowCasterGroup2D>" "List`1"
+@enduml

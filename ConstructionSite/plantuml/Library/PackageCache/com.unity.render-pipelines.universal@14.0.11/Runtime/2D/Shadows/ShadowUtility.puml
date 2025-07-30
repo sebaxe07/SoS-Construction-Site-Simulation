@@ -1,0 +1,17 @@
+@startuml
+class ShadowUtility {
+    + {static} GenerateShadowMesh(mesh:Mesh, shapePath:Vector3[]) : Bounds
+}
+struct Edge {
+    + vertexIndex0 : int
+    + vertexIndex1 : int
+    + AssignVertexIndices(vi0:int, vi1:int) : void
+    + Compare(a:Edge, b:Edge) : int
+    + CompareTo(edgeToCompare:Edge) : int
+}
+class "IComparable`1"<T> {
+}
+ShadowUtility +-- Edge
+"IComparable`1" "<Edge>" <|-- Edge
+Edge --> "tangent" Vector4
+@enduml

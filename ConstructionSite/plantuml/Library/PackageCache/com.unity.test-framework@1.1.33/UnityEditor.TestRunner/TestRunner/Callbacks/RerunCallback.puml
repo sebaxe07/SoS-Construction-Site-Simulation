@@ -1,0 +1,12 @@
+@startuml
+class RerunCallback {
+    + {static} useMockRunFilter : bool = false
+    + RunFinished(result:ITestResultAdaptor) : void
+    + TestStarted(test:ITestAdaptor) : void
+    + TestFinished(result:ITestResultAdaptor) : void
+    + RunStarted(testsToRun:ITestAdaptor) : void
+}
+ScriptableObject <|-- RerunCallback
+ICallbacks <|-- RerunCallback
+RerunCallback o-> "mockRunFilter" UITestRunnerFilter
+@enduml

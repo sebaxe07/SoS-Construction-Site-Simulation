@@ -1,0 +1,9 @@
+@startuml
+class GetRandomInArea {
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- GetRandomInArea
+GetRandomInArea --> "area" GameObject
+GetRandomInArea --> "randomPosition" Vector3
+@enduml

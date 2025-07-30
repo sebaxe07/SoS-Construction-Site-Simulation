@@ -1,0 +1,13 @@
+@startuml
+class EditModeRunnerCallback {
+    + OnDestroy() : void
+    + RunStarted(testsToRun:ITest) : void
+    + OnEnable() : void
+    + RunFinished(result:ITestResult) : void
+    + TestStarted(test:ITest) : void
+    + TestFinished(result:ITestResult) : void
+}
+ScriptableObject <|-- EditModeRunnerCallback
+ITestRunnerListener <|-- EditModeRunnerCallback
+EditModeRunnerCallback --> "runner" EditModeRunner
+@enduml

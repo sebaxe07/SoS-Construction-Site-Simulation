@@ -1,0 +1,17 @@
+@startuml
+abstract class TMP_BaseShaderGUI {
+    + <<override>> OnGUI(materialEditor:MaterialEditor, properties:MaterialProperty[]) : void
+    + EndPanel() : void
+}
+class ShaderFeature {
+    + undoLabel : string
+    + Active : bool <<get>>
+    + State : int <<get>>
+    + ReadState(material:Material) : void
+    + SetActive(active:bool, material:Material) : void
+    + DoPopup(editor:MaterialEditor, material:Material) : void
+}
+ShaderGUI <|-- TMP_BaseShaderGUI
+TMP_BaseShaderGUI +-- ShaderFeature
+ShaderFeature --> "label" GUIContent
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class SetVelocity {
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- SetVelocity
+SetVelocity --> "toSetVelocity" GameObject
+SetVelocity --> "velocity" Vector3
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class PRSGetSampleInfos {
+}
+enum Type {
+    Introduction,
+    Title,
+    Description,
+}
+MonoBehaviour <|-- PRSGetSampleInfos
+PRSGetSampleInfos --> "type" Type
+PRSGetSampleInfos --> "prefab" GameObject
+PRSGetSampleInfos +-- Type
+@enduml

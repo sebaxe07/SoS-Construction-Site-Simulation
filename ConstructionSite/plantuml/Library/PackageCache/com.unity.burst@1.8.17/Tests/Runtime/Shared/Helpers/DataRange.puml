@@ -1,0 +1,20 @@
+@startuml
+enum DataRange {
+    Standard= Zero | Minus100To100 | Inf | NaN | HighIntRange,
+    StandardPositive= Zero | ZeroExclusiveTo100 | Inf | NaN,
+    StandardPositiveExclusiveZero= ZeroExclusiveTo100 | Inf | NaN,
+    Standard11= Zero | MinusOneInclusiveToOneInclusive | Inf | NaN,
+    Zero= 1 << 1,
+    ZeroExclusiveToOneInclusive= 1 << 2,
+    MinusOneInclusiveToOneInclusive= 1 << 3,
+    Minus100To100= 1 << 4,
+    ZeroExclusiveTo100= 1 << 5,
+    Inf= 1 << 6,
+    NaN= 1 << 7,
+    HighIntRange= 1 << 8,
+    ZeroInclusiveToFifteenInclusive= 1 << 9,
+}
+class DataRangeExtensions <<static>> {
+    + {static} ExpandRange(dataRange:DataRange, type:Type, seed:int) : IEnumerable<object>
+}
+@enduml

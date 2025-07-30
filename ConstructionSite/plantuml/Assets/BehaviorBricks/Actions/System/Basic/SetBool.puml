@@ -1,0 +1,9 @@
+@startuml
+class SetBool {
+    + var : bool
+    + value : bool
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+BasePrimitiveAction <|-- SetBool
+@enduml

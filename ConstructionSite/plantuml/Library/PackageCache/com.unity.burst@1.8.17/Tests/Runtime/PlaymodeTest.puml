@@ -1,0 +1,51 @@
+@startuml
+class PlaymodeTest {
+    + CheckBurstJobEnabledDisabled() : IEnumerator
+    + NoSafetyCheckExceptionWarningInEditor() : void
+    + <<unsafe>> SharedStaticPostProcessedTests() : void
+    + TestDirectCalls() : void
+    + TestDirectCallInNamespacedClass() : void
+    + TestFunctionPointers() : void
+    + TestGenericClassConcreteMethodFunctionPointer() : void
+}
+class C <<static>> {
+    + {static} A() : int
+}
+struct ThrowingJob {
+    + I : int
+    + Execute() : void
+}
+struct MyKey {
+}
+struct "SomeGenericStruct`1"<T> {
+}
+struct "MyGenericContainingStruct`1"<T> {
+}
+struct SomeFunctionPointers {
+    + {static} A(a:int, b:int) : int
+    + {static} B(a:int, b:int) : int
+    + {static} C(a:int, b:int) : int
+    + {static} D(a:int, b:int) : int
+}
+class "GenericClass`1"<T> <<static>> {
+    + {static} ConcreteMethod() : int
+}
+struct MySubKey0 {
+}
+struct MySubKey1 {
+}
+class "SharedStatic`1"<T> {
+}
+PlaymodeTest +-- ThrowingJob
+IJob <|-- ThrowingJob
+PlaymodeTest +-- MyKey
+PlaymodeTest +-- "SomeGenericStruct`1"
+PlaymodeTest +-- "MyGenericContainingStruct`1"
+"MyGenericContainingStruct`1" o-> "Data0<int>" "SharedStatic`1"
+"MyGenericContainingStruct`1" o-> "Data1<int>" "SharedStatic`1"
+"MyGenericContainingStruct`1" o-> "Data2<int>" "SharedStatic`1"
+PlaymodeTest +-- SomeFunctionPointers
+PlaymodeTest +-- "GenericClass`1"
+MyKey +-- MySubKey0
+MyKey +-- MySubKey1
+@enduml

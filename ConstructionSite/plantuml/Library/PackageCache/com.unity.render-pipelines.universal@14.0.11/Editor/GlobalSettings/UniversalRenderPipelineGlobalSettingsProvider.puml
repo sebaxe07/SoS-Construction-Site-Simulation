@@ -1,0 +1,9 @@
+@startuml
+class UniversalGlobalSettingsPanelProvider {
+    + UniversalGlobalSettingsPanelProvider()
+    + {static} CreateSettingsProvider() : SettingsProvider
+}
+class "RenderPipelineGlobalSettingsProvider`2"<T1,T2> {
+}
+"RenderPipelineGlobalSettingsProvider`2" "<UniversalRenderPipeline,UniversalRenderPipelineGlobalSettings>" <|-- UniversalGlobalSettingsPanelProvider
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+class SimpleCharacterMotor {
+    + cursorVisible : bool = false
+    + walkSpeed : float = 2
+    + runSpeed : float = 4
+    + gravity : float = 9.8f
+    + lookSpeed : float = 45
+    + invertY : bool = true
+    + movementAcceleration : float = 1
+}
+MonoBehaviour <|-- SimpleCharacterMotor
+SimpleCharacterMotor o-> "cursorLockMode" CursorLockMode
+SimpleCharacterMotor --> "cameraPivot" Transform
+@enduml

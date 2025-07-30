@@ -1,0 +1,17 @@
+@startuml
+class ProbeVolumePerSceneData {
+}
+struct PerScenarioData {
+    + sceneHash : int
+}
+struct SerializablePerScenarioDataItem {
+    + scenario : string
+}
+MonoBehaviour <|-- ProbeVolumePerSceneData
+ISerializationCallbackReceiver <|-- ProbeVolumePerSceneData
+ProbeVolumePerSceneData +-- PerScenarioData
+PerScenarioData --> "cellDataAsset" TextAsset
+PerScenarioData --> "cellOptionalDataAsset" TextAsset
+ProbeVolumePerSceneData +-- SerializablePerScenarioDataItem
+SerializablePerScenarioDataItem --> "data" PerScenarioData
+@enduml

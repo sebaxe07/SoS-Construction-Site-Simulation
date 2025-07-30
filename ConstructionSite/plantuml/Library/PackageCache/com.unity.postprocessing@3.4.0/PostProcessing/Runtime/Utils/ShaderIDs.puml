@@ -1,0 +1,4 @@
+@startuml
+class ShaderIDs <<static>> {
+}
+@enduml

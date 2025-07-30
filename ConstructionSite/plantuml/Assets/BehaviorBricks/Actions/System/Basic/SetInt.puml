@@ -1,0 +1,9 @@
+@startuml
+class SetInt {
+    + var : int
+    + value : int
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+BasePrimitiveAction <|-- SetInt
+@enduml

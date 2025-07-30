@@ -1,0 +1,6 @@
+@startuml
+class PolygonUtils <<static>> {
+    + {static} DoLinesIntersect(p1:Vector3, q1:Vector3, p2:Vector3, q2:Vector3) : bool
+    + {static} IsAngleValid(previous:Vector3, current:Vector3, next:Vector3, minAngle:float, maxAngle:float) : bool
+}
+@enduml

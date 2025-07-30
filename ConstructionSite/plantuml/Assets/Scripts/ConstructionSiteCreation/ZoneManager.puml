@@ -1,0 +1,12 @@
+@startuml
+class ZoneManager {
+    + SetMainPerimeterVertices(mainPerimeter:PolygonData) : void
+    + PerimeterVerticesSet() : bool
+    + BeginZoneCreation() : void
+    + AddZonePoint(point:Vector3) : void
+}
+MonoBehaviour <|-- ZoneManager
+ZoneManager --> "constructionSiteManager" ConstructionSiteManager
+ZoneManager --> "perimeterManager" PerimeterManager
+ZoneManager --> "lineMaterial" Material
+@enduml

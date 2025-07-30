@@ -1,0 +1,10 @@
+@startuml
+class BlitToRTHandlePass {
+    + BlitToRTHandlePass(evt:RenderPassEvent, mat:Material)
+    + SetInput(src:RTHandle) : void
+    + <<override>> Configure(cmd:CommandBuffer, cameraTextureDescriptor:RenderTextureDescriptor) : void
+    + <<override>> Execute(context:ScriptableRenderContext, renderingData:RenderingData) : void
+    + Dispose() : void
+}
+ScriptableRenderPass <|-- BlitToRTHandlePass
+@enduml

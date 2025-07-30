@@ -1,0 +1,13 @@
+@startuml
+class EditorTests {
+    + CreatePipelineAssetWithoutErrors() : void
+    + CreateUniversalRendererAssetWithoutErrors() : void
+    + CreateRenderer2DAssetWithoutErrors() : void
+    + ValidateBuiltinResourceFiles() : void
+    + ValidateShaderResources(shaderPathID:ShaderPathID) : void
+    + ValidateNewAssetResources() : void
+    + ValidateAssetSettings() : void
+    + UniversalSpeedTree8Upgrader_ShouldntThrowExceptionWhenImportingSpeedTree7Assets() : void
+    + UseReAllocateIfNeededWithoutTextureLeak() : void
+}
+@enduml

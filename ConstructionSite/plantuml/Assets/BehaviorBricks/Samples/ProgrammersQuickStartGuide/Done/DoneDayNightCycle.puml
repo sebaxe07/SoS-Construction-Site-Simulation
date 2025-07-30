@@ -1,0 +1,8 @@
+@startuml
+class DoneDayNightCycle {
+    +  <<event>> OnChanged : System.EventHandler 
+    + dayDuration : float = 10.0f
+    + isNight : bool <<get>>
+}
+MonoBehaviour <|-- DoneDayNightCycle
+@enduml

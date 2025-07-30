@@ -1,0 +1,10 @@
+@startuml
+class TestInstrinsicsManagedFallbacks <<unsafe>> {
+    + {static} <<unsafe>> Test_shuffle_ps_Managed() : void
+    + {static} <<unsafe>> Test_blend_ps_Managed() : void
+    + {static} <<unsafe>> Test_blendv_ps_Managed() : void
+    + {static} <<unsafe>> Test_extractf_ps_Managed() : void
+    + {static} <<unsafe>> Test_mm256_broadcast_ss_Managed() : void
+    + {static} <<unsafe>> Test_broadcast_ss_Managed() : void
+}
+@enduml

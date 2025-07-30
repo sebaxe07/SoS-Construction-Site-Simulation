@@ -1,0 +1,8 @@
+@startuml
+class MassSpawner {
+    + Spawns : int = 500
+}
+MonoBehaviour <|-- MassSpawner
+MassSpawner --> "prefab" GameObject
+MassSpawner --> "wanderArea" GameObject
+@enduml

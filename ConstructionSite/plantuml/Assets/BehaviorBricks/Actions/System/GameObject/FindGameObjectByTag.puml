@@ -1,0 +1,9 @@
+@startuml
+class FindGameObjectByTag {
+    + tag : string
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+BasePrimitiveAction <|-- FindGameObjectByTag
+FindGameObjectByTag --> "foundGameObject" GameObject
+@enduml

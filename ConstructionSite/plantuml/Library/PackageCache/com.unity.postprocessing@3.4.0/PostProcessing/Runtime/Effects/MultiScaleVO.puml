@@ -1,0 +1,30 @@
+@startuml
+class MultiScaleVO <<sealed>> {
+    + MultiScaleVO(settings:AmbientOcclusion)
+    + GetCameraFlags() : DepthTextureMode
+    + SetResources(resources:PostProcessResources) : void
+    + GenerateAOMap(cmd:CommandBuffer, camera:Camera, destination:RenderTargetIdentifier, depthMap:RenderTargetIdentifier?, invert:bool, isMSAA:bool) : void
+    + RenderAfterOpaque(context:PostProcessRenderContext) : void
+    + RenderAmbientOnly(context:PostProcessRenderContext) : void
+    + CompositeAmbientOnly(context:PostProcessRenderContext) : void
+    + Release() : void
+}
+enum MipLevel {
+    Original,
+    L1,
+    L2,
+    L3,
+    L4,
+    L5,
+    L6,
+}
+enum Pass {
+    DepthCopy,
+    CompositionDeferred,
+    CompositionForward,
+    DebugOverlay,
+}
+IAmbientOcclusionMethod <|-- MultiScaleVO
+MultiScaleVO +-- MipLevel
+MultiScaleVO +-- Pass
+@enduml

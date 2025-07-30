@@ -1,0 +1,11 @@
+@startuml
+class FromMouseToWorld {
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- FromMouseToWorld
+FromMouseToWorld --> "selectedGameObject" GameObject
+FromMouseToWorld --> "selectedPosition" Vector3
+FromMouseToWorld --> "camera" Camera
+FromMouseToWorld --> "mask" LayerMask
+@enduml

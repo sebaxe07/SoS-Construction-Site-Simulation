@@ -1,0 +1,4 @@
+@startuml
+class DefineSetter <<sealed>> {
+}
+@enduml

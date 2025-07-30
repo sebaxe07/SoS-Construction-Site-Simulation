@@ -1,0 +1,9 @@
+@startuml
+class IsTargetCloseAndInSight {
+    + angle : float
+    + closeDistance : float
+    + <<override>> Check() : bool
+}
+GOCondition <|-- IsTargetCloseAndInSight
+IsTargetCloseAndInSight --> "target" GameObject
+@enduml

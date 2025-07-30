@@ -1,0 +1,4 @@
+@startuml
+class Dithering <<sealed>> {
+}
+@enduml

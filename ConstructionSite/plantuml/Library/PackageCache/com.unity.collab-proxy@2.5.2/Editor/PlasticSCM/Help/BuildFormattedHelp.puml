@@ -1,0 +1,12 @@
+@startuml
+class FormattedHelpLink {
+}
+class BuildFormattedHelp <<static>> {
+}
+class Segment <<static>> {
+}
+class Data {
+}
+BuildFormattedHelp +-- Segment
+Segment +-- Data
+@enduml

@@ -1,0 +1,4 @@
+@startuml
+class HelpLinkData <<static>> {
+}
+@enduml

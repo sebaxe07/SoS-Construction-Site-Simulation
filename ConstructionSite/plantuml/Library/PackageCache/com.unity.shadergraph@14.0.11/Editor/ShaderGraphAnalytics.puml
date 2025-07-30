@@ -1,0 +1,12 @@
+@startuml
+class ShaderGraphAnalytics {
+    + {static} SendShaderGraphEvent(assetGuid:string, graph:GraphData) : void
+}
+struct AnalyticsData {
+    + nodes : string
+    + node_count : int
+    + asset_guid : string
+    + subgraph_count : int
+}
+ShaderGraphAnalytics +-- AnalyticsData
+@enduml

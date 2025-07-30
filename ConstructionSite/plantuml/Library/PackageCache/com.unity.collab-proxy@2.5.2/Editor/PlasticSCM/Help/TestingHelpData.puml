@@ -1,0 +1,7 @@
+@startuml
+class TestingHelpData <<static>> {
+}
+class HelpLinkData {
+}
+TestingHelpData +-- HelpLinkData
+@enduml

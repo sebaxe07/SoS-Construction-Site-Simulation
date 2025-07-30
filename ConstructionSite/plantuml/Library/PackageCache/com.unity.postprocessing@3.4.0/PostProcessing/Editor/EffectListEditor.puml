@@ -1,0 +1,9 @@
+@startuml
+class EffectListEditor <<sealed>> {
+    + EffectListEditor(editor:Editor)
+    + Init(asset:PostProcessProfile, serializedObject:SerializedObject) : void
+    + Clear() : void
+    + OnGUI() : void
+}
+EffectListEditor --> "asset" PostProcessProfile
+@enduml

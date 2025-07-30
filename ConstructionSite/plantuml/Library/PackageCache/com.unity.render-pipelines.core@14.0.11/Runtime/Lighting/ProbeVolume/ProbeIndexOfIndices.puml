@@ -1,0 +1,7 @@
+@startuml
+class ProbeCellIndices {
+}
+struct IndexMetaData {
+}
+ProbeCellIndices +-- IndexMetaData
+@enduml

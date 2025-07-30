@@ -1,0 +1,16 @@
+@startuml
+class RenderObjectsPass {
+    + overrideMaterialPassIndex : int <<get>> <<set>>
+    + overrideShaderPassIndex : int <<get>> <<set>>
+    + SetDetphState(writeEnabled:bool, function:CompareFunction) : void
+    + SetStencilState(reference:int, compareFunction:CompareFunction, passOp:StencilOp, failOp:StencilOp, zFailOp:StencilOp) : void
+    + RenderObjectsPass(profilerTag:string, renderPassEvent:RenderPassEvent, shaderTags:string[], renderQueueType:RenderQueueType, layerMask:int, cameraSettings:RenderObjects.CustomCameraSettings)
+    + <<override>> Execute(context:ScriptableRenderContext, renderingData:RenderingData) : void
+}
+class PassData {
+}
+ScriptableRenderPass <|-- RenderObjectsPass
+RenderObjectsPass --> "overrideMaterial" Material
+RenderObjectsPass --> "overrideShader" Shader
+RenderObjectsPass +-- PassData
+@enduml

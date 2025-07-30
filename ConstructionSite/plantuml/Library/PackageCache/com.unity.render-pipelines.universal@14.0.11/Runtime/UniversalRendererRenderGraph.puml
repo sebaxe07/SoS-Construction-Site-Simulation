@@ -1,0 +1,12 @@
+@startuml
+class UniversalRenderer <<sealed>> <<partial>> {
+}
+class ClearTargetsPass {
+}
+class RenderGraphFrameResources {
+}
+class PassData {
+}
+UniversalRenderer +-- RenderGraphFrameResources
+ClearTargetsPass +-- PassData
+@enduml

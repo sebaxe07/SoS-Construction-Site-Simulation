@@ -1,0 +1,11 @@
+@startuml
+class VolumeProfileOverridesAnalytic {
+    + callbackOrder : int <<get>>
+}
+struct Data {
+    + volume_profile_asset_guid : string
+    + component_type : string
+}
+IPostprocessBuildWithReport <|-- VolumeProfileOverridesAnalytic
+VolumeProfileOverridesAnalytic +-- Data
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+class RendererLighting <<static>> {
+    + {static} CreateNormalMapRenderTexture(pass:IRenderPass2D, renderingData:RenderingData, cmd:CommandBuffer, renderScale:float) : void
+    + {static} GetBlendStyleRenderTextureDesc(pass:IRenderPass2D, renderingData:RenderingData) : RenderTextureDescriptor
+    + {static} CreateCameraSortingLayerRenderTexture(pass:IRenderPass2D, renderingData:RenderingData, cmd:CommandBuffer, downsamplingMethod:Downsampling) : void
+    + {static} EnableBlendStyle(cmd:CommandBuffer, blendStyleIndex:int, enabled:bool) : void
+    + {static} DisableAllKeywords(pass:IRenderPass2D, cmd:CommandBuffer) : void
+    + {static} ReleaseRenderTextures(pass:IRenderPass2D, cmd:CommandBuffer) : void
+    + {static} DrawPointLight(cmd:CommandBuffer, light:Light2D, lightMesh:Mesh, material:Material) : void
+    + {static} RenderLightVolumes(pass:IRenderPass2D, renderingData:RenderingData, cmd:CommandBuffer, layerToRender:int, endLayerValue:int, renderTexture:RenderTargetIdentifier, depthTexture:RenderTargetIdentifier, intermediateStoreAction:RenderBufferStoreAction, finalStoreAction:RenderBufferStoreAction, requiresRTInit:bool, lights:List<Light2D>) : void
+    + {static} SetShapeLightShaderGlobals(pass:IRenderPass2D, cmd:CommandBuffer) : void
+    + {static} ClearDirtyLighting(pass:IRenderPass2D, cmd:CommandBuffer, blendStylesUsed:uint) : void
+    + {static} RenderLights(pass:IRenderPass2D, renderingData:RenderingData, cmd:CommandBuffer, layerToRender:int, layerBatch:LayerBatch, rtDesc:RenderTextureDescriptor) : void
+}
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class LegacyEditModeRunTask {
+    + LegacyEditModeRunTask()
+    + <<override>> Execute(testJobData:TestJobData) : IEnumerator
+}
+TestTaskBase <|-- LegacyEditModeRunTask
+@enduml

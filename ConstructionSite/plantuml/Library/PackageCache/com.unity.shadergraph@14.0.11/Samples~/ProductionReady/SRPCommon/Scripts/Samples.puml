@@ -1,0 +1,12 @@
+@startuml
+class PRSSamples {
+    + introduction : string
+    + {static} CreateFromJSON(jsonString:string, prefabs:GameObject[]) : PRSSamples
+    + FindSampleWithPrefab(prefab:GameObject) : PRSSample
+}
+class PRSSample {
+    + title : string
+    + prefabName : string
+    + description : string
+}
+@enduml

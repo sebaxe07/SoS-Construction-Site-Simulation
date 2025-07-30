@@ -1,0 +1,14 @@
+@startuml
+class Styling <<static>> {
+}
+Styling --> "smallTickbox" GUIStyle
+Styling --> "miniLabelButton" GUIStyle
+Styling --> "splitter" Color
+Styling --> "paneOptionsIcon" Texture2D
+Styling --> "headerLabel" GUIStyle
+Styling --> "headerBackground" Color
+Styling --> "wheelLabel" GUIStyle
+Styling --> "wheelThumb" GUIStyle
+Styling --> "wheelThumbSize" Vector2
+Styling --> "preLabel" GUIStyle
+@enduml

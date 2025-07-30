@@ -1,0 +1,16 @@
+@startuml
+class PerimeterManager {
+    + jsonFilePath : string
+    + InitializeMainPerimeter() : void
+    + UpdateMainPerimeter(newPerimeter:List<Vector3>) : void
+    + GetYFromTerrainData(x:float, z:float) : float
+    + GenerateUpdatedMainPerimeter(zonePerimeter:List<Vector3>) : List<Vector3>
+    + GetMainPerimeterVertices() : PolygonData
+}
+MonoBehaviour <|-- PerimeterManager
+PerimeterManager --> "lineRenderer" LineRenderer
+PerimeterManager --> "lineMaterial" Material
+PerimeterManager --> "mapTerrain" Terrain
+PerimeterManager --> "zoneManager" ZoneManager
+PerimeterManager --> "snapManager" SnapManager
+@enduml

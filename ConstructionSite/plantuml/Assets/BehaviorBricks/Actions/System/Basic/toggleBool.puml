@@ -1,0 +1,8 @@
+@startuml
+class ToggleBool {
+    + var : bool
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+BasePrimitiveAction <|-- ToggleBool
+@enduml

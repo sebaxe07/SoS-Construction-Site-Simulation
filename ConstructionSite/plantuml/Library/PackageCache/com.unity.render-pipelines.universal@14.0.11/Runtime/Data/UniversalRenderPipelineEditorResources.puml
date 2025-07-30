@@ -1,0 +1,25 @@
+@startuml
+class UniversalRenderPipelineEditorResources {
+}
+class ShaderResources <<sealed>> {
+}
+class MaterialResources <<sealed>> {
+}
+ScriptableObject <|-- UniversalRenderPipelineEditorResources
+UniversalRenderPipelineEditorResources --> "shaders" ShaderResources
+UniversalRenderPipelineEditorResources --> "materials" MaterialResources
+UniversalRenderPipelineEditorResources +-- ShaderResources
+ShaderResources --> "autodeskInteractivePS" Shader
+ShaderResources --> "autodeskInteractiveTransparentPS" Shader
+ShaderResources --> "autodeskInteractiveMaskedPS" Shader
+ShaderResources --> "terrainDetailLitPS" Shader
+ShaderResources --> "terrainDetailGrassPS" Shader
+ShaderResources --> "terrainDetailGrassBillboardPS" Shader
+ShaderResources --> "defaultSpeedTree7PS" Shader
+ShaderResources --> "defaultSpeedTree8PS" Shader
+UniversalRenderPipelineEditorResources +-- MaterialResources
+MaterialResources --> "lit" Material
+MaterialResources --> "particleLit" Material
+MaterialResources --> "terrainLit" Material
+MaterialResources --> "decal" Material
+@enduml

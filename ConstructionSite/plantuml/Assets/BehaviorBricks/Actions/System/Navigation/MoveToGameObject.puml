@@ -1,0 +1,9 @@
+@startuml
+class MoveToGameObject {
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+    + <<override>> OnAbort() : void
+}
+GOAction <|-- MoveToGameObject
+MoveToGameObject --> "target" GameObject
+@enduml

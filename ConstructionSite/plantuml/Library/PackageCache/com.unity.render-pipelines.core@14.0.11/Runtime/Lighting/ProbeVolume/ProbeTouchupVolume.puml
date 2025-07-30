@@ -1,0 +1,10 @@
+@startuml
+class ProbeTouchupVolume {
+    + intensityScale : float = 1.0f
+    + invalidateProbes : bool = false
+    + overrideDilationThreshold : bool = false
+    + overriddenDilationThreshold : float = 0.75f
+}
+MonoBehaviour <|-- ProbeTouchupVolume
+ProbeTouchupVolume o-> "size" Vector3
+@enduml

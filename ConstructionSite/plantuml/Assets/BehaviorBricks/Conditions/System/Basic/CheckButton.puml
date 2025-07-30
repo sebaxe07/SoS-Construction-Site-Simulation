@@ -1,0 +1,7 @@
+@startuml
+class CheckButton {
+    + button : string
+    + <<override>> Check() : bool
+}
+ConditionBase <|-- CheckButton
+@enduml

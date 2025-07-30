@@ -1,0 +1,60 @@
+@startuml
+class RuntimeUtilities <<static>> {
+    + {static} GetLutStrip(size:int) : Texture2D
+    + {static} SetRenderTargetWithLoadStoreAction(cmd:CommandBuffer, rt:RenderTargetIdentifier, loadAction:RenderBufferLoadAction, storeAction:RenderBufferStoreAction) : void
+    + {static} SetRenderTargetWithLoadStoreAction(cmd:CommandBuffer, rt:RenderTargetIdentifier, loadAction:RenderBufferLoadAction, storeAction:RenderBufferStoreAction, depthLoadAction:RenderBufferLoadAction, depthStoreAction:RenderBufferStoreAction) : void
+    + {static} SetRenderTargetWithLoadStoreAction(cmd:CommandBuffer, color:RenderTargetIdentifier, colorLoadAction:RenderBufferLoadAction, colorStoreAction:RenderBufferStoreAction, depth:RenderTargetIdentifier, depthLoadAction:RenderBufferLoadAction, depthStoreAction:RenderBufferStoreAction) : void
+    + {static} BlitFullscreenTriangle(cmd:CommandBuffer, source:RenderTargetIdentifier, destination:RenderTargetIdentifier, clear:bool, viewport:Rect?, preserveDepth:bool) : void
+    + {static} BlitFullscreenTriangle(cmd:CommandBuffer, source:RenderTargetIdentifier, destination:RenderTargetIdentifier, propertySheet:PropertySheet, pass:int, loadAction:RenderBufferLoadAction, viewport:Rect?, preserveDepth:bool) : void
+    + {static} BlitFullscreenTriangle(cmd:CommandBuffer, source:RenderTargetIdentifier, destination:RenderTargetIdentifier, propertySheet:PropertySheet, pass:int, clear:bool, viewport:Rect?, preserveDepth:bool) : void
+    + {static} BlitFullscreenTriangleFromDoubleWide(cmd:CommandBuffer, source:RenderTargetIdentifier, destination:RenderTargetIdentifier, material:Material, pass:int, eye:int) : void
+    + {static} BlitFullscreenTriangleToDoubleWide(cmd:CommandBuffer, source:RenderTargetIdentifier, destination:RenderTargetIdentifier, propertySheet:PropertySheet, pass:int, eye:int) : void
+    + {static} BlitFullscreenTriangleFromTexArray(cmd:CommandBuffer, source:RenderTargetIdentifier, destination:RenderTargetIdentifier, propertySheet:PropertySheet, pass:int, clear:bool, depthSlice:int) : void
+    + {static} BlitFullscreenTriangleToTexArray(cmd:CommandBuffer, source:RenderTargetIdentifier, destination:RenderTargetIdentifier, propertySheet:PropertySheet, pass:int, clear:bool, depthSlice:int) : void
+    + {static} BlitFullscreenTriangle(cmd:CommandBuffer, source:RenderTargetIdentifier, destination:RenderTargetIdentifier, depth:RenderTargetIdentifier, propertySheet:PropertySheet, pass:int, clear:bool, viewport:Rect?) : void
+    + {static} BlitFullscreenTriangle(cmd:CommandBuffer, source:RenderTargetIdentifier, destinations:RenderTargetIdentifier[], depth:RenderTargetIdentifier, propertySheet:PropertySheet, pass:int, clear:bool, viewport:Rect?) : void
+    + {static} BuiltinBlit(cmd:CommandBuffer, source:Rendering.RenderTargetIdentifier, destination:RenderTargetIdentifier) : void
+    + {static} BuiltinBlit(cmd:CommandBuffer, source:Rendering.RenderTargetIdentifier, destination:RenderTargetIdentifier, mat:Material, pass:int) : void
+    + {static} CopyTexture(cmd:CommandBuffer, source:RenderTargetIdentifier, destination:RenderTargetIdentifier) : void
+    + {static} scriptableRenderPipelineActive : bool <<get>>
+    + {static} supportsDeferredShading : bool <<get>>
+    + {static} supportsDepthNormals : bool <<get>>
+    + {static} isSinglePassStereoEnabled : bool <<get>>
+    + {static} isVREnabled : bool <<get>>
+    + {static} isAndroidOpenGL : bool <<get>>
+    + {static} isWebNonWebGPU : bool <<get>>
+    + {static} isFloatingPointFormat(format:RenderTextureFormat) : bool
+    + {static} Destroy(obj:UnityObject) : void
+    + {static} isLinearColorSpace : bool <<get>>
+    + {static} IsResolvedDepthAvailable(camera:Camera) : bool
+    + {static} DestroyProfile(profile:PostProcessProfile, destroyEffects:bool) : void
+    + {static} DestroyVolume(volume:PostProcessVolume, destroyProfile:bool, destroyGameObject:bool) : void
+    + {static} IsPostProcessingActive(layer:PostProcessLayer) : bool
+    + {static} IsTemporalAntialiasingActive(layer:PostProcessLayer) : bool
+    + {static} GetAllSceneObjects() : IEnumerable<T>
+    + {static} CreateIfNull(obj:T) : void
+    + {static} Exp2(x:float) : float
+    + {static} GetJitteredPerspectiveProjectionMatrix(camera:Camera, offset:Vector2) : Matrix4x4
+    + {static} GetJitteredOrthographicProjectionMatrix(camera:Camera, offset:Vector2) : Matrix4x4
+    + {static} GenerateJitteredProjectionMatrixFromOriginal(context:PostProcessRenderContext, origProj:Matrix4x4, jitter:Vector2) : Matrix4x4
+    + {static} GetAllAssemblyTypes() : IEnumerable<Type>
+    + {static} GetAllTypesDerivedFrom() : IEnumerable<Type>
+    + {static} GetAttribute(type:Type) : T
+    + {static} GetMemberAttributes(expr:Expression<Func<TType, TValue>>) : Attribute[]
+    + {static} GetFieldPath(expr:Expression<Func<TType, TValue>>) : string
+}
+RuntimeUtilities --> "whiteTexture" Texture2D
+RuntimeUtilities --> "whiteTexture3D" Texture3D
+RuntimeUtilities --> "blackTexture" Texture2D
+RuntimeUtilities --> "blackTexture3D" Texture3D
+RuntimeUtilities --> "transparentTexture" Texture2D
+RuntimeUtilities --> "transparentTexture3D" Texture3D
+RuntimeUtilities --> "fullscreenTriangle" Mesh
+RuntimeUtilities --> "copyStdMaterial" Material
+RuntimeUtilities --> "copyStdFromDoubleWideMaterial" Material
+RuntimeUtilities --> "copyMaterial" Material
+RuntimeUtilities --> "copyFromTexArrayMaterial" Material
+RuntimeUtilities --> "copySheet" PropertySheet
+RuntimeUtilities --> "copyFromTexArraySheet" PropertySheet
+RuntimeUtilities --> "defaultHDRRenderTextureFormat" RenderTextureFormat
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+class PointData {
+    + x : float
+    + y : float
+    + z : float
+    + PointData(x:float, y:float, z:float)
+    + ToVector3() : Vector3
+    + {static} FromVector3(vector:Vector3) : PointData
+}
+class PolygonData {
+    + PolygonData(vertices:List<Vector3>)
+    + ToVector3List() : List<Vector3>
+    + Count : int <<get>>
+}
+class "List`1"<T> {
+}
+PolygonData --> "points<PointData>" "List`1"
+@enduml

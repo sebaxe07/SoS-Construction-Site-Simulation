@@ -1,0 +1,24 @@
+@startuml
+class MotionBlur <<sealed>> {
+    + <<override>> IsEnabledAndSupported(context:PostProcessRenderContext) : bool
+}
+class MotionBlurRenderer <<sealed>> {
+    + <<override>> GetCameraFlags() : DepthTextureMode
+    + <<override>> Render(context:PostProcessRenderContext) : void
+}
+class "PostProcessEffectRenderer`1"<T> {
+}
+enum Pass {
+    VelocitySetup,
+    TileMax1,
+    TileMax2,
+    TileMaxV,
+    NeighborMax,
+    Reconstruction,
+}
+PostProcessEffectSettings <|-- MotionBlur
+MotionBlur o-> "shutterAngle" FloatParameter
+MotionBlur o-> "sampleCount" IntParameter
+"PostProcessEffectRenderer`1" "<MotionBlur>" <|-- MotionBlurRenderer
+MotionBlurRenderer +-- Pass
+@enduml

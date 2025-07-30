@@ -1,0 +1,8 @@
+@startuml
+class LightMeterMonitor <<sealed>> {
+    + width : int = 512
+    + height : int = 256
+    + showCurves : bool = true
+}
+Monitor <|-- LightMeterMonitor
+@enduml

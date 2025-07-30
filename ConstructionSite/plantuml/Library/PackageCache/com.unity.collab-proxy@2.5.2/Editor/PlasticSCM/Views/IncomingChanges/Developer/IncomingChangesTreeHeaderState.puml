@@ -1,0 +1,15 @@
+@startuml
+enum IncomingChangesTreeColumn {
+    Path,
+    Size,
+    Author,
+    Details,
+    Resolution,
+    DateModified,
+    Comment,
+}
+class IncomingChangesTreeHeaderState {
+}
+MultiColumnHeaderState <|-- IncomingChangesTreeHeaderState
+ISerializationCallbackReceiver <|-- IncomingChangesTreeHeaderState
+@enduml

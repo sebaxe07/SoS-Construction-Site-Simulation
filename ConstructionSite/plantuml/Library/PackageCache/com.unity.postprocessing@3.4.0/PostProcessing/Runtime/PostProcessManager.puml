@@ -1,0 +1,12 @@
+@startuml
+class PostProcessManager <<sealed>> {
+    + GetActiveVolumes(layer:PostProcessLayer, results:List<PostProcessVolume>, skipDisabled:bool, skipZeroWeight:bool) : void
+    + GetHighestPriorityVolume(layer:PostProcessLayer) : PostProcessVolume
+    + GetHighestPriorityVolume(mask:LayerMask) : PostProcessVolume
+    + QuickVolume(layer:int, priority:float, settings:PostProcessEffectSettings[]) : PostProcessVolume
+}
+class "Dictionary`2"<T1,T2> {
+}
+PostProcessManager --> "instance" PostProcessManager
+PostProcessManager --> "settingsTypes<Type,PostProcessAttribute>" "Dictionary`2"
+@enduml

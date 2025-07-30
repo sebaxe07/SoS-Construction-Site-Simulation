@@ -1,0 +1,16 @@
+@startuml
+class DebugDisplayStats {
+    + UpdateFrameTiming() : void
+    + AreAnySettingsActive : bool <<get>>
+    + IsPostProcessingAllowed : bool <<get>>
+    + IsLightingActive : bool <<get>>
+    + TryGetScreenClearColor(_:Color) : bool
+    + CreatePanel() : IDebugDisplaySettingsPanelDisposable
+}
+class StatsPanel {
+    + StatsPanel(frameTiming:DebugFrameTiming)
+}
+IDebugDisplaySettingsData <|-- DebugDisplayStats
+DebugDisplayStats +-- StatsPanel
+DebugDisplaySettingsPanel <|-- StatsPanel
+@enduml

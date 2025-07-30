@@ -1,0 +1,5 @@
+@startuml
+class RenderPipelineGlobalSettingsUI <<static>> <<partial>> {
+    + {static} DrawShaderStrippingSettings(serialized:ISerializedRenderPipelineGlobalSettings, owner:Editor, additionalShaderStrippingSettings:CoreEditorDrawer<ISerializedRenderPipelineGlobalSettings>.IDrawer) : void
+}
+@enduml

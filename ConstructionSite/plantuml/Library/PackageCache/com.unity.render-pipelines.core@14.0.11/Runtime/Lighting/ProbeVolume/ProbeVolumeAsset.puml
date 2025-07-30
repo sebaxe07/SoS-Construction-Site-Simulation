@@ -1,0 +1,26 @@
+@startuml
+class ProbeVolumeAsset {
+    + Version : int <<get>>
+    + GetSerializedFullPath() : string
+}
+enum AssetVersion {
+    First,
+    AddProbeVolumesAtlasEncodingModes,
+    PV2,
+    ChunkBasedIndex,
+    BinaryRuntimeDebugSplit,
+    BinaryTextureData,
+    Max,
+    Current= Max - 1,
+}
+struct CellCounts {
+    + bricksCount : int
+    + probesCount : int
+    + offsetsCount : int
+    + chunksCount : int
+    + Add(o:CellCounts) : void
+}
+ScriptableObject <|-- ProbeVolumeAsset
+ProbeVolumeAsset +-- AssetVersion
+ProbeVolumeAsset +-- CellCounts
+@enduml

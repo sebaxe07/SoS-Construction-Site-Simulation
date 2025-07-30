@@ -1,0 +1,12 @@
+@startuml
+enum MonitorType {
+    LightMeter,
+    Histogram,
+    Waveform,
+    Vectorscope,
+}
+abstract class Monitor {
+    + IsRequestedAndSupported(context:PostProcessRenderContext) : bool
+}
+Monitor --> "output" RenderTexture
+@enduml

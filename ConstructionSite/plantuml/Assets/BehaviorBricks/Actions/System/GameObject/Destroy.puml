@@ -1,0 +1,8 @@
+@startuml
+class Destroy {
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- Destroy
+Destroy --> "targetGameobject" GameObject
+@enduml

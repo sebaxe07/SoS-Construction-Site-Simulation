@@ -1,0 +1,7 @@
+@startuml
+class BrickAsset {
+    + OnBeforeSerialize() : void
+    + OnAfterDeserialize() : void
+}
+ISerializationCallbackReceiver <|-- BrickAsset
+@enduml

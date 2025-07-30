@@ -1,0 +1,18 @@
+@startuml
+class DebugDisplaySettingsCommon {
+    + AreAnySettingsActive : bool <<get>>
+    + IsPostProcessingAllowed : bool <<get>>
+    + IsLightingActive : bool <<get>>
+    + TryGetScreenClearColor(_:Color) : bool
+    + CreatePanel() : IDebugDisplaySettingsPanelDisposable
+}
+class WidgetFactory <<static>> {
+}
+class SettingsPanel {
+    + SettingsPanel()
+}
+IDebugDisplaySettingsData <|-- DebugDisplaySettingsCommon
+DebugDisplaySettingsCommon +-- WidgetFactory
+DebugDisplaySettingsCommon +-- SettingsPanel
+DebugDisplaySettingsPanel <|-- SettingsPanel
+@enduml

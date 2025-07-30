@@ -1,0 +1,20 @@
+@startuml
+class Vectors <<static>> <<partial>> {
+    + {static} ConvertToInt(result:bool4) : int
+    + {static} ConvertToInt(result:bool3) : int
+    + {static} ConvertToInt(result:bool2) : int
+    + {static} ConvertToFloat(result:float4) : float
+    + {static} ConvertToDouble(result:double4) : double
+    + {static} ConvertToFloat(result:float3) : float
+    + {static} ConvertToDouble(result:double3) : double
+    + {static} ConvertToFloat(result:float2) : float
+    + {static} ConvertToDouble(result:double2) : double
+    + {static} ConvertToInt(result:int4) : int
+    + {static} ConvertToInt(result:int3) : int
+    + {static} ConvertToInt(result:int2) : int
+    + {static} ConvertToInt(result:uint4) : int
+    + {static} ConvertToInt(result:uint3) : int
+    + {static} ConvertToInt(result:uint2) : int
+    + {static} ConvertToInt(value:bool) : int
+}
+@enduml

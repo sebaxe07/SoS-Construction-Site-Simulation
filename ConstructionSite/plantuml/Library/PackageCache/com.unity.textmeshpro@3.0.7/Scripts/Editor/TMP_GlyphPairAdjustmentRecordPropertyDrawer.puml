@@ -1,0 +1,6 @@
+@startuml
+class TMP_GlyphPairAdjustmentRecordPropertyDrawer {
+    + <<override>> OnGUI(position:Rect, property:SerializedProperty, label:GUIContent) : void
+}
+PropertyDrawer <|-- TMP_GlyphPairAdjustmentRecordPropertyDrawer
+@enduml

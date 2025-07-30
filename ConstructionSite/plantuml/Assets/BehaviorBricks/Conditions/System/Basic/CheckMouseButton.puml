@@ -1,0 +1,13 @@
+@startuml
+class CheckMouseButton {
+    + <<override>> Check() : bool
+}
+enum MouseButton {
+    left= 0,
+    right= 1,
+    center= 2,
+}
+ConditionBase <|-- CheckMouseButton
+CheckMouseButton o-> "button" MouseButton
+CheckMouseButton +-- MouseButton
+@enduml

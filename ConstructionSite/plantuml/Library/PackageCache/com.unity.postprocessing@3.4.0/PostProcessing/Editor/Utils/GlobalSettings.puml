@@ -1,0 +1,7 @@
+@startuml
+class GlobalSettings <<static>> {
+}
+class Keys <<static>> {
+}
+GlobalSettings +-- Keys
+@enduml

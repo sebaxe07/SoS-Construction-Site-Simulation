@@ -1,0 +1,14 @@
+@startuml
+class TestTreeViewItem <<sealed>> {
+    + IsGroupNode : bool <<get>>
+    + FullName : string <<get>>
+    + GetAssemblyName() : string
+    + TestTreeViewItem(test:ITestAdaptor, depth:int, parent:TreeViewItem)
+    + SetResult(testResult:TestRunnerResult) : void
+    + GetResultText() : string
+}
+TreeViewItem <|-- TestTreeViewItem
+TestTreeViewItem --> "result" TestRunnerResult
+TestTreeViewItem --> "type" Type
+TestTreeViewItem --> "method" MethodInfo
+@enduml

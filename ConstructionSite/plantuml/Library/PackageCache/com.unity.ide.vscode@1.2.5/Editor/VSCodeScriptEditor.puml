@@ -1,0 +1,13 @@
+@startuml
+class VSCodeScriptEditor {
+    + TryGetInstallationForPath(editorPath:string, installation:CodeEditor.Installation) : bool
+    + OnGUI() : void
+    + CreateIfDoesntExist() : void
+    + SyncIfNeeded(addedFiles:string[], deletedFiles:string[], movedFiles:string[], movedFromFiles:string[], importedFiles:string[]) : void
+    + SyncAll() : void
+    + OpenProject(path:string, line:int, column:int) : bool
+    + VSCodeScriptEditor(discovery:IDiscovery, projectGeneration:IGenerator)
+    + Initialize(editorInstallationPath:string) : void
+}
+IExternalCodeEditor <|-- VSCodeScriptEditor
+@enduml

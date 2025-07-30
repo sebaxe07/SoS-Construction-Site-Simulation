@@ -1,0 +1,13 @@
+@startuml
+class AssertHelper <<static>> {
+    + {static} AreEqual(expected:object, result:object, maxUlp:int) : void
+    + <<const>> ZeroTolerance : float
+    + <<const>> ZeroToleranceDouble : double
+    + {static} NearEqualFloat(a:float, b:float, maxUlp:int, ulp:int) : bool
+    + {static} <<unsafe>> GetUlpFloatDistance(a:float, b:float) : int
+    + {static} NearEqualDouble(a:double, b:double, maxUlp:int, ulp:long) : bool
+    + {static} <<unsafe>> GetUlpDoubleDistance(a:double, b:double) : long
+    + {static} IsZero(a:float) : bool
+    + {static} IsZero(a:double) : bool
+}
+@enduml

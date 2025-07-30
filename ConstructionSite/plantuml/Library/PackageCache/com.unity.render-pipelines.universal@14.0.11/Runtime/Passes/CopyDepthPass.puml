@@ -1,0 +1,13 @@
+@startuml
+class CopyDepthPass {
+    + CopyDepthPass(evt:RenderPassEvent, copyDepthMaterial:Material, shouldClear:bool, copyToDepth:bool, copyResolvedDepth:bool)
+    + Setup(source:RTHandle, destination:RTHandle) : void
+    + <<override>> OnCameraSetup(cmd:CommandBuffer, renderingData:RenderingData) : void
+    + <<override>> Execute(context:ScriptableRenderContext, renderingData:RenderingData) : void
+    + <<override>> OnCameraCleanup(cmd:CommandBuffer) : void
+}
+class PassData {
+}
+ScriptableRenderPass <|-- CopyDepthPass
+CopyDepthPass +-- PassData
+@enduml

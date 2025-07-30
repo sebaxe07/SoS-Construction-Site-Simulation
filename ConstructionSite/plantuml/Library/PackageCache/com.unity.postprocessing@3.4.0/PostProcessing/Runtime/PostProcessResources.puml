@@ -1,0 +1,57 @@
+@startuml
+class PostProcessResources <<sealed>> {
+}
+class Shaders <<sealed>> {
+    + Clone() : Shaders
+}
+class ComputeShaders <<sealed>> {
+    + Clone() : ComputeShaders
+}
+class SMAALuts <<sealed>> {
+}
+ScriptableObject <|-- PostProcessResources
+PostProcessResources --> "smaaLuts" SMAALuts
+PostProcessResources --> "shaders" Shaders
+PostProcessResources --> "computeShaders" ComputeShaders
+PostProcessResources +-- Shaders
+Shaders --> "bloom" Shader
+Shaders --> "copy" Shader
+Shaders --> "copyStd" Shader
+Shaders --> "copyStdFromTexArray" Shader
+Shaders --> "copyStdFromDoubleWide" Shader
+Shaders --> "discardAlpha" Shader
+Shaders --> "depthOfField" Shader
+Shaders --> "finalPass" Shader
+Shaders --> "grainBaker" Shader
+Shaders --> "motionBlur" Shader
+Shaders --> "temporalAntialiasing" Shader
+Shaders --> "subpixelMorphologicalAntialiasing" Shader
+Shaders --> "texture2dLerp" Shader
+Shaders --> "uber" Shader
+Shaders --> "lut2DBaker" Shader
+Shaders --> "lightMeter" Shader
+Shaders --> "gammaHistogram" Shader
+Shaders --> "waveform" Shader
+Shaders --> "vectorscope" Shader
+Shaders --> "debugOverlays" Shader
+Shaders --> "deferredFog" Shader
+Shaders --> "scalableAO" Shader
+Shaders --> "multiScaleAO" Shader
+Shaders --> "screenSpaceReflections" Shader
+PostProcessResources +-- ComputeShaders
+ComputeShaders --> "autoExposure" ComputeShader
+ComputeShaders --> "exposureHistogram" ComputeShader
+ComputeShaders --> "lut3DBaker" ComputeShader
+ComputeShaders --> "texture3dLerp" ComputeShader
+ComputeShaders --> "gammaHistogram" ComputeShader
+ComputeShaders --> "waveform" ComputeShader
+ComputeShaders --> "vectorscope" ComputeShader
+ComputeShaders --> "multiScaleAODownsample1" ComputeShader
+ComputeShaders --> "multiScaleAODownsample2" ComputeShader
+ComputeShaders --> "multiScaleAORender" ComputeShader
+ComputeShaders --> "multiScaleAOUpsample" ComputeShader
+ComputeShaders --> "gaussianDownsample" ComputeShader
+PostProcessResources +-- SMAALuts
+SMAALuts --> "area" Texture2D
+SMAALuts --> "search" Texture2D
+@enduml

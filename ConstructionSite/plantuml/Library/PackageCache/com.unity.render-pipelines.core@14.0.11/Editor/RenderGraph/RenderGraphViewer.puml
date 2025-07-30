@@ -1,0 +1,34 @@
+@startuml
+class RenderGraphViewer {
+}
+class Style <<static>> {
+}
+class CellElement {
+    + CellElement(idxStart:int, idxEnd:int)
+    + SetColor(color:StyleColor) : void
+}
+enum Filter {
+    ImportedResources= 1 << 0,
+    CulledPasses= 1 << 1,
+    Textures= 1 << 2,
+    ComputeBuffers= 1 << 3,
+}
+struct ResourceElementInfo {
+    + Reset() : void
+}
+struct PassElementInfo {
+    + remap : int
+    + Reset() : void
+}
+EditorWindow <|-- RenderGraphViewer
+RenderGraphViewer +-- Style
+Style o-> "title" GUIContent
+RenderGraphViewer +-- CellElement
+VisualElement <|-- CellElement
+RenderGraphViewer +-- Filter
+RenderGraphViewer +-- ResourceElementInfo
+ResourceElementInfo --> "lifetime" VisualElement
+ResourceElementInfo --> "resourceLabel" VisualElement
+RenderGraphViewer +-- PassElementInfo
+PassElementInfo --> "pass" VisualElement
+@enduml

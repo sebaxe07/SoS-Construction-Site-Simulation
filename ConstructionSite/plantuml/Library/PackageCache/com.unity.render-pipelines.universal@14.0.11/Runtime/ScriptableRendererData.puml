@@ -1,0 +1,16 @@
+@startuml
+abstract class ScriptableRendererData {
+    + <<new>> SetDirty() : void
+    + useNativeRenderPass : bool <<get>> <<set>>
+}
+class DebugShaderResources <<sealed>> {
+}
+class "List`1"<T> {
+}
+ScriptableObject <|-- ScriptableRendererData
+ScriptableRendererData --> "debugShaders" DebugShaderResources
+ScriptableRendererData --> "rendererFeatures<ScriptableRendererFeature>" "List`1"
+ScriptableRendererData +-- DebugShaderResources
+DebugShaderResources --> "debugReplacementPS" Shader
+DebugShaderResources --> "hdrDebugViewPS" Shader
+@enduml

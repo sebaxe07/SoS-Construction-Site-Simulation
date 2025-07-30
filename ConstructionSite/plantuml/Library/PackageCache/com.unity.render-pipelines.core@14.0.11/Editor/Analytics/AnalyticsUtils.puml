@@ -1,0 +1,6 @@
+@startuml
+class AnalyticsUtils <<static>> {
+    + {static} ToNestedColumn(current:T, compareAndSimplifyWithDefault:bool) : string[]
+    + {static} ToNestedColumnWithDefault(current:T, defaultObject:T, compareAndSimplifyWithDefault:bool) : string[]
+}
+@enduml

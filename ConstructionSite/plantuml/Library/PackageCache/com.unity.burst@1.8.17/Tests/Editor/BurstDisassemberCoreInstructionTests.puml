@@ -1,0 +1,13 @@
+@startuml
+class BurstDisassemblerCoreInstructionTests {
+    + TestInfo(provider:Chooser) : void
+    + TestInstructionsPresent(asmKind:Chooser) : void
+}
+enum Chooser {
+    ARM,
+    INTEL,
+    LLVMIR,
+    Wasm,
+}
+BurstDisassemblerCoreInstructionTests +-- Chooser
+@enduml

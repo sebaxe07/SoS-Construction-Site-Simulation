@@ -1,0 +1,10 @@
+@startuml
+class PostProcessEffectSettings {
+    + active : bool = true
+    + SetAllOverridesTo(state:bool, excludeEnabled:bool) : void
+    + <<virtual>> IsEnabledAndSupported(context:PostProcessRenderContext) : bool
+    + GetHash() : int
+}
+ScriptableObject <|-- PostProcessEffectSettings
+PostProcessEffectSettings o-> "enabled" BoolParameter
+@enduml

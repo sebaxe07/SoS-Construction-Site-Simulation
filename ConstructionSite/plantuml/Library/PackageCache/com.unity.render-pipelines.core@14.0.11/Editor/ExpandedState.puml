@@ -1,0 +1,9 @@
+@startuml
+struct "ExpandedState`2"<TState,TTarget> {
+    + ExpandedState(defaultValue:TState, prefix:string)
+    + GetExpandedAreas(mask:TState) : bool
+    + SetExpandedAreas(mask:TState, value:bool) : void
+    + ExpandAll() : void
+    + CollapseAll() : void
+}
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+class FontWeightDrawer {
+    + <<override>> OnGUI(position:Rect, property:SerializedProperty, label:GUIContent) : void
+}
+class TMP_FontAssetEditor {
+    + OnEnable() : void
+    + OnDisable() : void
+    + <<override>> OnInspectorGUI() : void
+}
+struct UI_PanelState {
+    + {static} faceInfoPanel : bool = true
+    + {static} generationSettingsPanel : bool = true
+    + {static} fontAtlasInfoPanel : bool = true
+    + {static} fontWeightPanel : bool = true
+    + {static} fallbackFontAssetPanel : bool = true
+    + {static} glyphTablePanel : bool = false
+    + {static} characterTablePanel : bool = false
+    + {static} fontFeatureTablePanel : bool = false
+}
+struct AtlasSettings {
+    + pointSize : int
+    + padding : int
+    + atlasWidth : int
+    + atlasHeight : int
+}
+struct Warning {
+    + isEnabled : bool
+    + expirationTime : double
+}
+PropertyDrawer <|-- FontWeightDrawer
+Editor <|-- TMP_FontAssetEditor
+TMP_FontAssetEditor +-- UI_PanelState
+TMP_FontAssetEditor +-- AtlasSettings
+AtlasSettings --> "glyphRenderMode" GlyphRenderMode
+TMP_FontAssetEditor +-- Warning
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+class PostProcessLayerEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+}
+class "BaseEditor`1"<T> {
+}
+enum ExportMode {
+    FullFrame,
+    DisablePost,
+    BreakBeforeColorGradingLinear,
+    BreakBeforeColorGradingLog,
+}
+"BaseEditor`1" "<PostProcessLayer>" <|-- PostProcessLayerEditor
+PostProcessLayerEditor +-- ExportMode
+@enduml

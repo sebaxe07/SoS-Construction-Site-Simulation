@@ -1,0 +1,9 @@
+@startuml
+class RampAsset {
+    + size : int = 16
+    + up : bool = false
+    + overwriteExisting : bool = true
+}
+ScriptableObject <|-- RampAsset
+RampAsset o-> "gradient" Gradient
+@enduml

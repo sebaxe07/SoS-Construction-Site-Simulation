@@ -1,0 +1,12 @@
+@startuml
+class Spline <<sealed>> {
+    + <<const>> k_Precision : int = 128
+    + <<const>> k_Step : float
+    + Spline(curve:AnimationCurve, zeroValue:float, loop:bool, bounds:Vector2)
+    + Cache(frame:int) : void
+    + Evaluate(t:float, length:int) : float
+    + Evaluate(t:float) : float
+    + <<override>> GetHashCode() : int
+}
+Spline --> "curve" AnimationCurve
+@enduml

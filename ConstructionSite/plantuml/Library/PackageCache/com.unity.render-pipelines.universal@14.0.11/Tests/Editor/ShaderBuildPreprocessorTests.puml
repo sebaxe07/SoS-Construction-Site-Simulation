@@ -1,0 +1,21 @@
+@startuml
+class ShaderBuildPreprocessorTests {
+    + {static} TestGetSupportedShaderFeaturesFromAsset_NewAsset() : void
+    + {static} TestGetSupportedShaderFeaturesFromAsset_MainLightShadowCascade() : void
+    + {static} TestGetSupportedShaderFeaturesFromAsset_AdditionalLights() : void
+    + {static} TestGetSupportedShaderFeaturesFromAsset_SoftShadows() : void
+    + {static} TestGetSupportedShaderFeaturesFromAsset_HighDynamicRange() : void
+    + TestGetRendererRequirements() : void
+    + TestGetSupportedShaderFeaturesFromRenderer() : void
+    + {static} TestGetSupportedShaderFeaturesFromRendererFeatures_NoFeatures() : void
+    + {static} TestGetSupportedShaderFeaturesFromRendererFeatures_Null() : void
+    + {static} TestGetSupportedShaderFeaturesFromRendererFeatures_RenderingLayers() : void
+    + {static} TestGetSupportedShaderFeaturesFromRendererFeatures_ScreenSpaceShadows() : void
+    + {static} TestGetSupportedShaderFeaturesFromRendererFeatures_SSAO() : void
+    + {static} TestGetSupportedShaderFeaturesFromRendererFeatures_Decals() : void
+}
+class TestHelper {
+    + TestHelper()
+}
+ShaderBuildPreprocessorTests +-- TestHelper
+@enduml

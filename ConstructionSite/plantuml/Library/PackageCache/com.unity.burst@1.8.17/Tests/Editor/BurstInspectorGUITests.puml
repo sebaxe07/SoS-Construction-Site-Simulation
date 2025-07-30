@@ -1,0 +1,83 @@
+@startuml
+class BurstInspectorGUITests {
+    + SetUp() : IEnumerator
+    + TestInspectorOpenDuringDomainReloadDoesNotLogErrors() : IEnumerator
+    + DisassemblerNotChangingUnexpectedlyTest() : IEnumerator
+    + InspectorStallingLoadTest() : IEnumerator
+    + FontStyleDuringDomainReloadTest() : IEnumerator
+    + BranchHoverTest() : IEnumerator
+    + ClickBranchTest() : IEnumerator
+    + FocusCodeTest(job:string) : IEnumerator
+    + FocusCodeNotBranchesTest(input:(int, bool)) : IEnumerator
+    + SelectionNotOutsideBoundsTest() : IEnumerator
+    + SelectionInAssemblySearchBarTest() : IEnumerator
+    + GoToNextSearchTargetTest() : IEnumerator
+    + CorrectFormattingOfAssembly() : void
+    + FocusSpecialCharacterCode() : IEnumerator
+}
+struct InfoThingy {
+}
+struct MyJob {
+    + Execute() : void
+}
+struct BranchArrows {
+    + Execute() : void
+}
+struct BranchArrows2 {
+    + Execute() : void
+}
+class BurstDisassemblerWithCopy {
+    + IsColoredCopy : bool
+    + BurstDisassemblerWithCopy(disassembler:BurstDisassembler)
+    + Equals(other:BurstDisassembler) : bool
+}
+struct CustomJobWithSpecialCharacter {
+    + Execute(test:float) : void
+}
+interface "ICustomJob`1"<T> {
+}
+class CustomJobExtensions <<static>> {
+}
+class CustomJobScheduler {
+}
+class "NativeArray`1"<T> {
+}
+class "List`1"<T> {
+}
+class "JobStruct`2"<T1,T2> {
+}
+struct "JobStruct`2"<TJ,T> {
+}
+struct Data {
+}
+BurstInspectorGUITests --> "ValueSource" IEnumerable
+BurstInspectorGUITests --> "FocusCodeNotBranchesSource" IEnumerable
+BurstInspectorGUITests +-- InfoThingy
+InfoThingy --> "mousePos" Vector2
+BurstInspectorGUITests +-- MyJob
+IJob <|-- MyJob
+MyJob --> "Inpút<float>" "NativeArray`1"
+MyJob --> "Output<float>" "NativeArray`1"
+BurstInspectorGUITests +-- BranchArrows
+IJob <|-- BranchArrows
+BranchArrows --> "Inpút<float>" "NativeArray`1"
+BranchArrows --> "Output<float>" "NativeArray`1"
+BurstInspectorGUITests +-- BranchArrows2
+IJob <|-- BranchArrows2
+BranchArrows2 --> "Inpút<float>" "NativeArray`1"
+BranchArrows2 --> "Output<float>" "NativeArray`1"
+BurstInspectorGUITests +-- BurstDisassemblerWithCopy
+BurstDisassembler <|-- BurstDisassemblerWithCopy
+BurstDisassemblerWithCopy --> "BlocksCopy<AsmBlock>" "List`1"
+BurstDisassemblerWithCopy --> "LinesCopy<AsmLine>" "List`1"
+BurstDisassemblerWithCopy --> "TokensCopy<AsmToken>" "List`1"
+BurstInspectorGUITests +-- CustomJobWithSpecialCharacter
+"ICustomJob`1" "<float>" <|-- CustomJobWithSpecialCharacter
+BurstInspectorGUITests +-- "ICustomJob`1"
+BurstInspectorGUITests +-- CustomJobExtensions
+BurstInspectorGUITests +-- CustomJobScheduler
+CustomJobExtensions +-- "JobStruct`2"
+"JobStruct`2" +-- Data
+Data --> "additionalData" T
+Data --> "job" TJ
+@enduml

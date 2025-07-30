@@ -1,0 +1,7 @@
+@startuml
+class CheckKey {
+    + <<override>> Check() : bool
+}
+ConditionBase <|-- CheckKey
+CheckKey o-> "key" KeyCode
+@enduml

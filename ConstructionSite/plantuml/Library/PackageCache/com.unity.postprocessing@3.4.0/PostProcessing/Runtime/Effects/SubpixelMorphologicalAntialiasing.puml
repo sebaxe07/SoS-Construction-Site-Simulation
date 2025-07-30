@@ -1,0 +1,18 @@
+@startuml
+class SubpixelMorphologicalAntialiasing <<sealed>> {
+    + IsSupported() : bool
+}
+enum Pass {
+    EdgeDetection= 0,
+    BlendWeights= 3,
+    NeighborhoodBlending= 6,
+}
+enum Quality {
+    Low= 0,
+    Medium= 1,
+    High= 2,
+}
+SubpixelMorphologicalAntialiasing o-> "quality" Quality
+SubpixelMorphologicalAntialiasing +-- Pass
+SubpixelMorphologicalAntialiasing +-- Quality
+@enduml

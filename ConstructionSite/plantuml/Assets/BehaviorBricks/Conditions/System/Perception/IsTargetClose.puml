@@ -1,0 +1,8 @@
+@startuml
+class IsTargetClose {
+    + closeDistance : float
+    + <<override>> Check() : bool
+}
+GOCondition <|-- IsTargetClose
+IsTargetClose --> "target" GameObject
+@enduml

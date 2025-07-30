@@ -1,0 +1,23 @@
+@startuml
+class SimpleCameraController {
+    + boost : float = 3.5f
+    + positionLerpTime : float = 0.2f
+    + rotationLerpTime : float = 0.01f
+    + invertY : bool = false
+}
+class CameraState {
+    + yaw : float
+    + pitch : float
+    + roll : float
+    + x : float
+    + y : float
+    + z : float
+    + SetFromTransform(t:Transform) : void
+    + Translate(translation:Vector3) : void
+    + LerpTowards(target:CameraState, positionLerpPct:float, rotationLerpPct:float) : void
+    + UpdateTransform(t:Transform) : void
+}
+MonoBehaviour <|-- SimpleCameraController
+SimpleCameraController o-> "mouseSensitivityCurve" AnimationCurve
+SimpleCameraController +-- CameraState
+@enduml

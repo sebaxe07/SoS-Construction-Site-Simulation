@@ -1,0 +1,5 @@
+@startuml
+class TMP_ResourcesLoader {
+    + {static} LoadTextMeshProResources() : void
+}
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+class DrawScreenSpaceUIPass {
+    + DrawScreenSpaceUIPass(evt:RenderPassEvent, renderOffscreen:bool)
+    + {static} ConfigureColorDescriptor(descriptor:RenderTextureDescriptor, cameraWidth:int, cameraHeight:int) : void
+    + {static} ConfigureDepthDescriptor(descriptor:RenderTextureDescriptor, depthBufferBits:int, cameraWidth:int, cameraHeight:int) : void
+    + Dispose() : void
+    + Setup(cameraData:CameraData, depthBufferBits:int) : void
+    + <<override>> Execute(context:ScriptableRenderContext, renderingData:RenderingData) : void
+}
+class PassData {
+}
+ScriptableRenderPass <|-- DrawScreenSpaceUIPass
+DrawScreenSpaceUIPass +-- PassData
+@enduml

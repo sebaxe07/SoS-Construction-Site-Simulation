@@ -1,0 +1,9 @@
+@startuml
+class TestTreeViewBuilder {
+    + TestTreeViewBuilder(tests:ITestAdaptor, oldTestResultResults:Dictionary<string, TestRunnerResult>, uiFilter:TestRunnerUIFilter)
+    + BuildTreeView(settings:TestFilterSettings, sceneBased:bool, sceneName:string) : TreeViewItem
+}
+class "List`1"<T> {
+}
+TestTreeViewBuilder o-> "results<TestRunnerResult>" "List`1"
+@enduml

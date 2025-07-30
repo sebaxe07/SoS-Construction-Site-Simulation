@@ -1,0 +1,57 @@
+@startuml
+enum ScreenSpaceReflectionPreset {
+    Lower,
+    Low,
+    Medium,
+    High,
+    Higher,
+    Ultra,
+    Overkill,
+    Custom,
+}
+enum ScreenSpaceReflectionResolution {
+    Downsampled,
+    FullSize,
+    Supersampled,
+}
+class ScreenSpaceReflectionPresetParameter <<sealed>> {
+}
+class ScreenSpaceReflectionResolutionParameter <<sealed>> {
+}
+class ScreenSpaceReflections <<sealed>> {
+    + <<override>> IsEnabledAndSupported(context:PostProcessRenderContext) : bool
+}
+class ScreenSpaceReflectionsRenderer <<sealed>> {
+    + <<override>> GetCameraFlags() : DepthTextureMode
+    + <<override>> Render(context:PostProcessRenderContext) : void
+    + <<override>> Release() : void
+}
+class "ParameterOverride`1"<T> {
+}
+class "PostProcessEffectRenderer`1"<T> {
+}
+class QualityPreset {
+    + maximumIterationCount : int
+    + thickness : float
+}
+enum Pass {
+    Test,
+    Resolve,
+    Reproject,
+    Composite,
+}
+"ParameterOverride`1" "<ScreenSpaceReflectionPreset>" <|-- ScreenSpaceReflectionPresetParameter
+"ParameterOverride`1" "<ScreenSpaceReflectionResolution>" <|-- ScreenSpaceReflectionResolutionParameter
+PostProcessEffectSettings <|-- ScreenSpaceReflections
+ScreenSpaceReflections o-> "preset" ScreenSpaceReflectionPresetParameter
+ScreenSpaceReflections o-> "maximumIterationCount" IntParameter
+ScreenSpaceReflections o-> "resolution" ScreenSpaceReflectionResolutionParameter
+ScreenSpaceReflections o-> "thickness" FloatParameter
+ScreenSpaceReflections o-> "maximumMarchDistance" FloatParameter
+ScreenSpaceReflections o-> "distanceFade" FloatParameter
+ScreenSpaceReflections o-> "vignette" FloatParameter
+"PostProcessEffectRenderer`1" "<ScreenSpaceReflections>" <|-- ScreenSpaceReflectionsRenderer
+ScreenSpaceReflectionsRenderer +-- QualityPreset
+QualityPreset --> "downsampling" ScreenSpaceReflectionResolution
+ScreenSpaceReflectionsRenderer +-- Pass
+@enduml

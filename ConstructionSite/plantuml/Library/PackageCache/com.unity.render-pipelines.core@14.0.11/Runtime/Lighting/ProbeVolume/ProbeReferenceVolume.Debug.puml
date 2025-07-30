@@ -1,0 +1,45 @@
+@startuml
+enum DebugProbeShadingMode {
+    SH,
+    SHL0,
+    SHL0L1,
+    Validity,
+    ValidityOverDilationThreshold,
+    InvalidatedByTouchupVolumes,
+    Size,
+}
+class ProbeVolumeDebug {
+    + drawProbes : bool
+    + drawBricks : bool
+    + drawCells : bool
+    + realtimeSubdivision : bool
+    + subdivisionCellUpdatePerFrame : int = 4
+    + subdivisionDelayInSeconds : float = 1
+    + probeSize : float = 0.3f
+    + subdivisionViewCullingDistance : float = 500.0f
+    + probeCullingDistance : float = 200.0f
+    + maxSubdivToVisualize : int
+    + minSubdivToVisualize : int = 0
+    + exposureCompensation : float
+    + drawVirtualOffsetPush : bool
+    + offsetSize : float = 0.025f
+    + freezeStreaming : bool
+    + otherStateIndex : int = 0
+    + ProbeVolumeDebug()
+    + GetReset() : Action
+}
+class ProbeReferenceVolume <<partial>> {
+    + {static} <<readonly>> k_DebugPanelName : string = "Probe Volume"
+    + RenderDebug(camera:Camera) : void
+}
+class CellInstancedDebugProbes {
+}
+class "List`1"<T> {
+}
+IDebugData <|-- ProbeVolumeDebug
+ProbeVolumeDebug --> "probeShading" DebugProbeShadingMode
+ProbeReferenceVolume +-- CellInstancedDebugProbes
+CellInstancedDebugProbes --> "probeBuffers<Matrix4x4[]>" "List`1"
+CellInstancedDebugProbes --> "offsetBuffers<Matrix4x4[]>" "List`1"
+CellInstancedDebugProbes --> "props<MaterialPropertyBlock>" "List`1"
+@enduml

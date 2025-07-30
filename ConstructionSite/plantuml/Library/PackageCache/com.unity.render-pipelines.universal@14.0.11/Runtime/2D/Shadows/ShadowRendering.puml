@@ -1,0 +1,13 @@
+@startuml
+class ShadowRendering <<static>> {
+    + {static} maxTextureCount : uint <<get>>
+    + {static} InitializeBudget(maxTextureCount:uint) : void
+    + {static} CreateShadowRenderTexture(pass:IRenderPass2D, renderingData:RenderingData, cmdBuffer:CommandBuffer, shadowIndex:int) : void
+    + {static} PrerenderShadows(pass:IRenderPass2D, renderingData:RenderingData, cmdBuffer:CommandBuffer, layerToRender:int, light:Light2D, shadowIndex:int, shadowIntensity:float) : bool
+    + {static} SetGlobalShadowTexture(cmdBuffer:CommandBuffer, light:Light2D, shadowIndex:int) : void
+    + {static} DisableGlobalShadowTexture(cmdBuffer:CommandBuffer) : void
+    + {static} ReleaseShadowRenderTexture(cmdBuffer:CommandBuffer, shadowIndex:int) : void
+    + {static} SetShadowProjectionGlobals(cmdBuffer:CommandBuffer, shadowCaster:ShadowCaster2D) : void
+    + {static} RenderShadows(pass:IRenderPass2D, renderingData:RenderingData, cmdBuffer:CommandBuffer, layerToRender:int, light:Light2D, shadowIntensity:float, renderTexture:RenderTargetIdentifier, colorBit:int) : bool
+}
+@enduml

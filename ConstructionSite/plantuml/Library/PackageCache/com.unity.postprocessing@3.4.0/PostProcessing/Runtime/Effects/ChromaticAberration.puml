@@ -1,0 +1,16 @@
+@startuml
+class ChromaticAberration <<sealed>> {
+    + <<override>> IsEnabledAndSupported(context:PostProcessRenderContext) : bool
+}
+class ChromaticAberrationRenderer <<sealed>> {
+    + <<override>> Render(context:PostProcessRenderContext) : void
+    + <<override>> Release() : void
+}
+class "PostProcessEffectRenderer`1"<T> {
+}
+PostProcessEffectSettings <|-- ChromaticAberration
+ChromaticAberration o-> "spectralLut" TextureParameter
+ChromaticAberration o-> "intensity" FloatParameter
+ChromaticAberration o-> "fastMode" BoolParameter
+"PostProcessEffectRenderer`1" "<ChromaticAberration>" <|-- ChromaticAberrationRenderer
+@enduml

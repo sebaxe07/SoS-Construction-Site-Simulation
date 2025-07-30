@@ -1,0 +1,24 @@
+@startuml
+class PropertyDrawerTests {
+    + {static} OneTimeSetUp() : void
+    + OneTimeTearDown() : void
+    + NavigationDrawer_IsVisible() : IEnumerator
+    + SpriteStateDrawer_IsVisible() : IEnumerator
+    + DropdownOptionDataListDrawer_IsVisible() : IEnumerator
+    + SearchContextDrawer_IsVisible() : IEnumerator
+    + ExposedReferenceDrawer_IsVisible() : IEnumerator
+    + {static} NavigationDrawer_ShowsCorrectAdditionalControlCount(mode:int, expectedCount:int) : IEnumerator
+}
+class PropertyDrawerTestsWindow {
+    + Property(propertyName:string) : SerializedProperty
+    + Rebuild() : void
+}
+class "ExposedReference`1"<T> {
+}
+PropertyDrawerTests +-- PropertyDrawerTestsWindow
+EditorWindow <|-- PropertyDrawerTestsWindow
+PropertyDrawerTestsWindow --> "navigation" Navigation
+PropertyDrawerTestsWindow --> "spriteState" SpriteState
+PropertyDrawerTestsWindow --> "searchContext" GameObject
+PropertyDrawerTestsWindow --> "exposedReference<GameObject>" "ExposedReference`1"
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+class ProbeVolumeSceneData {
+    + ProbeVolumeSceneData(parentAsset:Object, parentSceneDataPropertyName:string)
+    + SetParentObject(parent:Object, parentSceneDataPropertyName:string) : void
+    + OnAfterDeserialize() : void
+    + OnBeforeSerialize() : void
+}
+struct SerializableBoundItem {
+    + sceneGUID : string
+}
+struct SerializableHasPVItem {
+    + sceneGUID : string
+    + hasProbeVolumes : bool
+}
+struct SerializablePVProfile {
+    + sceneGUID : string
+}
+struct SerializablePVBakeSettings {
+    + sceneGUID : string
+}
+class BakingSet {
+    + name : string
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+ISerializationCallbackReceiver <|-- ProbeVolumeSceneData
+ProbeVolumeSceneData --> "sceneBounds<string,Bounds>" "Dictionary`2"
+ProbeVolumeSceneData +-- SerializableBoundItem
+SerializableBoundItem --> "bounds" Bounds
+ProbeVolumeSceneData +-- SerializableHasPVItem
+ProbeVolumeSceneData +-- SerializablePVProfile
+SerializablePVProfile --> "profile" ProbeReferenceVolumeProfile
+ProbeVolumeSceneData +-- SerializablePVBakeSettings
+SerializablePVBakeSettings --> "settings" ProbeVolumeBakingProcessSettings
+ProbeVolumeSceneData +-- BakingSet
+BakingSet o-> "sceneGUIDs<string>" "List`1"
+BakingSet --> "settings" ProbeVolumeBakingProcessSettings
+BakingSet --> "profile" ProbeReferenceVolumeProfile
+BakingSet o-> "lightingScenarios<string>" "List`1"
+@enduml

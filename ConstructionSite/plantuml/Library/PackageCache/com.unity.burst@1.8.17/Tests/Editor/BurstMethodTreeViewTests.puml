@@ -1,0 +1,37 @@
+@startuml
+class BurstMethodTreeViewTests {
+    + SetUp() : void
+    + ProcessNewItemTest() : void
+    + ExtractNameSpacesTest() : void
+    + InitializeTest() : void
+    + BuildRootTest() : void
+    + GetSelection() : void
+    + TrySelectByDisplayNameTest() : void
+    + ProcessEntireTestProject() : void
+}
+struct Job1 {
+    + {static} TestMethod1() : void
+}
+struct Job2 {
+    + {static} TestMethod1() : void
+}
+struct Job3 {
+    + {static} TestMethod1(ptr:System.IntPtr) : void
+}
+struct Job4 {
+    + {static} TestMethod1() : void
+}
+struct Job5 {
+    + Execute() : void
+}
+class NameOverlapping {
+    + {static} NameOverlap(a:int, b:int) : int
+}
+BurstMethodTreeViewTests +-- Job1
+BurstMethodTreeViewTests +-- Job2
+BurstMethodTreeViewTests +-- Job3
+BurstMethodTreeViewTests +-- Job4
+BurstMethodTreeViewTests +-- Job5
+IJob <|-- Job5
+BurstMethodTreeViewTests +-- NameOverlapping
+@enduml

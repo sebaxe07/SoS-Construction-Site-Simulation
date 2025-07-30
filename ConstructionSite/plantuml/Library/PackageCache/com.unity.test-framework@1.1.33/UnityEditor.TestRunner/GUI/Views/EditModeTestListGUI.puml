@@ -1,0 +1,9 @@
+@startuml
+class EditModeTestListGUI {
+    + <<override>> RenderNoTestsInfo() : void
+    + <<override>> PrintHeadPanel() : void
+}
+TestListGUI <|-- EditModeTestListGUI
+EditModeTestListGUI --> "TestMode" TestMode
+EditModeTestListGUI --> "TestPlatform" TestPlatform
+@enduml

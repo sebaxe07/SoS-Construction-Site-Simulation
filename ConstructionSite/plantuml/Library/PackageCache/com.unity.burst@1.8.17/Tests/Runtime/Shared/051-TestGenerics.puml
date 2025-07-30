@@ -1,0 +1,414 @@
+@startuml
+class TestGenerics <<partial>> {
+    + {static} StructNestedGenerics() : int
+    + {static} CheckSizeOfWithGenerics() : int
+    + {static} TestOuterInnerGenerics() : float
+    + {static} TestOuterInnerGenerics2() : float
+    + {static} TestActivator() : float
+    + {static} TestActivatorIndirect() : float
+    + {static} TestStaticMethodGeneric() : float
+    + {static} TestCrossConstraints() : void
+    + {static} TestCrossAndGenericArgumentsInGenericInterface() : float
+    + {static} TestCase_1059355() : int
+    + {static} ExplicitInterfaceImplementation() : void
+    + {static} ExecutePhysicsJob() : int
+    + {static} TestGenericIssueWithIJobProcessComponentData() : float
+    + {static} TestSizeOfWithGenericType() : int
+    + {static} TestSizeOfWithNestedGenericTypes() : int
+    + {static} CheckInterfaceCallsThroughGenericsOfGenerics() : int
+    + {static} TestNestedGenericsWithStaticAndSameName() : long
+    + {static} TestGenericResolutionBranchTrickInt() : int
+    + {static} TestGenericResolutionBranchTrickStruct() : int
+    + {static} <<unsafe>> TestGenericResolutionBranchTrickClass() : int
+    + {static} TestStructImplementingGenericInterfaceWithSourceOrderDependentResolution() : int
+    + {static} TestStructImplementingGenericInterfaceWithSourceOrderDependentResolution2() : int
+    + {static} CallGenericStructImplementingGenericInterfaceWithOverloads() : int
+    + {static} CallGenericStructImplementingGenericInterfaceWithOverloads2() : int
+    + {static} CallGenericStructImplementingGenericInterfaceWithOverloadsWrapper() : int
+    + {static} CallGenericStructImplementingGenericInterfaceWithOverloadsWrapper2() : int
+    + {static} CallStructImplementingGenericInterfaceWithMoreSpecificOverload() : int
+    + {static} CallStructImplementingGenericInterfaceWithMoreSpecificOverload2() : int
+    + {static} CallGenericStructImplementingGenericInterfaceWithPrivateOverload() : int
+    + {static} CallGenericStructImplementingGenericInterfaceDerived() : int
+    + {static} CallBaseInterfaceMethodOnGenericStruct() : int
+    + {static} CallGenericStructImplementingGenericInterfaceDerived2() : int
+    + {static} CallGetHashCodeViaInterface() : int
+    + {static} CallGetHashCodeViaInterfaceHelper(value:T) : int
+    + {static} CallGetHashCodeViaInterface2() : int
+    + {static} CallGetHashCodeViaInterface3() : int
+}
+struct "DataOutput2`1"<TType> {
+}
+interface "IMyActivator`1"<T> {
+}
+struct "MyActivator`1"<T> {
+    + Create(value:float) : T
+}
+struct "MyActivatorIndirect`1"<T> {
+    + Create(value:float) : T
+}
+interface IMyData {
+}
+struct MyValueData1 {
+    + Value : float <<get>> <<set>>
+}
+struct MyValueData2 {
+    + Value : float <<get>> <<set>>
+}
+struct "GenericStructOuter`2"<T1,T2> {
+}
+struct "GenericStructOuter2`2"<T1,T2> {
+}
+struct "Executor`1"<T> {
+    + {static} Execute(job:T) : void
+}
+struct "GenericStruct`2"<T1,T2> {
+}
+struct "GenericSubStruct`2"<T3,T4> {
+    + Field3 : T3
+    + Field4 : T4
+}
+interface IRotation {
+}
+struct SimpleRotation {
+    + Value : float <<get>> <<set>>
+}
+struct SimpleRotation2 {
+    + Value : float <<get>> <<set>>
+}
+struct ReproBurstError {
+    + Execute() : void
+}
+struct "FirstLevel`2"<T1,T2> {
+    + First(t1:T1, t2:T2) : void
+}
+interface "ISecondLevel`1"<T2> {
+}
+struct "SecondLevel`1"<T> {
+    + Second(x:T) : void
+}
+struct "CaseMixedGenerics`1"<T1> {
+}
+struct CaseMixedImplem {
+    + MyMethod(t2:SimpleRotation, value:T) : float
+}
+struct ReproBurstError2 {
+    + Result : int
+    + Execute() : void
+}
+struct Variant {
+}
+struct "BugRepro`1"<TVariant> {
+}
+interface IFoo {
+}
+struct "Simplified`1"<T> {
+    + Run(foo:T) : int
+}
+struct ExplicitInterfaceStruct {
+}
+struct ExplicitRunner {
+    + {static} RunJob(job:T) : void
+}
+interface IQueryResult {
+}
+struct RayCastResult {
+    + Fraction : float <<get>> <<set>>
+    + RigidBodyIndex : int
+}
+interface "ICollector`1"<T> {
+}
+struct "AnyHitCollector`1"<T> {
+    + MaxFraction : float <<get>>
+    + HasHit : bool <<get>>
+    + NumHits : int <<get>>
+    + AddHit(hit:T) : void
+}
+struct "ClosestHitCollector`1"<T> {
+    + MaxFraction : float <<get>>
+    + HasHit : bool <<get>>
+    + NumHits : int <<get>>
+    + ClosestHit : T
+    + AddHit(hit:T) : void
+}
+interface IRaycastLeafProcessor {
+}
+struct RayLeafProcessor {
+    + RayLeaf(leafData:int, collector:T) : void
+}
+struct PhysicsJob {
+    + result : bool
+    + <<unsafe>> Execute(index:int) : void
+}
+interface IComponentData {
+}
+struct "JobStruct_Process_DD`3"<T,U0,U1> {
+    + Data : T
+    + DataU0 : U0
+    + DataU1 : U1
+    + {static} <<unsafe>> Execute(jobData:JobStruct_Process_DD<T, U0, U1>) : void
+}
+interface "IJobProcessComponentData`2"<U0,U1> {
+}
+struct "GenericComponent`1"<T> {
+    + Value : T
+}
+struct Translation {
+    + Value : float
+}
+struct MyReadJob {
+    + Execute(c0:GenericComponent<float>, c1:Translation) : void
+}
+struct "GenericTypeContainer`1"<TType> {
+    + Value : TType
+}
+class "GenericContainerOuter`1"<T> {
+}
+interface IComponentDataOrdered {
+}
+struct "EntityInChunkWithComponent`1"<TComponent> {
+    + Component : TComponent
+    + EntityInChunkWithComponent(component:TComponent)
+}
+struct "EntityInChunkWithComponentComparer`1"<TComponent> {
+    + Compare(x:EntityInChunkWithComponent<TComponent>, y:EntityInChunkWithComponent<TComponent>) : int
+}
+struct "MyOuterStructWithGenerics`1"<TComponent> {
+    + {static} GetJob() : InnerWithComparer<EntityInChunkWithComponent<TComponent>, EntityInChunkWithComponentComparer<TComponent>>
+}
+struct MyComponentData {
+    + Value : int
+    + MyComponentData(value:int)
+    + CompareTo(other:MyComponentData) : int
+}
+class "TypeIndexCache`1"<T> {
+    + {static} GetValue() : long
+}
+struct "InnerIndex`1"<T> {
+    + {static} Create() : long
+}
+struct SomeStruct {
+}
+class SomeClass {
+}
+interface "IGenericInterfaceWithSourceOrderDependentResolution`1"<T> {
+}
+struct StructImplementingGenericInterfaceWithSourceOrderDependentResolution {
+    + Foo(i:int) : int
+}
+interface "IGenericInterfaceWithSourceOrderDependentResolution2`1"<T> {
+}
+struct StructImplementingGenericInterfaceWithSourceOrderDependentResolution2 {
+    + Foo(i:int) : int
+}
+interface "IGenericInterfaceWithOverloads`1"<T> {
+}
+struct "GenericStructImplementingGenericInterfaceWithOverloads`1"<T> {
+    + UIntValue : T
+    + IntValue : T
+    + Foo(u:uint) : T
+    + Foo(i:int) : T
+}
+interface "IGenericInterfaceWithOverloadsWrapper`1"<T> {
+}
+struct "GenericStructImplementingGenericInterfaceWithOverloadsWrapper`1"<T> {
+    + Bar(index:uint) : GenericStructImplementingGenericInterfaceWithOverloads<T>
+    + Bar(index:int) : GenericStructImplementingGenericInterfaceWithOverloads<T>
+}
+interface "IGenericInterfaceWithMoreSpecificOverload`1"<T> {
+}
+struct "StructImplementingGenericInterfaceWithMoreSpecificOverload`1"<T> {
+    + Foo(t:T) : int
+    + Foo(i:int) : int
+}
+struct StructImplementingGenericInterfaceWithMoreSpecificOverload2 {
+    + Foo(i:int) : int
+}
+interface "IGenericInterface`1"<T> {
+}
+struct "GenericStructImplementingGenericInterfaceWithPrivateOverload`1"<T> {
+    + Get(idx:int) : T
+}
+interface "IGenericInterfaceBase`1"<T> {
+}
+interface "IGenericInterfaceDerived`2"<T,U> {
+}
+struct "GenericStructImplementingGenericInterfaceDerived`1"<T> {
+    + Foo(u:T) : int
+    + Foo(d:double) : int
+}
+struct "GenericStructImplementingGenericInterfaceDerived2`1"<T> {
+    + Foo(u:T) : int
+}
+struct CallGetHashCodeViaInterfaceStruct {
+    + Value : int
+    + <<override>> GetHashCode() : int
+    + GetHashCode(x:int) : int
+}
+struct CallGetHashCodeViaInterfaceStruct2 {
+    + Value : int
+    + GetHashCode(x:int) : int
+    + GetHashCode(d:double) : double
+}
+struct CallGetHashCodeViaInterfaceStruct3 {
+    + Value : int
+}
+struct GenericStructInner {
+    + Result : float
+    + Execute() : void
+}
+struct "GenericStructInner`1"<T3> {
+    + Field3 : T3
+    + Result : float
+    + Execute() : void
+}
+interface "MyInterface`1"<T2> {
+}
+struct "Check`2"<T3,T4> {
+    + Execute() : float
+    + {static} Run(t1:T1, t3t4:Check<T3, T4>) : float
+}
+struct Foo {
+    + Bug() : void
+}
+struct "GenericContainerInner`1"<TType> {
+    + Value : TType
+}
+class "IComparer`1"<T> {
+}
+class "IComparable`1"<T> {
+}
+struct "InnerWithComparer`2"<T,TComparer> {
+    + Value1 : T
+    + Value2 : T
+    + Result : int
+    + Execute() : void
+}
+TestGenerics +-- "DataOutput2`1"
+TestGenerics +-- "IMyActivator`1"
+TestGenerics +-- "MyActivator`1"
+"IMyActivator`1" "<T>" <|-- "MyActivator`1"
+TestGenerics +-- "MyActivatorIndirect`1"
+"IMyActivator`1" "<T>" <|-- "MyActivatorIndirect`1"
+TestGenerics +-- IMyData
+TestGenerics +-- MyValueData1
+IMyData <|-- MyValueData1
+TestGenerics +-- MyValueData2
+IMyData <|-- MyValueData2
+TestGenerics +-- "GenericStructOuter`2"
+TestGenerics +-- "GenericStructOuter2`2"
+TestGenerics +-- "Executor`1"
+TestGenerics +-- "GenericStruct`2"
+"GenericStruct`2" --> "FieldMixed1<int,T2>" "GenericSubStruct`2"
+"GenericStruct`2" --> "FieldMixed2<T1,float>" "GenericSubStruct`2"
+TestGenerics +-- "GenericSubStruct`2"
+TestGenerics +-- IRotation
+TestGenerics +-- SimpleRotation
+IRotation <|-- SimpleRotation
+TestGenerics +-- SimpleRotation2
+IRotation <|-- SimpleRotation2
+TestGenerics +-- ReproBurstError
+IJob <|-- ReproBurstError
+ReproBurstError --> "first<SecondLevel<int>,int>" "FirstLevel`2"
+ReproBurstError --> "second<int>" "SecondLevel`1"
+TestGenerics +-- "FirstLevel`2"
+TestGenerics +-- "ISecondLevel`1"
+TestGenerics +-- "SecondLevel`1"
+"ISecondLevel`1" "<T>" <|-- "SecondLevel`1"
+TestGenerics +-- "CaseMixedGenerics`1"
+TestGenerics +-- CaseMixedImplem
+TestGenerics +-- ReproBurstError2
+IJob <|-- ReproBurstError2
+TestGenerics +-- Variant
+TestGenerics +-- "BugRepro`1"
+TestGenerics +-- IFoo
+TestGenerics +-- "Simplified`1"
+TestGenerics +-- ExplicitInterfaceStruct
+IJob <|-- ExplicitInterfaceStruct
+TestGenerics +-- ExplicitRunner
+TestGenerics +-- IQueryResult
+TestGenerics +-- RayCastResult
+IQueryResult <|-- RayCastResult
+RayCastResult --> "SurfaceNormal" float3
+TestGenerics +-- "ICollector`1"
+TestGenerics +-- "AnyHitCollector`1"
+"ICollector`1" "<T>" <|-- "AnyHitCollector`1"
+TestGenerics +-- "ClosestHitCollector`1"
+"ICollector`1" "<T>" <|-- "ClosestHitCollector`1"
+TestGenerics +-- IRaycastLeafProcessor
+TestGenerics +-- RayLeafProcessor
+IRaycastLeafProcessor <|-- RayLeafProcessor
+TestGenerics +-- PhysicsJob
+IJobParallelFor <|-- PhysicsJob
+TestGenerics +-- IComponentData
+TestGenerics +-- "JobStruct_Process_DD`3"
+TestGenerics +-- "IJobProcessComponentData`2"
+TestGenerics +-- "GenericComponent`1"
+IComponentData <|-- "GenericComponent`1"
+TestGenerics +-- Translation
+IComponentData <|-- Translation
+TestGenerics +-- MyReadJob
+"IJobProcessComponentData`2" "<GenericComponent<float>,Translation>" <|-- MyReadJob
+TestGenerics +-- "GenericTypeContainer`1"
+TestGenerics +-- "GenericContainerOuter`1"
+TestGenerics +-- IComponentDataOrdered
+TestGenerics +-- "EntityInChunkWithComponent`1"
+TestGenerics +-- "EntityInChunkWithComponentComparer`1"
+"IComparer`1" "<EntityInChunkWithComponent<TComponent>>" <|-- "EntityInChunkWithComponentComparer`1"
+TestGenerics +-- "MyOuterStructWithGenerics`1"
+TestGenerics +-- MyComponentData
+IComponentData <|-- MyComponentData
+"IComparable`1" "<MyComponentData>" <|-- MyComponentData
+TestGenerics +-- "TypeIndexCache`1"
+TestGenerics +-- "InnerIndex`1"
+TestGenerics +-- SomeStruct
+TestGenerics +-- SomeClass
+TestGenerics +-- "IGenericInterfaceWithSourceOrderDependentResolution`1"
+TestGenerics +-- StructImplementingGenericInterfaceWithSourceOrderDependentResolution
+"IGenericInterfaceWithSourceOrderDependentResolution`1" "<int>" <|-- StructImplementingGenericInterfaceWithSourceOrderDependentResolution
+TestGenerics +-- "IGenericInterfaceWithSourceOrderDependentResolution2`1"
+TestGenerics +-- StructImplementingGenericInterfaceWithSourceOrderDependentResolution2
+"IGenericInterfaceWithSourceOrderDependentResolution2`1" "<int>" <|-- StructImplementingGenericInterfaceWithSourceOrderDependentResolution2
+TestGenerics +-- "IGenericInterfaceWithOverloads`1"
+TestGenerics +-- "GenericStructImplementingGenericInterfaceWithOverloads`1"
+"IGenericInterfaceWithOverloads`1" "<T>" <|-- "GenericStructImplementingGenericInterfaceWithOverloads`1"
+TestGenerics +-- "IGenericInterfaceWithOverloadsWrapper`1"
+TestGenerics +-- "GenericStructImplementingGenericInterfaceWithOverloadsWrapper`1"
+"IGenericInterfaceWithOverloadsWrapper`1" "<T>" <|-- "GenericStructImplementingGenericInterfaceWithOverloadsWrapper`1"
+"GenericStructImplementingGenericInterfaceWithOverloadsWrapper`1" --> "UIntValue<T>" "GenericStructImplementingGenericInterfaceWithOverloads`1"
+"GenericStructImplementingGenericInterfaceWithOverloadsWrapper`1" --> "IntValue<T>" "GenericStructImplementingGenericInterfaceWithOverloads`1"
+TestGenerics +-- "IGenericInterfaceWithMoreSpecificOverload`1"
+TestGenerics +-- "StructImplementingGenericInterfaceWithMoreSpecificOverload`1"
+"IGenericInterfaceWithMoreSpecificOverload`1" "<T>" <|-- "StructImplementingGenericInterfaceWithMoreSpecificOverload`1"
+TestGenerics +-- StructImplementingGenericInterfaceWithMoreSpecificOverload2
+"IGenericInterfaceWithMoreSpecificOverload`1" "<int>" <|-- StructImplementingGenericInterfaceWithMoreSpecificOverload2
+TestGenerics +-- "IGenericInterface`1"
+TestGenerics +-- "GenericStructImplementingGenericInterfaceWithPrivateOverload`1"
+"IGenericInterface`1" "<T>" <|-- "GenericStructImplementingGenericInterfaceWithPrivateOverload`1"
+TestGenerics +-- "IGenericInterfaceBase`1"
+TestGenerics +-- "IGenericInterfaceDerived`2"
+"IGenericInterfaceBase`1" "<T>" <|-- "IGenericInterfaceDerived`2"
+TestGenerics +-- "GenericStructImplementingGenericInterfaceDerived`1"
+"IGenericInterfaceDerived`2" "<T,T>" <|-- "GenericStructImplementingGenericInterfaceDerived`1"
+TestGenerics +-- "GenericStructImplementingGenericInterfaceDerived2`1"
+"IGenericInterfaceDerived`2" "<T,T>" <|-- "GenericStructImplementingGenericInterfaceDerived2`1"
+TestGenerics +-- CallGetHashCodeViaInterfaceStruct
+TestGenerics +-- CallGetHashCodeViaInterfaceStruct2
+TestGenerics +-- CallGetHashCodeViaInterfaceStruct3
+"GenericStructOuter`2" +-- GenericStructInner
+IJob <|-- GenericStructInner
+GenericStructInner --> "Field1" T1
+GenericStructInner --> "Field2" T2
+"GenericStructOuter2`2" +-- "GenericStructInner`1"
+IJob <|-- "GenericStructInner`1"
+"GenericStructInner`1" --> "Field1" T1
+"GenericStructInner`1" --> "Field2" T2
+"CaseMixedGenerics`1" +-- "MyInterface`1"
+"CaseMixedGenerics`1" +-- "Check`2"
+"BugRepro`1" +-- Foo
+IFoo <|-- Foo
+"GenericContainerOuter`1" +-- "GenericContainerInner`1"
+"GenericContainerInner`1" --> "Value2" T
+"MyOuterStructWithGenerics`1" +-- "InnerWithComparer`2"
+IJob <|-- "InnerWithComparer`2"
+@enduml

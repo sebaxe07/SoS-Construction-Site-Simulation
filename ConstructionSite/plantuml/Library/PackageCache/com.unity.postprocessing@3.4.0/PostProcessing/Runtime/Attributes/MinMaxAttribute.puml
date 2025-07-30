@@ -1,0 +1,8 @@
+@startuml
+class MinMaxAttribute <<sealed>> {
+    + <<readonly>> min : float
+    + <<readonly>> max : float
+    + MinMaxAttribute(min:float, max:float)
+}
+Attribute <|-- MinMaxAttribute
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class PostProcessProfileEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+}
+Editor <|-- PostProcessProfileEditor
+@enduml

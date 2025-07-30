@@ -1,0 +1,10 @@
+@startuml
+class DoneShootOnce {
+    + velocity : float
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- DoneShootOnce
+DoneShootOnce --> "shootPoint" Transform
+DoneShootOnce --> "bullet" GameObject
+@enduml

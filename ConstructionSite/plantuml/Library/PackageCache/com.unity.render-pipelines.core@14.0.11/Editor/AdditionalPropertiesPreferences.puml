@@ -1,0 +1,20 @@
+@startuml
+class SetAdditionalPropertiesVisibilityAttribute <<sealed>> {
+}
+class AdditionalPropertiesPreferences {
+    + PreferenceGUI() : void
+}
+class Styles {
+}
+class "List`1"<T> {
+}
+class Keys <<static>> {
+}
+Attribute <|-- SetAdditionalPropertiesVisibilityAttribute
+ICoreRenderPipelinePreferencesProvider <|-- AdditionalPropertiesPreferences
+AdditionalPropertiesPreferences --> "keywords<string>" "List`1"
+AdditionalPropertiesPreferences o-> "header" GUIContent
+AdditionalPropertiesPreferences +-- Styles
+Styles o-> "additionalPropertiesLabel" GUIContent
+AdditionalPropertiesPreferences +-- Keys
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+class UniversalRenderPipelineGlobalSettings <<partial>> {
+    + OnBeforeSerialize() : void
+    + OnAfterDeserialize() : void
+    + {static} <<readonly>> defaultAssetName : string = "UniversalRenderPipelineGlobalSettings"
+    + validRenderingLayers : uint <<get>>
+    + lightLayerName0 : string
+    + lightLayerName1 : string
+    + lightLayerName2 : string
+    + lightLayerName3 : string
+    + lightLayerName4 : string
+    + lightLayerName5 : string
+    + lightLayerName6 : string
+    + lightLayerName7 : string
+    + supportRuntimeDebugDisplay : bool = false
+    + stripDebugVariants : bool <<get>> <<set>>
+    + stripUnusedPostProcessingVariants : bool <<get>> <<set>>
+    + stripUnusedVariants : bool <<get>> <<set>>
+    + stripUnusedLODCrossFadeVariants : bool <<get>> <<set>>
+    + stripScreenCoordOverrideVariants : bool <<get>> <<set>>
+}
+RenderPipelineGlobalSettings <|-- UniversalRenderPipelineGlobalSettings
+ISerializationCallbackReceiver <|-- UniversalRenderPipelineGlobalSettings
+UniversalRenderPipelineGlobalSettings --> "instance" UniversalRenderPipelineGlobalSettings
+@enduml

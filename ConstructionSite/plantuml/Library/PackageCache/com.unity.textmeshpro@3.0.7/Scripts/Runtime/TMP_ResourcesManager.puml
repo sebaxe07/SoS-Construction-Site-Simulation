@@ -1,0 +1,6 @@
+@startuml
+class TMP_ResourceManager {
+    + {static} AddFontAsset(fontAsset:TMP_FontAsset) : void
+    + {static} TryGetFontAsset(hashcode:int, fontAsset:TMP_FontAsset) : bool
+}
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+class TargetTests {
+    + RunBeforeAnyTests() : void
+    + CanCreateBlankGraph() : void
+    + {static} s_ForceVFXFakeTargetVisible : bool = false
+    + CanInitializeOutputTargets() : void
+    + CanAddTarget() : void
+    + ActiveTargetsArePotentialTargets() : void
+    + GetTargetIndexWorks() : void
+    + CanRemoveTarget() : void
+    + CanSetBlockActive() : void
+    + CanUpdateBlockActiveState() : void
+    + CanBuildMultipleShaders() : void
+}
+class VFXTarget <<sealed>> {
+    + VFXTarget()
+    + <<override>> GetActiveBlocks(context:UnityEditor.ShaderGraph.TargetActiveBlockContext) : void
+    + <<override>> GetFields(context:TargetFieldContext) : void
+    + <<override>> Setup(context:TargetSetupContext) : void
+    + <<override>> IsActive() : bool
+    + <<override>> WorksWithSRP(scriptableRenderPipeline:UnityEngine.Rendering.RenderPipelineAsset) : bool
+    + <<override>> GetPropertiesGUI(context:TargetPropertyGUIContext, onChange:System.Action, registerUndo:System.Action<System.String>) : void
+}
+class MultiShaderTarget <<sealed>> {
+    + MultiShaderTarget()
+    + <<override>> GetActiveBlocks(context:UnityEditor.ShaderGraph.TargetActiveBlockContext) : void
+    + <<override>> GetFields(context:TargetFieldContext) : void
+    + {static} BuildPass() : PassDescriptor
+    + {static} BuildSubShader(additionaShaderID:string) : SubShaderDescriptor
+    + <<override>> Setup(context:TargetSetupContext) : void
+    + <<override>> IsActive() : bool
+    + <<override>> WorksWithSRP(scriptableRenderPipeline:UnityEngine.Rendering.RenderPipelineAsset) : bool
+    + <<override>> GetPropertiesGUI(context:TargetPropertyGUIContext, onChange:System.Action, registerUndo:System.Action<System.String>) : void
+}
+TargetTests +-- VFXTarget
+TargetTests +-- MultiShaderTarget
+@enduml

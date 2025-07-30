@@ -1,0 +1,5 @@
+@startuml
+class TextureFormatUtilities <<static>> {
+    + {static} GetUncompressedRenderTextureFormat(texture:Texture) : RenderTextureFormat
+}
+@enduml

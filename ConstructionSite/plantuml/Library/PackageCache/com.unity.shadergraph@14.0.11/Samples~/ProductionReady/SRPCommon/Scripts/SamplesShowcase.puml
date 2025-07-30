@@ -1,0 +1,38 @@
+@startuml
+class PRSSamplesShowcase {
+    + headline : string = "Headline Goes Here"
+    + enableSelectButton : bool = true
+    + currentIndex : int
+    + {static} SanitizedIntroduction : string
+    + {static} GetSanitizedDescription(prefabName:string) : string
+    + {static} GetSanitizedTitle(prefabName:string) : string
+    + {static} GetSanitizedIntroduction() : string
+    + {static} SanitizeText(text:string) : string
+    + {static} CleanupJson(jsonString:string) : string
+}
+enum Mode {
+    Instantiation,
+    Focus,
+    TextOnly,
+}
+class "Dictionary`2"<T1,T2> {
+}
+MonoBehaviour <|-- PRSSamplesShowcase
+PRSSamplesShowcase o-> "headlineLightColor" Color
+PRSSamplesShowcase o-> "headlineDarkColor" Color
+PRSSamplesShowcase o-> "openLightColor" Color
+PRSSamplesShowcase o-> "openDarkColor" Color
+PRSSamplesShowcase o-> "highlightLightColor" Color
+PRSSamplesShowcase o-> "highlightDarkColor" Color
+PRSSamplesShowcase o-> "codeLightColor" Color
+PRSSamplesShowcase o-> "codeDarkColor" Color
+PRSSamplesShowcase --> "SamplesDescriptionsJson" TextAsset
+PRSSamplesShowcase o-> "PresentationMode" Mode
+PRSSamplesShowcase --> "currentPrefab" GameObject
+PRSSamplesShowcase --> "SanitizedDescriptions<string,string>" "Dictionary`2"
+PRSSamplesShowcase --> "SanitizedTitles<string,string>" "Dictionary`2"
+PRSSamplesShowcase --> "gameobjectSamplesName" TMP_Text
+PRSSamplesShowcase --> "gameobjectSamplesDescription" TMP_Text
+PRSSamplesShowcase --> "gameViewCamera" Camera
+PRSSamplesShowcase +-- Mode
+@enduml

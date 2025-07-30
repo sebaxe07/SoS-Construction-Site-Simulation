@@ -1,0 +1,41 @@
+@startuml
+enum DebugOverlay {
+    None,
+    Depth,
+    Normals,
+    MotionVectors,
+    NANTracker,
+    ColorBlindnessSimulation,
+    _,
+    AmbientOcclusion,
+    BloomBuffer,
+    BloomThreshold,
+    DepthOfField,
+}
+enum ColorBlindnessType {
+    Deuteranopia,
+    Protanopia,
+    Tritanopia,
+}
+class PostProcessDebugLayer <<sealed>> {
+    + debugOverlayActive : bool <<get>>
+    + RequestMonitorPass(monitor:MonitorType) : void
+    + RequestDebugOverlay(mode:DebugOverlay) : void
+    + PushDebugOverlay(cmd:CommandBuffer, source:RenderTargetIdentifier, sheet:PropertySheet, pass:int) : void
+}
+class OverlaySettings {
+    + linearDepth : bool = false
+    + motionColorIntensity : float = 4f
+    + motionGridSize : int = 64
+    + colorBlindnessStrength : float = 1f
+}
+PostProcessDebugLayer --> "lightMeter" LightMeterMonitor
+PostProcessDebugLayer --> "histogram" HistogramMonitor
+PostProcessDebugLayer --> "waveform" WaveformMonitor
+PostProcessDebugLayer --> "vectorscope" VectorscopeMonitor
+PostProcessDebugLayer --> "debugOverlayTarget" RenderTexture
+PostProcessDebugLayer --> "debugOverlay" DebugOverlay
+PostProcessDebugLayer --> "overlaySettings" OverlaySettings
+PostProcessDebugLayer +-- OverlaySettings
+OverlaySettings o-> "colorBlindnessType" ColorBlindnessType
+@enduml

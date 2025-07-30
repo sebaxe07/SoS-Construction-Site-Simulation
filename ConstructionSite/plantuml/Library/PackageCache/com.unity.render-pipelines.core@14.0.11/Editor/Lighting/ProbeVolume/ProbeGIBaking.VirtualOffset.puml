@@ -1,0 +1,31 @@
+@startuml
+class ProbeGIBaking <<partial>> {
+}
+struct CreateRayCastCommandsJob {
+    + startIdx : int
+    + Execute(i:int) : void
+}
+struct PushOutGeometryJob {
+    + startIdx : int
+    + Execute(i:int) : void
+}
+class "NativeArray`1"<T> {
+}
+ProbeGIBaking +-- CreateRayCastCommandsJob
+IJobParallelFor <|-- CreateRayCastCommandsJob
+CreateRayCastCommandsJob --> "voSettings" VirtualOffsetSettings
+CreateRayCastCommandsJob --> "positions<Vector3>" "NativeArray`1"
+CreateRayCastCommandsJob --> "positionIndex<int>" "NativeArray`1"
+CreateRayCastCommandsJob --> "searchDistanceForPosition<float>" "NativeArray`1"
+CreateRayCastCommandsJob --> "raycastCommands<RaycastCommand>" "NativeArray`1"
+CreateRayCastCommandsJob --> "raycastHits<RaycastHit>" "NativeArray`1"
+CreateRayCastCommandsJob --> "queryParams" QueryParameters
+ProbeGIBaking +-- PushOutGeometryJob
+IJobParallelFor <|-- PushOutGeometryJob
+PushOutGeometryJob --> "voSettings" VirtualOffsetSettings
+PushOutGeometryJob --> "positionIndex<int>" "NativeArray`1"
+PushOutGeometryJob --> "raycastCommands<RaycastCommand>" "NativeArray`1"
+PushOutGeometryJob --> "raycastHits<RaycastHit>" "NativeArray`1"
+PushOutGeometryJob --> "positions<Vector3>" "NativeArray`1"
+PushOutGeometryJob --> "offsets<Vector3>" "NativeArray`1"
+@enduml

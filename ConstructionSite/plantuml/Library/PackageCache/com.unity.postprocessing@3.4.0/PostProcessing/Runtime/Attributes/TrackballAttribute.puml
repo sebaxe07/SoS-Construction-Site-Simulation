@@ -1,0 +1,14 @@
+@startuml
+class TrackballAttribute <<sealed>> {
+    + TrackballAttribute(mode:Mode)
+}
+enum Mode {
+    None,
+    Lift,
+    Gamma,
+    Gain,
+}
+Attribute <|-- TrackballAttribute
+TrackballAttribute --> "mode" Mode
+TrackballAttribute +-- Mode
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class FreeFlyCamera {
+    + movementSpeed : float = 10.0f
+    + lookSpeed : float = 2.0f
+}
+MonoBehaviour <|-- FreeFlyCamera
+@enduml

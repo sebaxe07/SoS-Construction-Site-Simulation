@@ -1,0 +1,8 @@
+@startuml
+class SpawnEffect {
+    + spawnEffectTime : float = 2
+    + pause : float = 1
+}
+MonoBehaviour <|-- SpawnEffect
+SpawnEffect --> "fadeIn" AnimationCurve
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class Fog <<sealed>> {
+    + enabled : bool = true
+    + excludeSkybox : bool = true
+}
+@enduml

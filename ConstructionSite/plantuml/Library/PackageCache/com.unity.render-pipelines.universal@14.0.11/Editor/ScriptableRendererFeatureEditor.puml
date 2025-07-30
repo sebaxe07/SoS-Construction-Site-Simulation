@@ -1,0 +1,6 @@
+@startuml
+class ScriptableRendererFeatureEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+Editor <|-- ScriptableRendererFeatureEditor
+@enduml

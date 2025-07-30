@@ -1,0 +1,14 @@
+@startuml
+enum PostProcessEvent {
+    BeforeTransparent= 0,
+    BeforeStack= 1,
+    AfterStack= 2,
+}
+struct PostProcessEventComparer {
+    + Equals(x:PostProcessEvent, y:PostProcessEvent) : bool
+    + GetHashCode(obj:PostProcessEvent) : int
+}
+class "IEqualityComparer`1"<T> {
+}
+"IEqualityComparer`1" "<PostProcessEvent>" <|-- PostProcessEventComparer
+@enduml

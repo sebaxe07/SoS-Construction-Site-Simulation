@@ -1,0 +1,8 @@
+@startuml
+class WaitForSeconds {
+    + seconds : float
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+BasePrimitiveAction <|-- WaitForSeconds
+@enduml

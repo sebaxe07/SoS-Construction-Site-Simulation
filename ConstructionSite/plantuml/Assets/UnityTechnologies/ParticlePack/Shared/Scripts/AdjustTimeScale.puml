@@ -1,0 +1,5 @@
+@startuml
+class AdjustTimeScale {
+}
+MonoBehaviour <|-- AdjustTimeScale
+@enduml

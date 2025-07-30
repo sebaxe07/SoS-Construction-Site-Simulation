@@ -1,0 +1,9 @@
+@startuml
+class Spawner {
+}
+MonoBehaviour <|-- Spawner
+Spawner --> "prefab" GameObject
+Spawner --> "position" Vector3
+Spawner --> "wanderArea" GameObject
+Spawner --> "player" GameObject
+@enduml

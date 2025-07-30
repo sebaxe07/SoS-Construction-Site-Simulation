@@ -1,0 +1,18 @@
+@startuml
+class ProbeReferenceVolumeProfile <<sealed>> {
+    + simplificationLevels : int = 3
+    + cellSizeInBricks : int <<get>>
+    + minDistanceBetweenProbes : float = 1.0f
+    + maxSubdivision : int <<get>>
+    + minBrickSize : float <<get>>
+    + cellSizeInMeters : float <<get>>
+    + minRendererVolumeSize : float = 0.1f
+    + IsEquivalent(otherProfile:ProbeReferenceVolumeProfile) : bool
+}
+enum Version {
+    Initial,
+}
+ScriptableObject <|-- ProbeReferenceVolumeProfile
+ProbeReferenceVolumeProfile o-> "renderersLayerMask" LayerMask
+ProbeReferenceVolumeProfile +-- Version
+@enduml

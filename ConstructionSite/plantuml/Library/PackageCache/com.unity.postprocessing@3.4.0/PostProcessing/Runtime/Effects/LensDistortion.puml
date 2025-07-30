@@ -1,0 +1,18 @@
+@startuml
+class LensDistortion <<sealed>> {
+    + <<override>> IsEnabledAndSupported(context:PostProcessRenderContext) : bool
+}
+class LensDistortionRenderer <<sealed>> {
+    + <<override>> Render(context:PostProcessRenderContext) : void
+}
+class "PostProcessEffectRenderer`1"<T> {
+}
+PostProcessEffectSettings <|-- LensDistortion
+LensDistortion o-> "intensity" FloatParameter
+LensDistortion o-> "intensityX" FloatParameter
+LensDistortion o-> "intensityY" FloatParameter
+LensDistortion o-> "centerX" FloatParameter
+LensDistortion o-> "centerY" FloatParameter
+LensDistortion o-> "scale" FloatParameter
+"PostProcessEffectRenderer`1" "<LensDistortion>" <|-- LensDistortionRenderer
+@enduml

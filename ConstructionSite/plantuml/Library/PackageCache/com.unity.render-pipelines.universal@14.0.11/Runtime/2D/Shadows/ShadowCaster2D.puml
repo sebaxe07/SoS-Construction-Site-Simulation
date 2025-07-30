@@ -1,0 +1,18 @@
+@startuml
+class ShadowCaster2D {
+    + useRendererSilhouette : bool <<set>> <<get>>
+    + selfShadows : bool <<set>> <<get>>
+    + castsShadows : bool <<set>> <<get>>
+    + Update() : void
+    + OnBeforeSerialize() : void
+    + OnAfterDeserialize() : void
+}
+enum ComponentVersions {
+    Version_Unserialized= 0,
+    Version_1= 1,
+}
+ShadowCasterGroup2D <|-- ShadowCaster2D
+ISerializationCallbackReceiver <|-- ShadowCaster2D
+ShadowCaster2D --> "mesh" Mesh
+ShadowCaster2D +-- ComponentVersions
+@enduml

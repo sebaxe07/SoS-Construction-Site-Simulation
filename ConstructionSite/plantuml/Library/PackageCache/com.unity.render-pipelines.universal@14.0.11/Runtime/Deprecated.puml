@@ -1,0 +1,39 @@
+@startuml
+abstract class ScriptableRenderPass <<partial>> {
+    + <<virtual>> FrameCleanup(cmd:CommandBuffer) : void
+}
+class ForwardRenderer <<sealed>> {
+    + ForwardRenderer(data:ForwardRendererData)
+    + <<override>> Setup(context:ScriptableRenderContext, renderingData:RenderingData) : void
+    + <<override>> SetupLights(context:ScriptableRenderContext, renderingData:RenderingData) : void
+    + <<override>> SetupCullingParameters(cullingParameters:ScriptableCullingParameters, cameraData:CameraData) : void
+    + <<override>> FinishRendering(cmd:CommandBuffer) : void
+}
+class AdditionalLightsShadowCasterPass <<partial>> {
+    + {static} m_AdditionalShadowsBufferId : int
+    + {static} m_AdditionalShadowsIndicesId : int
+}
+enum ShadowCascadesOption {
+    NoCascades,
+    TwoCascades,
+    FourCascades,
+}
+enum ShaderVariantLogLevel {
+    Disabled,
+    OnlyUniversalRPShaders,
+    AllShaders,
+}
+class UniversalRenderPipelineAsset <<partial>> {
+}
+abstract class ScriptableRenderer <<partial>> {
+}
+class Bloom <<sealed>> <<partial>> {
+}
+ScriptableRenderer <|-- ForwardRenderer
+UniversalRenderPipelineAsset --> "shaderVariantLogLevel" ShaderVariantLogLevel
+UniversalRenderPipelineAsset --> "shadowCascadeOption" ShadowCascadesOption
+ScriptableRenderer --> "cameraDepth" RenderTargetIdentifier
+VolumeComponent <|-- Bloom
+IPostProcessComponent <|-- Bloom
+Bloom o-> "skipIterations" ClampedIntParameter
+@enduml

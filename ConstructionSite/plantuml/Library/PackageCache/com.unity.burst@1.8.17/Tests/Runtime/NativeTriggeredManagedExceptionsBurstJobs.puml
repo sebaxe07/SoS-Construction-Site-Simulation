@@ -1,0 +1,26 @@
+@startuml
+class NativeTriggeredManagedExceptionsBurstJobs {
+    + RaiseMonoException() : void
+    + RaiseInvalidOperationException() : void
+    <<unsafe>> + RaiseArgumentNullException() : void
+}
+struct RaiseMonoExceptionJob {
+    + output : float
+    + Execute() : void
+}
+struct RaiseInvalidOperationExceptionJob {
+    + Execute() : void
+}
+struct RaiseArgumentNullExceptionJob {
+    + Execute() : void
+}
+class "NativeArray`1"<T> {
+}
+NativeTriggeredManagedExceptionsBurstJobs +-- RaiseMonoExceptionJob
+IJob <|-- RaiseMonoExceptionJob
+NativeTriggeredManagedExceptionsBurstJobs +-- RaiseInvalidOperationExceptionJob
+IJob <|-- RaiseInvalidOperationExceptionJob
+RaiseInvalidOperationExceptionJob --> "test<int>" "NativeArray`1"
+NativeTriggeredManagedExceptionsBurstJobs +-- RaiseArgumentNullExceptionJob
+IJob <|-- RaiseArgumentNullExceptionJob
+@enduml

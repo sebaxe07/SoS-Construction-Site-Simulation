@@ -1,0 +1,15 @@
+@startuml
+class SerializedUniversalRenderPipelineGlobalSettings {
+    + SerializedUniversalRenderPipelineGlobalSettings(serializedObject:SerializedObject)
+}
+ISerializedRenderPipelineGlobalSettings <|-- SerializedUniversalRenderPipelineGlobalSettings
+SerializedUniversalRenderPipelineGlobalSettings --> "serializedObject" SerializedObject
+SerializedUniversalRenderPipelineGlobalSettings --> "shaderVariantLogLevel" SerializedProperty
+SerializedUniversalRenderPipelineGlobalSettings --> "exportShaderVariants" SerializedProperty
+SerializedUniversalRenderPipelineGlobalSettings --> "renderingLayerNames" SerializedProperty
+SerializedUniversalRenderPipelineGlobalSettings --> "stripDebugVariants" SerializedProperty
+SerializedUniversalRenderPipelineGlobalSettings --> "stripUnusedPostProcessingVariants" SerializedProperty
+SerializedUniversalRenderPipelineGlobalSettings --> "stripUnusedVariants" SerializedProperty
+SerializedUniversalRenderPipelineGlobalSettings --> "stripScreenCoordOverrideVariants" SerializedProperty
+SerializedUniversalRenderPipelineGlobalSettings --> "renderingLayerNameList" ReorderableList
+@enduml

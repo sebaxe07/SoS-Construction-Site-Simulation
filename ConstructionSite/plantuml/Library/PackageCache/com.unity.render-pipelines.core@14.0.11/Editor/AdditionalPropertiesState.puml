@@ -1,0 +1,11 @@
+@startuml
+class "AdditionalPropertiesState`2"<TState,TTarget> {
+    + AdditionalPropertiesState(defaultValue:TState, prefix:string)
+    + GetAdditionalPropertiesState(mask:TState) : bool
+    + SetAdditionalPropertiesState(mask:TState, value:bool) : void
+    + ShowAll() : void
+    + HideAll() : void
+    + RegisterEditor(editor:Editor) : void
+    + UnregisterEditor(editor:Editor) : void
+}
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class TextMeshProUGUI <<partial>> {
+    + <<override>> ComputeMarginSize() : void
+}
+@enduml

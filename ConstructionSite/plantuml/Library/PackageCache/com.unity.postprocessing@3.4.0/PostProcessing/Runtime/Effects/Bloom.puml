@@ -1,0 +1,38 @@
+@startuml
+class Bloom <<sealed>> {
+    + <<override>> IsEnabledAndSupported(context:PostProcessRenderContext) : bool
+}
+class BloomRenderer <<sealed>> {
+    + <<override>> Init() : void
+    + <<override>> Render(context:PostProcessRenderContext) : void
+}
+class "PostProcessEffectRenderer`1"<T> {
+}
+enum Pass {
+    Prefilter13,
+    Prefilter4,
+    Downsample13,
+    Downsample4,
+    UpsampleTent,
+    UpsampleBox,
+    DebugOverlayThreshold,
+    DebugOverlayTent,
+    DebugOverlayBox,
+}
+struct Level {
+}
+PostProcessEffectSettings <|-- Bloom
+Bloom o-> "intensity" FloatParameter
+Bloom o-> "threshold" FloatParameter
+Bloom o-> "softKnee" FloatParameter
+Bloom o-> "clamp" FloatParameter
+Bloom o-> "diffusion" FloatParameter
+Bloom o-> "anamorphicRatio" FloatParameter
+Bloom o-> "color" ColorParameter
+Bloom o-> "fastMode" BoolParameter
+Bloom o-> "dirtTexture" TextureParameter
+Bloom o-> "dirtIntensity" FloatParameter
+"PostProcessEffectRenderer`1" "<Bloom>" <|-- BloomRenderer
+BloomRenderer +-- Pass
+BloomRenderer +-- Level
+@enduml

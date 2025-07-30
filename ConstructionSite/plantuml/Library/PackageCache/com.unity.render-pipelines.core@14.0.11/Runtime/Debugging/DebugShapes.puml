@@ -1,0 +1,9 @@
+@startuml
+class DebugShapes <<partial>> {
+    + RequestSphereMesh() : Mesh
+    + RequestBoxMesh() : Mesh
+    + RequestConeMesh() : Mesh
+    + RequestPyramidMesh() : Mesh
+}
+DebugShapes --> "instance" DebugShapes
+@enduml

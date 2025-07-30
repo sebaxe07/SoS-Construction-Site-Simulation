@@ -1,0 +1,18 @@
+@startuml
+class XRSystem <<static>> {
+    {static} + displayActive : bool <<get>>
+    {static} + isHDRDisplayOutputActive : bool <<get>>
+    {static} + singlePassAllowed : bool <<get>> <<set>> = true
+    {static} + dumpDebugInfo : bool <<get>> <<set>> = false
+    + {static} Initialize(passAllocator:Func<XRPassCreateInfo, XRPass>, occlusionMeshPS:Shader, mirrorViewPS:Shader) : void
+    + {static} SetDisplayMSAASamples(msaaSamples:MSAASamples) : void
+    + {static} GetDisplayMSAASamples() : MSAASamples
+    + {static} SetRenderScale(renderScale:float) : void
+    + {static} NewLayout() : XRLayout
+    + {static} EndLayout() : void
+    + {static} RenderMirrorView(cmd:CommandBuffer, camera:Camera) : void
+    + {static} Dispose() : void
+}
+XRSystem o-> "emptyPass" XRPass
+XRSystem --> "foveatedRenderingCaps" FoveatedRenderingCaps
+@enduml

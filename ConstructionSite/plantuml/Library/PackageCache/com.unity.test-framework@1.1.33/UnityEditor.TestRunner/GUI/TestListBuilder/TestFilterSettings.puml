@@ -1,0 +1,17 @@
+@startuml
+class TestFilterSettings {
+    + showSucceeded : bool
+    + showFailed : bool
+    + showIgnored : bool
+    + showNotRun : bool
+    + filterByName : string
+    + filterByCategory : int
+    + TestFilterSettings(prefsKey:string)
+    + Load() : void
+    + Save() : void
+    + UpdateCounters(results:IEnumerable<TestRunnerResult>) : void
+    + GetSelectedCategories() : string[]
+    + OnGUI() : void
+    + BuildRenderingOptions() : RenderingOptions
+}
+@enduml

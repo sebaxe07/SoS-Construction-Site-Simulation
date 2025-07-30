@@ -1,0 +1,14 @@
+@startuml
+class EditorUtilities <<static>> {
+    + {static} isTargetingConsoles : bool <<get>>
+    + {static} isTargetingMobiles : bool <<get>>
+    + {static} isTargetingAndroid : bool <<get>>
+    + {static} isTargetingWebGL : bool <<get>>
+    + {static} isTargetingConsolesOrMobiles : bool <<get>>
+    + {static} GetContent(textAndTooltip:string) : GUIContent
+    + {static} DrawFixMeBox(text:string, action:Action) : void
+    + {static} DrawSplitter() : void
+    + {static} DrawOverrideCheckbox(rect:Rect, property:SerializedProperty) : void
+    + {static} DrawHeaderLabel(title:string) : void
+}
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class WindowResultUpdater {
+    + WindowResultUpdater()
+    + RunStarted(testsToRun:ITestAdaptor) : void
+    + RunFinished(testResults:ITestResultAdaptor) : void
+    + TestStarted(testName:ITestAdaptor) : void
+    + TestFinished(test:ITestResultAdaptor) : void
+    + TestTreeRebuild(test:ITestAdaptor) : void
+}
+ICallbacks <|-- WindowResultUpdater
+ITestTreeRebuildCallbacks <|-- WindowResultUpdater
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class PlaySound {
+    + volume : float = 1f
+    + waitUntilFinish : bool = false
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- PlaySound
+PlaySound --> "clip" AudioClip
+@enduml

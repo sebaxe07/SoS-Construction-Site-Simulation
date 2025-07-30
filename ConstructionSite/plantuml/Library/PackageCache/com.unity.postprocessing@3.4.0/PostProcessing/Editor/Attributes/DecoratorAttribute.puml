@@ -1,0 +1,7 @@
+@startuml
+class DecoratorAttribute <<sealed>> {
+    + DecoratorAttribute(attributeType:Type)
+}
+Attribute <|-- DecoratorAttribute
+DecoratorAttribute --> "attributeType" Type
+@enduml

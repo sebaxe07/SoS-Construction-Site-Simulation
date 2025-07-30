@@ -1,0 +1,92 @@
+@startuml
+struct BakingCell {
+    + index : int
+    + minSubdiv : int
+    + indexChunkCount : int
+    + shChunkCount : int
+}
+class BakingBatch {
+    + index : int
+    + BakingBatch(index:int, cellCount:Vector3Int)
+    + Clear() : void
+    + GetProbePositionHash(position:Vector3) : int
+    + GetSubdivLevelAt(position:Vector3) : int
+    + uniqueProbeCount : int <<get>>
+}
+class ProbeGIBaking <<partial>> {
+    + {static} Init() : void
+    {static} + Clear() : void
+    + {static} CanFreezePlacement() : bool
+    + {static} FindWorldBounds(hasFoundInvalidSetup:bool) : void
+    + {static} OnBakeCompletedCleanup() : void
+    + {static} RunPlacement() : void
+    + {static} PrepareProbeSubdivisionContext() : ProbeSubdivisionContext
+    + {static} BakeBricks(ctx:ProbeSubdivisionContext) : ProbeSubdivisionResult
+    + {static} GetBricksFromLoaded() : ProbeSubdivisionResult
+    + {static} ModifyProfileFromLoadedData(profile:ProbeReferenceVolumeProfile) : bool
+    + {static} ApplySubdivisionResults(results:ProbeSubdivisionResult, refToWS:Matrix4x4) : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+enum BakingStage {
+    NotStarted,
+    Started,
+    PlacementDone,
+    OnBakeCompletedStarted,
+    OnBakeCompletedFinished,
+}
+abstract class "BakingProfiling`1"<T> {
+    + GetProgress(stage:T) : float
+    + {abstract} GetLastStep() : T
+    + BakingProfiling(stage:T, currentStage:T)
+    + OnDispose(currentStage:T) : void
+}
+class BakingSetupProfiling {
+    + BakingSetupProfiling(stage:Stages)
+    + <<override>> GetLastStep() : Stages
+    + {static} GetProgressRange(progress0:float, progress1:float) : void
+    + Dispose() : void
+}
+class BakingCompleteProfiling {
+    + BakingCompleteProfiling(stage:Stages)
+    + <<override>> GetLastStep() : Stages
+    + {static} GetProgressRange(progress0:float, progress1:float) : void
+    + Dispose() : void
+}
+enum Stages {
+    PrepareWorldSubdivision,
+    EnsurePerSceneDataInOpenScenes,
+    FindWorldBounds,
+    PlaceProbes,
+    BakeBricks,
+    ApplySubdivisionResults,
+    ApplyVirtualOffsets,
+    None,
+}
+enum Stages {
+    FinalizingBake,
+    AddOccluders,
+    FetchResults,
+    WriteBakedData,
+    PerformDilation,
+    None,
+}
+BakingCell --> "position" Vector3Int
+BakingCell --> "bounds" Bounds
+BakingBatch o-> "cellIndex2SceneReferences<int,HashSet<Scene>>" "Dictionary`2"
+BakingBatch o-> "cells<BakingCell>" "List`1"
+BakingBatch o-> "uniqueBrickSubdiv<int,int>" "Dictionary`2"
+BakingBatch o-> "invalidatedPositions<Vector3,bool>" "Dictionary`2"
+ProbeGIBaking +-- BakingStage
+ProbeGIBaking +-- "BakingProfiling`1"
+ProbeGIBaking +-- BakingSetupProfiling
+"BakingProfiling`1" "<BakingSetupProfiling.Stages>" <|-- BakingSetupProfiling
+IDisposable <|-- BakingSetupProfiling
+ProbeGIBaking +-- BakingCompleteProfiling
+"BakingProfiling`1" "<BakingCompleteProfiling.Stages>" <|-- BakingCompleteProfiling
+IDisposable <|-- BakingCompleteProfiling
+BakingSetupProfiling +-- Stages
+BakingCompleteProfiling +-- Stages
+@enduml

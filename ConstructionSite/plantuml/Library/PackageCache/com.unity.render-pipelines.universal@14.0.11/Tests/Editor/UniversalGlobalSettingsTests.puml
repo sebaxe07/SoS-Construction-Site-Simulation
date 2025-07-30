@@ -1,0 +1,10 @@
+@startuml
+class UniversalGlobalSettingsTests {
+    + SetUp() : void
+    + TearDown() : void
+    + URPFrameRendered_GlobalSettingsShouldBeAssigned() : void
+    + URPFrameRendered_EnsureGlobalSettingsIfNullAssigned() : void
+    + Undo_URPActive_ChangeGlobalSettings() : void
+    + Undo_UPActive_UnregisterGlobalSettings() : void
+}
+@enduml

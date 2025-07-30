@@ -1,0 +1,6 @@
+@startuml
+class ProbeReferenceVolume <<partial>> {
+    + SetNumberOfCellsLoadedPerFrame(numberOfCells:int) : void
+    + UpdateCellStreaming(cmd:CommandBuffer, camera:Camera) : void
+}
+@enduml

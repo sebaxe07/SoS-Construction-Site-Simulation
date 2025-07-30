@@ -1,0 +1,47 @@
+@startuml
+enum TemporalAAQuality {
+    VeryLow= 0,
+    Low,
+    Medium,
+    High,
+    VeryHigh,
+}
+class TaaPersistentData <<sealed>> {
+    + accumulationTexture(index:int) : RTHandle
+    + GetLastAccumFrameIndex(index:int) : int
+    + SetLastAccumFrameIndex(index:int, value:int) : void
+    + TaaPersistentData()
+    + Init(sizeX:int, sizeY:int, volumeDepth:int, format:GraphicsFormat, vrUsage:VRTextureUsage, texDim:TextureDimension) : void
+    + AllocateTargets(xrMultipassEnabled:bool) : bool
+    + DeallocateTargets() : void
+}
+class TemporalAA <<static>> {
+}
+class ShaderConstants <<static>> {
+    + {static} <<readonly>> _TaaAccumulationTex : int
+    + {static} <<readonly>> _TaaMotionVectorTex : int
+    + {static} <<readonly>> _TaaFilterWeights : int
+    + {static} <<readonly>> _TaaFrameInfluence : int
+    + {static} <<readonly>> _TaaVarianceClampScale : int
+    + {static} <<readonly>> _CameraDepthTexture : int
+}
+class ShaderKeywords <<static>> {
+    + {static} <<readonly>> TAA_LOW_PRECISION_SOURCE : string = "TAA_LOW_PRECISION_SOURCE"
+}
+struct Settings {
+    + baseBlendFactor : float <<get>> <<set>>
+    + jitterScale : float <<get>> <<set>>
+    + mipBias : float <<get>> <<set>>
+    + varianceClampScale : float <<get>> <<set>>
+    + contrastAdaptiveSharpening : float <<get>> <<set>>
+    + {static} Create() : Settings
+}
+class TaaPassData {
+}
+TaaPersistentData --> "rtd" RenderTextureDescriptor
+TemporalAA +-- ShaderConstants
+TemporalAA +-- ShaderKeywords
+TemporalAA +-- Settings
+Settings --> "quality" TemporalAAQuality
+TemporalAA +-- TaaPassData
+@enduml

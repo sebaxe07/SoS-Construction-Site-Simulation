@@ -1,0 +1,13 @@
+@startuml
+class BuildTargetAnalytic {
+    + callbackOrder : int <<get>>
+}
+struct BuildTargetAnalyticData {
+    + build_target : string
+    + render_pipeline_asset_type : string
+    + quality_levels : int
+    + total_quality_levels_on_project : int
+}
+IPostprocessBuildWithReport <|-- BuildTargetAnalytic
+BuildTargetAnalytic +-- BuildTargetAnalyticData
+@enduml

@@ -1,0 +1,64 @@
+@startuml
+class ScreenSpaceAmbientOcclusionSettings {
+}
+class ScreenSpaceAmbientOcclusion {
+    + <<override>> Create() : void
+    + <<override>> AddRenderPasses(renderer:ScriptableRenderer, renderingData:RenderingData) : void
+}
+enum DepthSource {
+    Depth= 0,
+    DepthNormals= 1,
+}
+enum NormalQuality {
+    Low,
+    Medium,
+    High,
+}
+enum AOSampleOption {
+    High,
+    Medium,
+    Low,
+}
+enum AOMethodOptions {
+    BlueNoise,
+    InterleavedGradient,
+}
+enum BlurQualityOptions {
+    High,
+    Medium,
+    Low,
+}
+class ScreenSpaceAmbientOcclusionPass {
+    + <<override>> OnCameraSetup(cmd:CommandBuffer, renderingData:RenderingData) : void
+    + <<override>> Execute(context:ScriptableRenderContext, renderingData:RenderingData) : void
+    + <<override>> OnCameraCleanup(cmd:CommandBuffer) : void
+    + Dispose() : void
+}
+enum BlurTypes {
+    Bilateral,
+    Gaussian,
+    Kawase,
+}
+enum ShaderPasses {
+    AmbientOcclusion= 0,
+    BilateralBlurHorizontal= 1,
+    BilateralBlurVertical= 2,
+    BilateralBlurFinal= 3,
+    BilateralAfterOpaque= 4,
+    GaussianBlurHorizontal= 5,
+    GaussianBlurVertical= 6,
+    GaussianAfterOpaque= 7,
+    KawaseBlur= 8,
+    KawaseAfterOpaque= 9,
+}
+ScriptableRendererFeature <|-- ScreenSpaceAmbientOcclusion
+ScreenSpaceAmbientOcclusionSettings +-- DepthSource
+ScreenSpaceAmbientOcclusionSettings +-- NormalQuality
+ScreenSpaceAmbientOcclusionSettings +-- AOSampleOption
+ScreenSpaceAmbientOcclusionSettings +-- AOMethodOptions
+ScreenSpaceAmbientOcclusionSettings +-- BlurQualityOptions
+ScreenSpaceAmbientOcclusion +-- ScreenSpaceAmbientOcclusionPass
+ScriptableRenderPass <|-- ScreenSpaceAmbientOcclusionPass
+ScreenSpaceAmbientOcclusionPass +-- BlurTypes
+ScreenSpaceAmbientOcclusionPass +-- ShaderPasses
+@enduml

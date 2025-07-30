@@ -1,0 +1,6 @@
+@startuml
+class DoneSleepForever {
+    + <<override>> OnUpdate() : TaskStatus
+}
+BasePrimitiveAction <|-- DoneSleepForever
+@enduml

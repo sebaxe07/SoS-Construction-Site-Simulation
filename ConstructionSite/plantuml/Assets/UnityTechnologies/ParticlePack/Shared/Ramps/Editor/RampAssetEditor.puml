@@ -1,0 +1,6 @@
+@startuml
+class RampAssetEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+Editor <|-- RampAssetEditor
+@enduml

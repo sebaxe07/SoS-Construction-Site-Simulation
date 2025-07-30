@@ -1,0 +1,10 @@
+@startuml
+class Instantiate {
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- Instantiate
+Instantiate --> "original" GameObject
+Instantiate --> "position" Vector3
+Instantiate --> "instantiated" GameObject
+@enduml

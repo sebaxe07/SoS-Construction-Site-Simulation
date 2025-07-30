@@ -1,0 +1,9 @@
+@startuml
+class BlitToRTHandleRendererFeature {
+    + <<override>> Create() : void
+    + <<override>> AddRenderPasses(renderer:ScriptableRenderer, renderingData:RenderingData) : void
+    + <<override>> SetupRenderPasses(renderer:ScriptableRenderer, renderingData:RenderingData) : void
+}
+ScriptableRendererFeature <|-- BlitToRTHandleRendererFeature
+BlitToRTHandleRendererFeature --> "blitMaterial" Material
+@enduml

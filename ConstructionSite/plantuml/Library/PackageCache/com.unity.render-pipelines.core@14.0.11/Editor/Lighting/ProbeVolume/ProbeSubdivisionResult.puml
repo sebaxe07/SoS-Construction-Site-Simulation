@@ -1,0 +1,10 @@
+@startuml
+class ProbeSubdivisionResult {
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+ProbeSubdivisionResult o-> "cells<(Vector3Int position, Bounds bounds, Brick[] bricks)>" "List`1"
+ProbeSubdivisionResult o-> "scenesPerCells<Vector3Int,HashSet<Scene>>" "Dictionary`2"
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+enum ShaderVariantLogLevel {
+    Disabled,
+    OnlySRPShaders,
+    AllShaders,
+}
+interface IShaderVariantSettings {
+}
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+class UnityTestAttribute {
+    + UnityTestAttribute()
+    + <<new>> ApplyToTest(test:Test) : void
+}
+CombiningStrategyAttribute <|-- UnityTestAttribute
+ISimpleTestBuilder <|-- UnityTestAttribute
+IImplyFixture <|-- UnityTestAttribute
+ITestBuilder <|-- UnityTestAttribute
+IApplyToTest <|-- UnityTestAttribute
+@enduml

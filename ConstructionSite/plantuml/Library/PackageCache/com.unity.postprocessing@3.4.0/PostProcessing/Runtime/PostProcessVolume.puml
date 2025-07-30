@@ -1,0 +1,12 @@
+@startuml
+class PostProcessVolume <<sealed>> {
+    + isGlobal : bool = false
+    + blendDistance : float = 0f
+    + weight : float = 1f
+    + priority : float = 0f
+    + HasInstantiatedProfile() : bool
+}
+MonoBehaviour <|-- PostProcessVolume
+PostProcessVolume --> "sharedProfile" PostProcessProfile
+PostProcessVolume --> "profile" PostProcessProfile
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+class TMPro_FontAssetCreatorWindow {
+    + {static} ShowFontAtlasCreatorWindow() : void
+    + {static} ShowFontAtlasCreatorWindow(sourceFontFile:Font) : void
+    + {static} ShowFontAtlasCreatorWindow(fontAsset:TMP_FontAsset) : void
+    + OnEnable() : void
+    + OnDisable() : void
+    + OnGUI() : void
+    + Update() : void
+    + GetKerningTable() : TMP_FontFeatureTable
+}
+class FontAssetCreationSettingsContainer {
+}
+enum FontPackingModes {
+    Fast= 0,
+    Optimum= 4,
+}
+class "List`1"<T> {
+}
+EditorWindow <|-- TMPro_FontAssetCreatorWindow
+TMPro_FontAssetCreatorWindow +-- FontAssetCreationSettingsContainer
+FontAssetCreationSettingsContainer --> "fontAssetCreationSettings<FontAssetCreationSettings>" "List`1"
+TMPro_FontAssetCreatorWindow +-- FontPackingModes
+@enduml

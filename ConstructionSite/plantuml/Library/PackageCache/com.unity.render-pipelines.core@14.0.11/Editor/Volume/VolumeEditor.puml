@@ -1,0 +1,23 @@
+@startuml
+class VolumeEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+}
+class Styles <<static>> {
+    + {static} <<readonly>> noVolumeMessage : string
+}
+Editor <|-- VolumeEditor
+VolumeEditor +-- Styles
+Styles o-> "mode" GUIContent
+Styles o-> "addBoxCollider" GUIContent
+Styles o-> "sphereBoxCollider" GUIContent
+Styles o-> "capsuleBoxCollider" GUIContent
+Styles o-> "meshBoxCollider" GUIContent
+Styles o-> "addColliderFixMessage" GUIContent
+Styles o-> "disableColliderFixMessage" GUIContent
+Styles o-> "enableColliderFixMessage" GUIContent
+Styles o-> "profileInstance" GUIContent
+Styles o-> "profile" GUIContent
+Styles o-> "newLabel" GUIContent
+Styles o-> "saveLabel" GUIContent
+Styles o-> "cloneLabel" GUIContent
+@enduml

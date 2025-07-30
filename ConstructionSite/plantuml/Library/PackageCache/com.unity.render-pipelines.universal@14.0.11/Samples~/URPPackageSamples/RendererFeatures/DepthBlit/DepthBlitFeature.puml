@@ -1,0 +1,13 @@
+@startuml
+class DepthBlitFeature {
+    + <<override>> AddRenderPasses(renderer:ScriptableRenderer, renderingData:RenderingData) : void
+    + <<override>> SetupRenderPasses(renderer:ScriptableRenderer, renderingData:RenderingData) : void
+    + <<override>> Create() : void
+}
+ScriptableRendererFeature <|-- DepthBlitFeature
+DepthBlitFeature o-> "evt_Depth" RenderPassEvent
+DepthBlitFeature o-> "evt_Edge" RenderPassEvent
+DepthBlitFeature --> "rendererDataAsset" UniversalRendererData
+DepthBlitFeature --> "copyDepthShader" Shader
+DepthBlitFeature --> "m_DepthEdgeMaterial" Material
+@enduml

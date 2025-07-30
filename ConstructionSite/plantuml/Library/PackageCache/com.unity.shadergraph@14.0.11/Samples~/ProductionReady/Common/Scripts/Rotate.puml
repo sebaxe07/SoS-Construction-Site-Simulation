@@ -1,0 +1,5 @@
+@startuml
+class PRSRotate {
+}
+MonoBehaviour <|-- PRSRotate
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class DoneShoot {
+    + delay : int
+    + <<override>> OnUpdate() : TaskStatus
+}
+DoneShootOnce <|-- DoneShoot
+@enduml

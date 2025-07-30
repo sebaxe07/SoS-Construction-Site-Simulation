@@ -1,0 +1,9 @@
+@startuml
+class DebugManagerWindowLifetimeAnalytic {
+}
+class Data {
+    + window_mode : string
+    + seconds_opened : int
+}
+DebugManagerWindowLifetimeAnalytic +-- Data
+@enduml

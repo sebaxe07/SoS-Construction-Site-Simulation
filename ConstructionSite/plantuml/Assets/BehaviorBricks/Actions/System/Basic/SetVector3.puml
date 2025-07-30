@@ -1,0 +1,9 @@
+@startuml
+class SetVector3 {
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+BasePrimitiveAction <|-- SetVector3
+SetVector3 --> "var" Vector3
+SetVector3 --> "value" Vector3
+@enduml

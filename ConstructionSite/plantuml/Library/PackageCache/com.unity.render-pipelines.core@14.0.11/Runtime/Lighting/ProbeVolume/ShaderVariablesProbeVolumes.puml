@@ -1,0 +1,19 @@
+@startuml
+enum APVConstantBufferRegister {
+    GlobalRegister= 5,
+}
+enum APVLeakReductionMode {
+    None= 0,
+    ValidityAndNormalBased= 1,
+}
+struct ShaderVariablesProbeVolumes {
+}
+ShaderVariablesProbeVolumes --> "_PoolDim_CellInMeters" Vector4
+ShaderVariablesProbeVolumes --> "_MinCellPos_Noise" Vector4
+ShaderVariablesProbeVolumes --> "_IndicesDim_IndexChunkSize" Vector4
+ShaderVariablesProbeVolumes --> "_Biases_CellInMinBrick_MinBrickSize" Vector4
+ShaderVariablesProbeVolumes --> "_LeakReductionParams" Vector4
+ShaderVariablesProbeVolumes --> "_Weight_MinLoadedCell" Vector4
+ShaderVariablesProbeVolumes --> "_MaxLoadedCell_FrameIndex" Vector4
+ShaderVariablesProbeVolumes --> "_NormalizationClamp_Padding12" Vector4
+@enduml

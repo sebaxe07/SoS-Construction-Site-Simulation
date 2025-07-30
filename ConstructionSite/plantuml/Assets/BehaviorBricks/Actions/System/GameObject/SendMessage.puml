@@ -1,0 +1,9 @@
+@startuml
+class SendMessage {
+    + methodName : string
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- SendMessage
+SendMessage --> "targetGameobject" GameObject
+@enduml

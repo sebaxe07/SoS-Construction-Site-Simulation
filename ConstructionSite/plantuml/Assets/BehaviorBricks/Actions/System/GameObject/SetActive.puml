@@ -1,0 +1,9 @@
+@startuml
+class SetActive {
+    + active : bool
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- SetActive
+SetActive --> "targetGameobject" GameObject
+@enduml

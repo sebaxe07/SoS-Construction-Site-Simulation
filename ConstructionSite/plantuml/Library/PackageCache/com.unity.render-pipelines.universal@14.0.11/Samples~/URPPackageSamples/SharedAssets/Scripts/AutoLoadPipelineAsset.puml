@@ -1,0 +1,5 @@
+@startuml
+class AutoLoadPipelineAsset {
+}
+MonoBehaviour <|-- AutoLoadPipelineAsset
+@enduml

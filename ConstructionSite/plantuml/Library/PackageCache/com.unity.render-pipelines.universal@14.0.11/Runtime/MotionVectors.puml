@@ -1,0 +1,6 @@
+@startuml
+class MotionVectorsPersistentData <<sealed>> {
+    + Reset() : void
+    + Update(cameraData:CameraData) : void
+}
+@enduml

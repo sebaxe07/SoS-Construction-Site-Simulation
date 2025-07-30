@@ -1,0 +1,7 @@
+@startuml
+class WaveformMonitor <<sealed>> {
+    + exposure : float = 0.12f
+    + height : int = 256
+}
+Monitor <|-- WaveformMonitor
+@enduml

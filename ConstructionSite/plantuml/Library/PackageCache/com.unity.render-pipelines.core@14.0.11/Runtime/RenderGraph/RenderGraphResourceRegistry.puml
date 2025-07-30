@@ -1,0 +1,18 @@
+@startuml
+class RenderGraphResourceRegistry {
+}
+class RenderGraphResourcesData {
+    + sharedResourcesCount : int
+    + Clear(onException:bool, frameIndex:int) : void
+    + Cleanup() : void
+    + PurgeUnusedGraphicsResources(frameIndex:int) : void
+    + AddNewRenderGraphResource(outRes:ResType, pooledResource:bool) : int
+}
+class "DynamicArray`1"<T> {
+}
+RenderGraphResourceRegistry +-- RenderGraphResourcesData
+RenderGraphResourcesData o-> "resourceArray<IRenderGraphResource>" "DynamicArray`1"
+RenderGraphResourcesData --> "pool" IRenderGraphResourcePool
+RenderGraphResourcesData --> "createResourceCallback" ResourceCreateCallback
+RenderGraphResourcesData --> "releaseResourceCallback" ResourceCallback
+@enduml

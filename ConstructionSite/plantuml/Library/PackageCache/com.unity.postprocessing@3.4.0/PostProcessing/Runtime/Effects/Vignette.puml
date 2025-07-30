@@ -1,0 +1,30 @@
+@startuml
+enum VignetteMode {
+    Classic,
+    Masked,
+}
+class VignetteModeParameter <<sealed>> {
+}
+class Vignette <<sealed>> {
+    + <<override>> IsEnabledAndSupported(context:PostProcessRenderContext) : bool
+}
+class VignetteRenderer <<sealed>> {
+    + <<override>> Render(context:PostProcessRenderContext) : void
+}
+class "ParameterOverride`1"<T> {
+}
+class "PostProcessEffectRenderer`1"<T> {
+}
+"ParameterOverride`1" "<VignetteMode>" <|-- VignetteModeParameter
+PostProcessEffectSettings <|-- Vignette
+Vignette o-> "mode" VignetteModeParameter
+Vignette o-> "color" ColorParameter
+Vignette o-> "center" Vector2Parameter
+Vignette o-> "intensity" FloatParameter
+Vignette o-> "smoothness" FloatParameter
+Vignette o-> "roundness" FloatParameter
+Vignette o-> "rounded" BoolParameter
+Vignette o-> "mask" TextureParameter
+Vignette o-> "opacity" FloatParameter
+"PostProcessEffectRenderer`1" "<Vignette>" <|-- VignetteRenderer
+@enduml

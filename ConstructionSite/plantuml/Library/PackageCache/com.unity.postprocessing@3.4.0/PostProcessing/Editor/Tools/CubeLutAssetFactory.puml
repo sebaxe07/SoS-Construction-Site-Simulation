@@ -1,0 +1,4 @@
+@startuml
+class CubeLutAssetFactory <<static>> {
+}
+@enduml

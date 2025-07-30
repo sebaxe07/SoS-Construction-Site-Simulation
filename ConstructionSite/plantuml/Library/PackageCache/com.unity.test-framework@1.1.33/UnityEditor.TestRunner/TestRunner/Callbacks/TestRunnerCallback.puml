@@ -1,0 +1,10 @@
+@startuml
+class TestRunnerCallback {
+    + RunStarted(testsToRun:ITest) : void
+    + RunFinished(testResults:ITestResult) : void
+    + TestStarted(testName:ITest) : void
+    + TestFinished(test:ITestResult) : void
+}
+ScriptableObject <|-- TestRunnerCallback
+ITestRunnerListener <|-- TestRunnerCallback
+@enduml

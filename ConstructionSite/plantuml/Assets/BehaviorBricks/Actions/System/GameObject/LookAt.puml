@@ -1,0 +1,8 @@
+@startuml
+class LookAt {
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- LookAt
+LookAt --> "target" GameObject
+@enduml

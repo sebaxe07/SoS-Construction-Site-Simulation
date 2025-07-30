@@ -1,0 +1,18 @@
+@startuml
+class PostProcessProfile <<sealed>> {
+    + isDirty : bool = true
+    + AddSettings() : T
+    + AddSettings(type:Type) : PostProcessEffectSettings
+    + AddSettings(effect:PostProcessEffectSettings) : PostProcessEffectSettings
+    + RemoveSettings() : void
+    + RemoveSettings(type:Type) : void
+    + HasSettings() : bool
+    + HasSettings(type:Type) : bool
+    + GetSetting() : T
+    + TryGetSettings(outSetting:T) : bool
+}
+class "List`1"<T> {
+}
+ScriptableObject <|-- PostProcessProfile
+PostProcessProfile o-> "settings<PostProcessEffectSettings>" "List`1"
+@enduml

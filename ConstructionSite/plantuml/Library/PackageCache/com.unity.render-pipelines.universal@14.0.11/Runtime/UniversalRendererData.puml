@@ -1,0 +1,36 @@
+@startuml
+enum CopyDepthMode {
+    AfterOpaques,
+    AfterTransparents,
+    ForcePrepass,
+}
+class UniversalRendererData {
+    + shadowTransparentReceive : bool <<get>> <<set>>
+    + accurateGbufferNormals : bool <<get>> <<set>>
+}
+class ShaderResources <<sealed>> {
+}
+ScriptableRendererData <|-- UniversalRendererData
+ISerializationCallbackReceiver <|-- UniversalRendererData
+UniversalRendererData o-> "postProcessData" PostProcessData
+UniversalRendererData o-> "shaders" ShaderResources
+UniversalRendererData --> "opaqueLayerMask" LayerMask
+UniversalRendererData --> "transparentLayerMask" LayerMask
+UniversalRendererData --> "defaultStencilState" StencilStateData
+UniversalRendererData --> "renderingMode" RenderingMode
+UniversalRendererData --> "depthPrimingMode" DepthPrimingMode
+UniversalRendererData --> "copyDepthMode" CopyDepthMode
+UniversalRendererData --> "intermediateTextureMode" IntermediateTextureMode
+UniversalRendererData +-- ShaderResources
+ShaderResources --> "blitPS" Shader
+ShaderResources --> "copyDepthPS" Shader
+ShaderResources --> "screenSpaceShadowPS" Shader
+ShaderResources --> "samplingPS" Shader
+ShaderResources --> "stencilDeferredPS" Shader
+ShaderResources --> "fallbackErrorPS" Shader
+ShaderResources --> "fallbackLoadingPS" Shader
+ShaderResources --> "materialErrorPS" Shader
+ShaderResources --> "cameraMotionVector" Shader
+ShaderResources --> "objectMotionVector" Shader
+ShaderResources --> "dataDrivenLensFlare" Shader
+@enduml

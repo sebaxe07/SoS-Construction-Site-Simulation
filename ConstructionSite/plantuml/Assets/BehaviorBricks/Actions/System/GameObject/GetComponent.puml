@@ -1,0 +1,9 @@
+@startuml
+class GetComponent {
+    + type : string
+    + <<override>> OnStart() : void
+    + <<override>> OnUpdate() : TaskStatus
+}
+GOAction <|-- GetComponent
+GetComponent --> "component" Component
+@enduml

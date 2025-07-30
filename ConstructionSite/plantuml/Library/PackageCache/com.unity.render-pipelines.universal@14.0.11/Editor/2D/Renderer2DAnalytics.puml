@@ -1,0 +1,27 @@
+@startuml
+struct AnalyticsDataTypes {
+    + <<const>> k_LightDataString : string = "u2drendererlights"
+    + <<const>> k_Renderer2DDataString : string = "u2drendererdata"
+}
+interface IAnalyticsData {
+}
+struct Light2DData {
+    + was_create_event : bool
+    + instance_id : int
+}
+struct RendererAssetData {
+    + was_create_event : bool
+    + instance_id : int
+    + blending_layers_count : int
+    + blending_modes_used : int
+}
+interface IAnalytics {
+}
+class Renderer2DAnalytics {
+    + SendData(eventString:string, data:IAnalyticsData) : AnalyticsResult
+}
+IAnalyticsData <|-- Light2DData
+IAnalyticsData <|-- RendererAssetData
+IAnalytics <|-- Renderer2DAnalytics
+Renderer2DAnalytics --> "instance" Renderer2DAnalytics
+@enduml

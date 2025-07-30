@@ -1,0 +1,27 @@
+@startuml
+interface IGenerator {
+}
+class ProjectGeneration {
+    + {static} <<readonly>> MSBuildNamespaceUri : string = "http://schemas.microsoft.com/developer/msbuild/2003"
+    + ProjectDirectory : string <<get>>
+    + GenerateAll(generateAll:bool) : void
+    + ProjectGeneration(tempDirectory:string)
+    + ProjectGeneration(tempDirectory:string, assemblyNameProvider:IAssemblyNameProvider, fileIO:IFileIO, guidGenerator:IGUIDGenerator)
+    + SyncIfNeeded(affectedFiles:List<string>, reimportedFiles:string[]) : bool
+    + Sync() : void
+    + SolutionExists() : bool
+    + GenerateAndWriteSolutionAndProjects() : void
+    + ProjectFile(assembly:Assembly) : string
+    + SolutionFile() : string
+}
+class SolutionGuidGenerator <<static>> {
+    + {static} GuidForProject(projectName:string) : string
+    + {static} GuidForSolution(projectName:string, sourceFileExtension:string) : string
+}
+enum ScriptingLanguage {
+    None,
+    CSharp,
+}
+IGenerator <|-- ProjectGeneration
+ProjectGeneration +-- ScriptingLanguage
+@enduml

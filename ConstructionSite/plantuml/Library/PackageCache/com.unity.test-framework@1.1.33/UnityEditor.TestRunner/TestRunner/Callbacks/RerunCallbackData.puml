@@ -1,0 +1,7 @@
+@startuml
+class RerunCallbackData {
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<RerunCallbackData>" <|-- RerunCallbackData
+@enduml

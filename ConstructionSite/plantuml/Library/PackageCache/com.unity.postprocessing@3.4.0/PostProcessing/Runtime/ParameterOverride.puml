@@ -1,0 +1,60 @@
+@startuml
+abstract class ParameterOverride {
+    + overrideState : bool
+    + {abstract} GetHash() : int
+    + GetValue() : T
+}
+class "ParameterOverride`1"<T> {
+    + value : T
+    + ParameterOverride()
+    + ParameterOverride(value:T)
+    + ParameterOverride(value:T, overrideState:bool)
+    + <<virtual>> Interp(from:T, to:T, t:float) : void
+    + Override(x:T) : void
+    + <<override>> GetHash() : int
+}
+class FloatParameter <<sealed>> {
+    + <<override>> Interp(from:float, to:float, t:float) : void
+}
+class IntParameter <<sealed>> {
+    + <<override>> Interp(from:int, to:int, t:float) : void
+}
+class BoolParameter <<sealed>> {
+}
+class ColorParameter <<sealed>> {
+    + <<override>> Interp(from:Color, to:Color, t:float) : void
+}
+class Vector2Parameter <<sealed>> {
+    + <<override>> Interp(from:Vector2, to:Vector2, t:float) : void
+}
+class Vector3Parameter <<sealed>> {
+    + <<override>> Interp(from:Vector3, to:Vector3, t:float) : void
+}
+class Vector4Parameter <<sealed>> {
+    + <<override>> Interp(from:Vector4, to:Vector4, t:float) : void
+}
+class SplineParameter <<sealed>> {
+    + <<override>> Interp(from:Spline, to:Spline, t:float) : void
+}
+enum TextureParameterDefault {
+    None,
+    Black,
+    White,
+    Transparent,
+    Lut2D,
+}
+class TextureParameter <<sealed>> {
+    + <<override>> Interp(from:Texture, to:Texture, t:float) : void
+}
+ParameterOverride <|-- "ParameterOverride`1"
+"ParameterOverride`1" "<float>" <|-- FloatParameter
+"ParameterOverride`1" "<int>" <|-- IntParameter
+"ParameterOverride`1" "<bool>" <|-- BoolParameter
+"ParameterOverride`1" "<Color>" <|-- ColorParameter
+"ParameterOverride`1" "<Vector2>" <|-- Vector2Parameter
+"ParameterOverride`1" "<Vector3>" <|-- Vector3Parameter
+"ParameterOverride`1" "<Vector4>" <|-- Vector4Parameter
+"ParameterOverride`1" "<Spline>" <|-- SplineParameter
+"ParameterOverride`1" "<Texture>" <|-- TextureParameter
+TextureParameter o-> "defaultState" TextureParameterDefault
+@enduml

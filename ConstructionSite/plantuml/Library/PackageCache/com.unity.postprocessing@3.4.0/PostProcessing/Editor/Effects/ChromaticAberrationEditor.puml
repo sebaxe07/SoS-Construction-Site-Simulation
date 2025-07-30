@@ -1,0 +1,9 @@
+@startuml
+class ChromaticAberrationEditor <<sealed>> {
+    + <<override>> OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+}
+class "PostProcessEffectEditor`1"<T> {
+}
+"PostProcessEffectEditor`1" "<ChromaticAberration>" <|-- ChromaticAberrationEditor
+@enduml

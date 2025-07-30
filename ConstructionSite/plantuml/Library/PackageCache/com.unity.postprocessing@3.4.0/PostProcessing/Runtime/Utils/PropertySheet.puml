@@ -1,0 +1,8 @@
+@startuml
+class PropertySheet <<sealed>> {
+    + ClearKeywords() : void
+    + EnableKeyword(keyword:string) : void
+    + DisableKeyword(keyword:string) : void
+}
+PropertySheet --> "properties" MaterialPropertyBlock
+@enduml

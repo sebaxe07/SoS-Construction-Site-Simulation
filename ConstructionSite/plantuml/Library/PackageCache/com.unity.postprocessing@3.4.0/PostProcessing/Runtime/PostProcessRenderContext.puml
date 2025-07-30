@@ -1,0 +1,40 @@
+@startuml
+class PostProcessRenderContext <<sealed>> {
+    + flip : bool <<get>> <<set>>
+    + width : int <<get>>
+    + height : int <<get>>
+    + stereoActive : bool <<get>>
+    + xrActiveEye : int <<get>> <<set>>
+    + numberOfEyes : int <<get>>
+    + screenWidth : int <<get>>
+    + screenHeight : int <<get>>
+    + isSceneView : bool <<get>> <<internal set>>
+    + Reset() : void
+    + IsTemporalAntialiasingActive() : bool
+    + IsDebugOverlayEnabled(overlay:DebugOverlay) : bool
+    + PushDebugOverlay(cmd:CommandBuffer, source:RenderTargetIdentifier, sheet:PropertySheet, pass:int) : void
+    + GetScreenSpaceTemporaryRT(cmd:CommandBuffer, nameID:int, depthBufferBits:int, colorFormat:RenderTextureFormat, readWrite:RenderTextureReadWrite, filter:FilterMode, widthOverride:int, heightOverride:int) : void
+    + GetScreenSpaceTemporaryRT(depthBufferBits:int, colorFormat:RenderTextureFormat, readWrite:RenderTextureReadWrite, widthOverride:int, heightOverride:int) : RenderTexture
+    + UpdateSinglePassStereoState(isTAAEnabled:bool, isAOEnabled:bool, isSSREnabled:bool) : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+enum StereoRenderingMode {
+    MultiPass= 0,
+    SinglePass,
+    SinglePassInstanced,
+    SinglePassMultiview,
+}
+PostProcessRenderContext --> "camera" Camera
+PostProcessRenderContext --> "command" CommandBuffer
+PostProcessRenderContext --> "source" RenderTargetIdentifier
+PostProcessRenderContext --> "destination" RenderTargetIdentifier
+PostProcessRenderContext --> "sourceFormat" RenderTextureFormat
+PostProcessRenderContext --> "resources" PostProcessResources
+PostProcessRenderContext --> "propertySheets" PropertySheetFactory
+PostProcessRenderContext --> "userData<string,object>" "Dictionary`2"
+PostProcessRenderContext --> "debugLayer" PostProcessDebugLayer
+PostProcessRenderContext --> "stereoRenderingMode" StereoRenderingMode
+PostProcessRenderContext --> "temporalAntialiasing" TemporalAntialiasing
+PostProcessRenderContext +-- StereoRenderingMode
+@enduml

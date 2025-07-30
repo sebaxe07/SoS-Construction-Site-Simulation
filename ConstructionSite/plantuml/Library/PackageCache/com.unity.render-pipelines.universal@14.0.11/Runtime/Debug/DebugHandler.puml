@@ -1,0 +1,29 @@
+@startuml
+class DebugHandler {
+    + AreAnySettingsActive : bool <<get>>
+    + IsPostProcessingAllowed : bool <<get>>
+    + IsLightingActive : bool <<get>>
+    + TryGetScreenClearColor(color:Color) : bool
+    + Dispose() : void
+}
+class DebugRenderPassEnumerable {
+    + DebugRenderPassEnumerable(debugHandler:DebugHandler, context:ScriptableRenderContext, commandBuffer:CommandBuffer, filteringSettings:FilteringSettings)
+    + GetEnumerator() : IEnumerator<DebugRenderSetup>
+}
+class "IEnumerable`1"<T> {
+}
+class Enumerator {
+    + Enumerator(debugHandler:DebugHandler, context:ScriptableRenderContext, commandBuffer:CommandBuffer, filteringSettings:FilteringSettings)
+    + MoveNext() : bool
+    + Reset() : void
+    + Dispose() : void
+}
+class "IEnumerator`1"<T> {
+}
+IDebugDisplaySettingsQuery <|-- DebugHandler
+DebugHandler +-- DebugRenderPassEnumerable
+"IEnumerable`1" "<DebugRenderSetup>" <|-- DebugRenderPassEnumerable
+DebugRenderPassEnumerable +-- Enumerator
+"IEnumerator`1" "<DebugRenderSetup>" <|-- Enumerator
+Enumerator --> "Current" DebugRenderSetup
+@enduml

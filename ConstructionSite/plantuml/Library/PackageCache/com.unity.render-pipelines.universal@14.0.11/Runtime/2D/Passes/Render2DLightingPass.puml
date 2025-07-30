@@ -1,0 +1,8 @@
+@startuml
+class Render2DLightingPass {
+    + Render2DLightingPass(rendererData:Renderer2DData, blitMaterial:Material, samplingMaterial:Material)
+    + <<override>> Execute(context:ScriptableRenderContext, renderingData:RenderingData) : void
+}
+ScriptableRenderPass <|-- Render2DLightingPass
+IRenderPass2D <|-- Render2DLightingPass
+@enduml

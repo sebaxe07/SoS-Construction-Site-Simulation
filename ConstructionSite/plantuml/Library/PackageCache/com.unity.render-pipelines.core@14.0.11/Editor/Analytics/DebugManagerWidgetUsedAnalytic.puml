@@ -1,0 +1,10 @@
+@startuml
+class DebugManagerWidgetUsedAnalytic {
+    + {static} Send(path:string, value:object) : void
+}
+class Data {
+    + query_path : string
+    + value : string
+}
+DebugManagerWidgetUsedAnalytic +-- Data
+@enduml

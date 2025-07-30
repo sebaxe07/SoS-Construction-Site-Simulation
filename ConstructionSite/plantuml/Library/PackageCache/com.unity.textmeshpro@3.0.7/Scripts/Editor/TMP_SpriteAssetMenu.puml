@@ -1,0 +1,5 @@
+@startuml
+class TMP_SpriteAssetMenu <<static>> {
+    + {static} CreateSpriteAsset() : void
+}
+@enduml

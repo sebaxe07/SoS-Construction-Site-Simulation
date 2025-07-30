@@ -1,0 +1,11 @@
+@startuml
+class DoneIsNightCondition {
+    + <<override>> Check() : bool
+    + <<override>> MonitorCompleteWhenTrue() : TaskStatus
+    + <<override>> MonitorFailWhenFalse() : TaskStatus
+    + OnSunset(sender:object, night:System.EventArgs) : void
+    + OnSunrise(sender:object, e:System.EventArgs) : void
+    + <<override>> OnAbort() : void
+}
+ConditionBase <|-- DoneIsNightCondition
+@enduml
