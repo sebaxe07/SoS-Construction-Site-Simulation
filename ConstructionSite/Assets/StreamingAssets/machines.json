@@ -1,0 +1,56 @@
+[
+    {
+        "typeId": "M001",
+        "name": "Excavator E200",
+        "manufacturer": "Caterpillar",
+        "engineType": "Diesel",
+        "fuelConsumption": 10.5,
+        "maintenanceCost": 1200,
+        "tankCapacity": 300,
+        "wheelOrTrackType": "tracks",
+        "maxSpeed": 40,
+        "averageSpeed": 25,
+        "machineType": "excavator",
+        "capacity": {
+            "value": 1.2,
+            "unit": "cubic meters",
+            "description": "bucket capacity"
+        }
+    },
+    {
+        "typeId": "M002",
+        "name": "Quarry Truck T500",
+        "manufacturer": "Volvo",
+        "engineType": "Diesel",
+        "fuelConsumption": 15.8,
+        "maintenanceCost": 1500,
+        "tankCapacity": 500,
+        "wheelOrTrackType": "wheels",
+        "maxSpeed": 80,
+        "averageSpeed": 50,
+        "machineType": "truck",
+        "capacity": {
+            "value": 10,
+            "unit": "tons",
+            "description": "bed capacity"
+        }
+    },
+    {
+        "typeId": "M003",
+        "name": "Crane L350",
+        "manufacturer": "Liebherr",
+        "engineType": "Electric",
+        "fuelConsumption": 5.2,
+        "maintenanceCost": 900,
+        "batteryCapacity": 150,
+        "wheelOrTrackType": " ",
+        "maxSpeed": 20,
+        "averageSpeed": 10,
+        "machineType": "crane",
+        "capacity": {
+            "value": 20,
+            "unit": "tons",
+            "description": "maximum liftable weight"
+        }
+    }
+]

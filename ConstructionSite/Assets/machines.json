@@ -1,0 +1,204 @@
+{
+    "machines": [
+        {
+            "id": 5,
+            "typeId": "M001",
+            "name": "Excavator E200",
+            "manufacturer": "Caterpillar",
+            "engineType": "Diesel",
+            "fuelConsumption": 10.5,
+            "maintenanceCost": 1200.0,
+            "tankCapacity": 300.0,
+            "wheelOrTrackType": "tracks",
+            "maxSpeed": 40.0,
+            "averageSpeed": 25.0,
+            "machineType": "excavator",
+            "assignedWorkerID": 4,
+            "capacity": {
+                "value": 1.2,
+                "unit": "m3",
+                "description": "Bucket Capacity"
+            }
+        },
+        {
+            "id": 6,
+            "typeId": "M002",
+            "name": "Quarry Truck T500",
+            "manufacturer": "Volvo",
+            "engineType": "Diesel",
+            "fuelConsumption": 15.8,
+            "maintenanceCost": 1500.0,
+            "tankCapacity": 500.0,
+            "wheelOrTrackType": "wheels",
+            "maxSpeed": 80.0,
+            "averageSpeed": 50.0,
+            "machineType": "truck",
+            "assignedWorkerID": 5,
+            "capacity": {
+                "value": 10.0,
+                "unit": "tons",
+                "description": "Load Capacity"
+            }
+        },
+        {
+            "id": 7,
+            "typeId": "M001",
+            "name": "Excavator E200",
+            "manufacturer": "Caterpillar",
+            "engineType": "Diesel",
+            "fuelConsumption": 10.5,
+            "maintenanceCost": 1200.0,
+            "tankCapacity": 300.0,
+            "wheelOrTrackType": "tracks",
+            "maxSpeed": 40.0,
+            "averageSpeed": 25.0,
+            "machineType": "excavator",
+            "assignedWorkerID": -1,
+            "capacity": {
+                "value": 1.2,
+                "unit": "m3",
+                "description": "Bucket Capacity"
+            }
+        },
+        {
+            "id": 8,
+            "typeId": "M001",
+            "name": "Excavator E200",
+            "manufacturer": "Caterpillar",
+            "engineType": "Diesel",
+            "fuelConsumption": 10.5,
+            "maintenanceCost": 1200.0,
+            "tankCapacity": 300.0,
+            "wheelOrTrackType": "tracks",
+            "maxSpeed": 40.0,
+            "averageSpeed": 25.0,
+            "machineType": "excavator",
+            "assignedWorkerID": -1,
+            "capacity": {
+                "value": 1.2,
+                "unit": "m3",
+                "description": "Bucket Capacity"
+            }
+        },
+        {
+            "id": 9,
+            "typeId": "M001",
+            "name": "Excavator E200",
+            "manufacturer": "Caterpillar",
+            "engineType": "Diesel",
+            "fuelConsumption": 10.5,
+            "maintenanceCost": 1200.0,
+            "tankCapacity": 300.0,
+            "wheelOrTrackType": "tracks",
+            "maxSpeed": 40.0,
+            "averageSpeed": 25.0,
+            "machineType": "excavator",
+            "assignedWorkerID": -1,
+            "capacity": {
+                "value": 1.2,
+                "unit": "m3",
+                "description": "Bucket Capacity"
+            }
+        },
+        {
+            "id": 10,
+            "typeId": "M001",
+            "name": "Excavator E200",
+            "manufacturer": "Caterpillar",
+            "engineType": "Diesel",
+            "fuelConsumption": 10.5,
+            "maintenanceCost": 1200.0,
+            "tankCapacity": 300.0,
+            "wheelOrTrackType": "tracks",
+            "maxSpeed": 40.0,
+            "averageSpeed": 25.0,
+            "machineType": "excavator",
+            "assignedWorkerID": -1,
+            "capacity": {
+                "value": 1.2,
+                "unit": "m3",
+                "description": "Bucket Capacity"
+            }
+        },
+        {
+            "id": 11,
+            "typeId": "M001",
+            "name": "Excavator E200",
+            "manufacturer": "Caterpillar",
+            "engineType": "Diesel",
+            "fuelConsumption": 10.5,
+            "maintenanceCost": 1200.0,
+            "tankCapacity": 300.0,
+            "wheelOrTrackType": "tracks",
+            "maxSpeed": 40.0,
+            "averageSpeed": 25.0,
+            "machineType": "excavator",
+            "assignedWorkerID": -1,
+            "capacity": {
+                "value": 1.2,
+                "unit": "m3",
+                "description": "Bucket Capacity"
+            }
+        },
+        {
+            "id": 12,
+            "typeId": "M003",
+            "name": "Crane L350",
+            "manufacturer": "Liebherr",
+            "engineType": "Electric",
+            "fuelConsumption": 5.2,
+            "maintenanceCost": 900.0,
+            "tankCapacity": 0.0,
+            "wheelOrTrackType": "",
+            "maxSpeed": 0.0,
+            "averageSpeed": 0.0,
+            "machineType": "crane",
+            "assignedWorkerID": -1,
+            "capacity": {
+                "value": 20.0,
+                "unit": "tons",
+                "description": "Load Max Weight"
+            }
+        },
+        {
+            "id": 13,
+            "typeId": "M003",
+            "name": "Crane L350",
+            "manufacturer": "Liebherr",
+            "engineType": "Electric",
+            "fuelConsumption": 5.2,
+            "maintenanceCost": 900.0,
+            "tankCapacity": 0.0,
+            "wheelOrTrackType": "",
+            "maxSpeed": 0.0,
+            "averageSpeed": 0.0,
+            "machineType": "crane",
+            "assignedWorkerID": -1,
+            "capacity": {
+                "value": 20.0,
+                "unit": "tons",
+                "description": "Load Max Weight"
+            }
+        },
+        {
+            "id": 14,
+            "typeId": "M002",
+            "name": "Quarry Truck T500",
+            "manufacturer": "Volvo",
+            "engineType": "Diesel",
+            "fuelConsumption": 15.8,
+            "maintenanceCost": 1500.0,
+            "tankCapacity": 500.0,
+            "wheelOrTrackType": "wheels",
+            "maxSpeed": 80.0,
+            "averageSpeed": 50.0,
+            "machineType": "truck",
+            "assignedWorkerID": -1,
+            "capacity": {
+                "value": 10.0,
+                "unit": "tons",
+                "description": "Load Capacity"
+            }
+        }
+    ]
+}

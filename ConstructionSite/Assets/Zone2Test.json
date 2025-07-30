@@ -1,0 +1,35 @@
+{
+    "machines": [
+        {
+            "machineId": "M002",
+            "tasks": [
+                {
+                    "task": "unload",
+                    "coord": [
+                        500,
+                        -600
+                    ]
+                }
+            ]
+        },
+        {
+            "machineId": "M003",
+            "tasks": [
+                {
+                    "task": "load",
+                    "coord": [
+                        500,
+                        -600
+                    ]
+                },
+                {
+                    "task": "unload",
+                    "coord": [
+                        580,
+                        -440
+                    ]
+                }
+            ]
+        }
+    ]
+}

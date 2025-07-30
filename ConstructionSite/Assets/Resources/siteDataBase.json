@@ -1,0 +1,527 @@
+{
+  "ConstructionSites": [
+    {
+      "Name": "Site 1",
+      "Address": "123 Main St",
+      "City": "Anytown",
+      "State": "CA",
+      "Zip": "12345",
+      "Phone": "555-555-5555",
+      "Dimensions": "356 m^2",
+      "Layout": {
+        "NUmberOfVertices": 4,
+        "Vertices": [
+          {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          },
+          {
+            "X": 0,
+            "Y": 356,
+            "Z": 0
+          },
+          {
+            "X": 356,
+            "Y": 356,
+            "Z": 0
+          },
+          {
+            "X": 356,
+            "Y": 0,
+            "Z": 0
+          }
+        ],
+        "Zones": [
+          {
+            "Name": "Zone 1",
+            "Type": "Excavation",
+            "Vertices": [
+              {
+                "X": 283.20477294921877,
+                "Y": 2466.99755859375,
+                "Z": -36.094730377197269
+              },
+              {
+                "X": 369.2767639160156,
+                "Y": 2466.99755859375,
+                "Z": -174.9205780029297
+              },
+              {
+                "X": 513.6556396484375,
+                "Y": 2466.99755859375,
+                "Z": -108.28419494628906
+              },
+              {
+                "X": 427.58367919921877,
+                "Y": 2466.99755859375,
+                "Z": 41.64777755737305
+              }
+            ],
+            "Gates": [
+              { "StartVertex": 0, "EndVertex": 1 },
+              { "StartVertex": 2, "EndVertex": 3 }
+            ]
+          },
+          {
+            "Name": "Zone 2",
+            "Type": "Demolition",
+            "Vertices": [
+              {
+                "X": 521.9852905273438,
+                "Y": 2466.99755859375,
+                "Z": 69.41292572021485
+              },
+              {
+                "X": 591.398193359375,
+                "Y": 2466.99755859375,
+                "Z": -74.9659652709961
+              },
+              {
+                "X": 669.1407470703125,
+                "Y": 2466.99755859375,
+                "Z": 52.75385284423828
+              },
+              {
+                "X": 588.6217651367188,
+                "Y": 2466.99755859375,
+                "Z": 188.8031463623047
+              }
+            ],
+            "Gates": [{ "StartVertex": 0, "EndVertex": 1 }]
+          },
+          {
+            "Name": "Zone 3",
+            "Type": "Concrete",
+            "Vertices": [
+              {
+                "X": 413.7010498046875,
+                "Y": 2466.99755859375,
+                "Z": -258.2161560058594
+              },
+              {
+                "X": 516.4322509765625,
+                "Y": 2466.99755859375,
+                "Z": -216.56834411621095
+              },
+              {
+                "X": 605.2808227539063,
+                "Y": 2466.99755859375,
+                "Z": -349.8412170410156
+              },
+              {
+                "X": 385.93597412109377,
+                "Y": 2466.99755859375,
+                "Z": -449.7958068847656
+              }
+            ],
+            "Gates": [{ "StartVertex": 0, "EndVertex": 1 }]
+          },
+          {
+            "Name": "Zone 4",
+            "Type": "Building",
+            "Vertices": [
+              {
+                "X": 655.2581176757813,
+                "Y": 2466.99755859375,
+                "Z": -188.80319213867188
+              },
+              {
+                "X": 733.0006713867188,
+                "Y": 2466.99755859375,
+                "Z": -291.5343322753906
+              },
+              {
+                "X": 882.9325561523438,
+                "Y": 2466.99755859375,
+                "Z": -374.82989501953127
+              },
+              {
+                "X": 885.708984375,
+                "Y": 2466.99755859375,
+                "Z": -244.33349609375
+              },
+              {
+                "X": 957.8985595703125,
+                "Y": 2466.99755859375,
+                "Z": -116.61373138427735
+              }
+            ],
+            "Gates": [{ "StartVertex": 0, "EndVertex": 1 }]
+          }
+        ]
+      },
+      "RoadSystem": {
+        "Nodes": [
+          {
+            "Id": 0,
+            "Position": { "X": 557.140991, "Y": 46.1071129, "Z": -3.57057095 },
+            "ConnectedEdges": [1]
+          },
+          {
+            "Id": 1,
+            "Position": { "X": 516.1298, "Y": 46.03545, "Z": -15.57489 },
+            "ConnectedEdges": [0, 2, 3, 14]
+          },
+          {
+            "Id": 2,
+            "Position": { "X": 469.8303, "Y": 46.40052, "Z": -31.48606 },
+            "ConnectedEdges": [1]
+          },
+          {
+            "Id": 3,
+            "Position": { "X": 560.0984, "Y": 47.41866, "Z": -135.6044 },
+            "ConnectedEdges": [1, 4, 6, 8]
+          },
+          {
+            "Id": 4,
+            "Position": { "X": 446.8237, "Y": 52.71956, "Z": -186.2117 },
+            "ConnectedEdges": [3, 5, 10]
+          },
+          {
+            "Id": 5,
+            "Position": { "X": 469.6935, "Y": 53.87895, "Z": -236.0919 },
+            "ConnectedEdges": [4]
+          },
+          {
+            "Id": 6,
+            "Position": { "X": 635.8293, "Y": 46.42003, "Z": -272.4222 },
+            "ConnectedEdges": [3, 7]
+          },
+          {
+            "Id": 7,
+            "Position": { "X": 700.8015, "Y": 46.69034, "Z": -245.396 },
+            "ConnectedEdges": [6]
+          },
+          {
+            "Id": 8,
+            "Position": { "X": 733.5524, "Y": 48.10567, "Z": -73.61307 },
+            "ConnectedEdges": [3, 9]
+          },
+          {
+            "Id": 9,
+            "Position": { "X": 889.0231, "Y": 47.23615, "Z": -11.44737 },
+            "ConnectedEdges": [8, 15]
+          },
+          {
+            "Id": 10,
+            "Position": { "X": 355.8961, "Y": 55.0365, "Z": -224.6859 },
+            "ConnectedEdges": [4, 11]
+          },
+          {
+            "Id": 11,
+            "Position": { "X": 286.7491, "Y": 47.58076, "Z": -126.0134 },
+            "ConnectedEdges": [10, 12, 13]
+          },
+          {
+            "Id": 12,
+            "Position": { "X": 330.6571, "Y": 48.5816, "Z": -104.4335 },
+            "ConnectedEdges": [11]
+          },
+          {
+            "Id": 13,
+            "Position": { "X": 232.1353, "Y": 44.36349, "Z": -6.575836 },
+            "ConnectedEdges": [11, 14]
+          },
+          {
+            "Id": 14,
+            "Position": { "X": 433.6929, "Y": 45.95132, "Z": 103.0682 },
+            "ConnectedEdges": [13, 15, 1]
+          },
+          {
+            "Id": 15,
+            "Position": { "X": 638.5571, "Y": 45.0715, "Z": 296.1952 },
+            "ConnectedEdges": [14, 9]
+          }
+        ],
+        "Edges": [
+          {
+            "Id": 0,
+            "StartNode": 0,
+            "EndNode": 1,
+            "Width": 7.0,
+            "Length": 41.011191,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 1,
+            "StartNode": 1,
+            "EndNode": 2,
+            "Width": 7.0,
+            "Length": 50.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 2,
+            "StartNode": 1,
+            "EndNode": 3,
+            "Width": 7.0,
+            "Length": 120.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 3,
+            "StartNode": 3,
+            "EndNode": 4,
+            "Width": 7.0,
+            "Length": 130.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 4,
+            "StartNode": 4,
+            "EndNode": 5,
+            "Width": 7.0,
+            "Length": 50.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 5,
+            "StartNode": 3,
+            "EndNode": 6,
+            "Width": 7.0,
+            "Length": 150.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 6,
+            "StartNode": 6,
+            "EndNode": 7,
+            "Width": 7.0,
+            "Length": 70.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 7,
+            "StartNode": 3,
+            "EndNode": 8,
+            "Width": 7.0,
+            "Length": 200.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 8,
+            "StartNode": 8,
+            "EndNode": 9,
+            "Width": 7.0,
+            "Length": 150.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 9,
+            "StartNode": 4,
+            "EndNode": 10,
+            "Width": 7.0,
+            "Length": 150.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 10,
+            "StartNode": 10,
+            "EndNode": 11,
+            "Width": 7.0,
+            "Length": 100.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 11,
+            "StartNode": 11,
+            "EndNode": 12,
+            "Width": 7.0,
+            "Length": 43.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 12,
+            "StartNode": 11,
+            "EndNode": 13,
+            "Width": 7.0,
+            "Length": 100.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 13,
+            "StartNode": 13,
+            "EndNode": 14,
+            "Width": 7.0,
+            "Length": 150.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 14,
+            "StartNode": 1,
+            "EndNode": 14,
+            "Width": 7.0,
+            "Length": 150.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              }
+            ]
+          },
+          {
+            "Id": 15,
+            "StartNode": 9,
+            "EndNode": 15,
+            "Width": 7.0,
+            "Length": 250.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          },
+          {
+            "Id": 16,
+            "StartNode": 14,
+            "EndNode": 15,
+            "Width": 7.0,
+            "Length": 200.0,
+            "Lanes": [
+              {
+                "Id": 0,
+                "Direction": 1
+              },
+              {
+                "Id": 1,
+                "Direction": -1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

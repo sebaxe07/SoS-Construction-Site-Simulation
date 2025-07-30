@@ -1,0 +1,96 @@
+{
+    "machines": [
+        {
+            "id": "1",
+            "name": "CAT 320",
+            "manufacturer": "Caterpillar",
+            "machineType": "excavator",
+            "engineType": "diesel",
+            "energyConsumption": 45.5,
+            "maintenanceCost": 150.0,
+            "movingVehicleProperties": {
+                "wheelOrTrackType": "track",
+                "fuelCapacity": 400.0,
+                "maxSpeed": 30.0,
+                "avgSpeed": 20.0
+            },
+            "excavatorProperties": {
+                "bucketCapacity": 1.2
+            },
+            "assignedWorkerID": -1
+        },
+        {
+            "id": "2",
+            "name": "Volvo FH16",
+            "manufacturer": "Volvo",
+            "machineType": "truck",
+            "engineType": "diesel",
+            "energyConsumption": 35.0,
+            "maintenanceCost": 120.0,
+            "movingVehicleProperties": {
+                "wheelOrTrackType": "wheel",
+                "fuelCapacity": 600.0,
+                "maxSpeed": 80.0,
+                "avgSpeed": 60.0
+            },
+            "truckProperties": {
+                "loadCapacity": 40.0
+            },
+            "assignedWorkerID": -1
+        },
+        {
+            "id": "3",
+            "name": "Liebherr LTM",
+            "manufacturer": "Liebherr",
+            "machineType": "crane",
+            "engineType": "diesel",
+            "energyConsumption": 55.0,
+            "maintenanceCost": 200.0,
+            "steadyVehicleProperties": {
+                "immovable": true
+            },
+            "craneProperties": {
+                "loadMaxWeight": 100.0
+            },
+            "assignedWorkerID": -1
+        },
+        {
+            "id": "4",
+            "name": "Volvo FH16",
+            "manufacturer": "Volvo",
+            "machineType": "truck",
+            "engineType": "diesel",
+            "energyConsumption": 35.0,
+            "maintenanceCost": 120.0,
+            "movingVehicleProperties": {
+                "wheelOrTrackType": "wheel",
+                "fuelCapacity": 600.0,
+                "maxSpeed": 80.0,
+                "avgSpeed": 60.0
+            },
+            "truckProperties": {
+                "loadCapacity": 40.0
+            },
+            "assignedWorkerID": -1
+        },
+        {
+            "id": "5",
+            "name": "Volvo FH16",
+            "manufacturer": "Volvo",
+            "machineType": "truck",
+            "engineType": "diesel",
+            "energyConsumption": 35.0,
+            "maintenanceCost": 120.0,
+            "movingVehicleProperties": {
+                "wheelOrTrackType": "wheel",
+                "fuelCapacity": 600.0,
+                "maxSpeed": 80.0,
+                "avgSpeed": 60.0
+            },
+            "truckProperties": {
+                "loadCapacity": 40.0
+            },
+            "assignedWorkerID": -1
+        }
+    ]
+}

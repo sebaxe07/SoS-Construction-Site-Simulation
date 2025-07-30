@@ -1,0 +1,54 @@
+{
+    "machines": [
+        {
+            "machineId": "M001",
+            "tasks": [
+                {
+                    "task": "dig",
+                    "coord": [
+                        450,
+                        -200
+                    ]
+                },
+                {
+                    "task": "unload",
+                    "coord": [
+                        430,
+                        -200
+                    ]
+                }
+            ]
+        },
+        {
+            "machineId": "M002",
+            "tasks": [
+                {
+                    "task": "load",
+                    "coord": [
+                        340,
+                        -440
+                    ]
+                }
+            ]
+        },
+        {
+            "machineId": "M004",
+            "tasks": [
+                {
+                    "task": "load",
+                    "coord": [
+                        430,
+                        -200
+                    ]
+                },
+                {
+                    "task": "unload",
+                    "coord": [
+                        340,
+                        -440
+                    ]
+                }
+            ]
+        }
+    ]
+}

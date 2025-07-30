@@ -1,0 +1,40 @@
+{
+    "constellations": [
+        {
+            "id": "51ee9bb2-e26b-4ee7-9046-1f7112498d78",
+            "name": "const_1",
+            "workerIds": [
+                "4",
+                "5"
+            ],
+            "machineWorker": [
+                {
+                    "machineId": 5,
+                    "workerId": 4
+                },
+                {
+                    "machineId": 6,
+                    "workerId": 5
+                }
+            ]
+        },
+        {
+            "id": "9bead301-b15f-4d4f-b836-75096fa2d3ba",
+            "name": "ASDa",
+            "workerIds": [
+                "4",
+                "10"
+            ],
+            "machineWorker": [
+                {
+                    "machineId": 1,
+                    "workerId": 10
+                },
+                {
+                    "machineId": 2,
+                    "workerId": 4
+                }
+            ]
+        }
+    ]
+}

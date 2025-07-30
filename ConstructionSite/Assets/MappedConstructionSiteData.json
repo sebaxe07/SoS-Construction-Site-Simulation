@@ -1,0 +1,660 @@
+{
+    "ConstructionSites": [
+        {
+            "Name": "",
+            "Address": "",
+            "City": "",
+            "State": "",
+            "Zip": "",
+            "Phone": "",
+            "Dimensions": "",
+            "Layout": {
+                "NumberOfVertices": 14,
+                "Vertices": [
+                    {
+                        "X": 1.5289306640625,
+                        "Y": 47.784141540527347,
+                        "Z": 290.45361328125
+                    },
+                    {
+                        "X": 81.1334228515625,
+                        "Y": 51.37965393066406,
+                        "Z": 128.224609375
+                    },
+                    {
+                        "X": 115.17529296875,
+                        "Y": 51.53545379638672,
+                        "Z": 94.1827392578125
+                    },
+                    {
+                        "X": 278.5767822265625,
+                        "Y": 58.86260986328125,
+                        "Z": -236.02471923828126
+                    },
+                    {
+                        "X": 178.8587646484375,
+                        "Y": 61.945343017578128,
+                        "Z": -342.4302978515625
+                    },
+                    {
+                        "X": 475.427490234375,
+                        "Y": 74.57576751708985,
+                        "Z": -764.352783203125
+                    },
+                    {
+                        "X": 668.04443359375,
+                        "Y": 60.60969543457031,
+                        "Z": -752.1231079101563
+                    },
+                    {
+                        "X": 1340.6748046875,
+                        "Y": 52.875640869140628,
+                        "Z": -504.47296142578127
+                    },
+                    {
+                        "X": 1025.76123046875,
+                        "Y": 52.86354064941406,
+                        "Z": -9.17236328125
+                    },
+                    {
+                        "X": 1019.646484375,
+                        "Y": 51.90907287597656,
+                        "Z": 137.5831298828125
+                    },
+                    {
+                        "X": 661.9296875,
+                        "Y": 48.188011169433597,
+                        "Z": 620.6541748046875
+                    },
+                    {
+                        "X": 499.886962890625,
+                        "Y": 42.862060546875,
+                        "Z": 715.43359375
+                    },
+                    {
+                        "X": 405.107177734375,
+                        "Y": 44.669647216796878,
+                        "Z": 617.5965576171875
+                    },
+                    {
+                        "X": 209.4327392578125,
+                        "Y": 46.006805419921878,
+                        "Z": 516.701904296875
+                    }
+                ],
+                "Zones": [
+                    {
+                        "Name": "",
+                        "Type": "",
+                        "Vertices": [
+                            {
+                                "X": 163.54579162597657,
+                                "Y": 46.89547348022461,
+                                "Z": 466.76611328125
+                            },
+                            {
+                                "X": 284.49755859375,
+                                "Y": 45.842437744140628,
+                                "Z": 213.3726806640625
+                            },
+                            {
+                                "X": 60.30095672607422,
+                                "Y": 49.5818977355957,
+                                "Z": 170.67987060546876
+                            },
+                            {
+                                "X": 1.5289306640625,
+                                "Y": 47.784141540527347,
+                                "Z": 290.45361328125
+                            }
+                        ],
+                        "Gates": [
+                            {
+                                "StartVertex": 1,
+                                "EndVertex": 2
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "",
+                        "Type": "",
+                        "Vertices": [
+                            {
+                                "X": 1019.448974609375,
+                                "Y": 47.9788818359375,
+                                "Z": -606.25048828125
+                            },
+                            {
+                                "X": 826.39697265625,
+                                "Y": 45.875267028808597,
+                                "Z": -308.20574951171877
+                            },
+                            {
+                                "X": 1142.29931640625,
+                                "Y": 52.869590759277347,
+                                "Z": -192.4652099609375
+                            },
+                            {
+                                "X": 1340.6748046875,
+                                "Y": 52.875640869140628,
+                                "Z": -504.47296142578127
+                            }
+                        ],
+                        "Gates": [
+                            {
+                                "StartVertex": 1,
+                                "EndVertex": 2
+                            }
+                        ]
+                    }
+                ]
+            },
+            "RoadSystem": {
+                "Nodes": [
+                    {
+                        "Id": "9f5e202d-6453-4b44-95e8-0e066cafdc80",
+                        "Position": {
+                            "X": 172.39926147460938,
+                            "Y": 55.21216583251953,
+                            "Z": 192.02627563476563
+                        },
+                        "ConnectedEdges": [
+                            "608a872e-ec9d-4b40-a591-e1ae9b40c615"
+                        ]
+                    },
+                    {
+                        "Id": "f2bec0b0-9941-4c8e-b43e-f573748ce15f",
+                        "Position": {
+                            "X": 403.0379638671875,
+                            "Y": 47.49884033203125,
+                            "Z": -50.8033447265625
+                        },
+                        "ConnectedEdges": [
+                            "608a872e-ec9d-4b40-a591-e1ae9b40c615",
+                            "6196bf13-09ee-48cc-9e9c-3fddb71132c0"
+                        ]
+                    },
+                    {
+                        "Id": "bfd1bb1a-50f7-4550-bc37-1443e461ef48",
+                        "Position": {
+                            "X": 565.60791015625,
+                            "Y": 47.66254425048828,
+                            "Z": 267.5625
+                        },
+                        "ConnectedEdges": [
+                            "6196bf13-09ee-48cc-9e9c-3fddb71132c0",
+                            "e27ae70e-94d5-4c59-947b-8c61a9ecb3d5"
+                        ]
+                    },
+                    {
+                        "Id": "2dc7cc42-b199-43f3-b962-298b1117f615",
+                        "Position": {
+                            "X": 751.8857421875,
+                            "Y": 45.668548583984378,
+                            "Z": 115.1534423828125
+                        },
+                        "ConnectedEdges": [
+                            "e27ae70e-94d5-4c59-947b-8c61a9ecb3d5",
+                            "54c0491c-2d27-4554-b515-d72a41a41b4e",
+                            "dd6ff796-062a-4540-b457-b85f54e0e78e",
+                            "71a40847-84f1-4332-a092-565e83d9ac15",
+                            "1e0dad8d-3180-477f-8e9d-36385ece5d0c",
+                            "7a2a2136-5134-43d0-80d5-73aae55bf83a"
+                        ]
+                    },
+                    {
+                        "Id": "be76bf0f-34f9-4e7e-bf5d-0af37ae84060",
+                        "Position": {
+                            "X": 528.352294921875,
+                            "Y": 50.741539001464847,
+                            "Z": -257.4027099609375
+                        },
+                        "ConnectedEdges": [
+                            "54c0491c-2d27-4554-b515-d72a41a41b4e",
+                            "c534d228-e6b1-4d10-a4cb-1cefd9e29f90",
+                            "db09607c-4268-426f-accd-a34d98fb31c1",
+                            "eaf0bd39-258f-44aa-95ed-452583688afc"
+                        ]
+                    },
+                    {
+                        "Id": "1548dbf2-6e32-461d-ba23-fb66f8abf3a9",
+                        "Position": {
+                            "X": 984.34814453125,
+                            "Y": 56.87242889404297,
+                            "Z": -250.33547973632813
+                        },
+                        "ConnectedEdges": [
+                            "c534d228-e6b1-4d10-a4cb-1cefd9e29f90",
+                            "db09607c-4268-426f-accd-a34d98fb31c1"
+                        ]
+                    },
+                    {
+                        "Id": "e5677680-1ac8-4990-bde4-fdd0f01abd4a",
+                        "Position": {
+                            "X": 863.65283203125,
+                            "Y": 47.13892364501953,
+                            "Z": -94.8326416015625
+                        },
+                        "ConnectedEdges": [
+                            "eaf0bd39-258f-44aa-95ed-452583688afc",
+                            "788bac8d-ab12-4275-a910-cbb0ae5a58a9",
+                            "788bac8d-ab12-4275-a910-cbb0ae5a58a9",
+                            "85a1f603-48f5-40b6-8b09-e8727768bdb8",
+                            "0b3fcdca-b864-4f47-aeb0-1fcb2e22a14f",
+                            "5477dd54-a32a-4675-8532-e754ff4ba276",
+                            "c715655d-0983-40a9-ba24-6fd17837204e",
+                            "1116833a-f804-4600-9160-81cc53080b4b"
+                        ]
+                    },
+                    {
+                        "Id": "6fbddaa9-e8a9-4b81-8519-1eb67d21f5f6",
+                        "Position": {
+                            "X": 850.10546875,
+                            "Y": 45.96428680419922,
+                            "Z": 132.0877685546875
+                        },
+                        "ConnectedEdges": [
+                            "85a1f603-48f5-40b6-8b09-e8727768bdb8",
+                            "dd6ff796-062a-4540-b457-b85f54e0e78e",
+                            "71a40847-84f1-4332-a092-565e83d9ac15",
+                            "0b3fcdca-b864-4f47-aeb0-1fcb2e22a14f",
+                            "5477dd54-a32a-4675-8532-e754ff4ba276",
+                            "1e0dad8d-3180-477f-8e9d-36385ece5d0c"
+                        ]
+                    },
+                    {
+                        "Id": "2c3ea44f-e2cc-46f2-bb45-7d918f2d43eb",
+                        "Position": {
+                            "X": 928.00341796875,
+                            "Y": 46.88018035888672,
+                            "Z": 54.189697265625
+                        },
+                        "ConnectedEdges": [
+                            "c715655d-0983-40a9-ba24-6fd17837204e",
+                            "82b4c0b4-91e3-48f5-a0bc-83670ddd4a04"
+                        ]
+                    },
+                    {
+                        "Id": "afeaeed2-dbb1-47f5-840b-5762dfc6a490",
+                        "Position": {
+                            "X": 958.4853515625,
+                            "Y": 45.68836975097656,
+                            "Z": -98.219482421875
+                        },
+                        "ConnectedEdges": [
+                            "82b4c0b4-91e3-48f5-a0bc-83670ddd4a04",
+                            "d7e0b4e0-6534-48c1-98ce-4981f46f4fce"
+                        ]
+                    },
+                    {
+                        "Id": "aa5de9c8-c1b0-4723-b31f-c0c48ce9e15b",
+                        "Position": {
+                            "X": 988.967041015625,
+                            "Y": 46.57122802734375,
+                            "Z": -27.0953369140625
+                        },
+                        "ConnectedEdges": [
+                            "d7e0b4e0-6534-48c1-98ce-4981f46f4fce",
+                            "cc6196d5-75a5-44ca-80ea-4ea5bdaadba3"
+                        ]
+                    },
+                    {
+                        "Id": "9ef3c40b-979b-4d9e-8d43-b8a8e36cf8c2",
+                        "Position": {
+                            "X": 826.77099609375,
+                            "Y": 46.653717041015628,
+                            "Z": -25.539627075195314
+                        },
+                        "ConnectedEdges": [
+                            "7a2a2136-5134-43d0-80d5-73aae55bf83a",
+                            "1116833a-f804-4600-9160-81cc53080b4b",
+                            "cc6196d5-75a5-44ca-80ea-4ea5bdaadba3"
+                        ]
+                    }
+                ],
+                "Edges": [
+                    {
+                        "Id": "608a872e-ec9d-4b40-a591-e1ae9b40c615",
+                        "StartNode": "9f5e202d-6453-4b44-95e8-0e066cafdc80",
+                        "EndNode": "f2bec0b0-9941-4c8e-b43e-f573748ce15f",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "be1e50aa-fec3-4451-a260-4f8e7f647c74",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "443001b3-6b16-4d6d-a205-513ca2cf117f",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "6196bf13-09ee-48cc-9e9c-3fddb71132c0",
+                        "StartNode": "f2bec0b0-9941-4c8e-b43e-f573748ce15f",
+                        "EndNode": "bfd1bb1a-50f7-4550-bc37-1443e461ef48",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "8f4bbbbe-c61f-44b1-a94e-b88633545237",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "054472d3-eb93-42b7-948b-f2a34fffb4b8",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "e27ae70e-94d5-4c59-947b-8c61a9ecb3d5",
+                        "StartNode": "bfd1bb1a-50f7-4550-bc37-1443e461ef48",
+                        "EndNode": "2dc7cc42-b199-43f3-b962-298b1117f615",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "661060ca-c988-4f66-b7f6-390d4abce307",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "f3d015e8-5f13-4442-a004-46220ef67274",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "54c0491c-2d27-4554-b515-d72a41a41b4e",
+                        "StartNode": "2dc7cc42-b199-43f3-b962-298b1117f615",
+                        "EndNode": "be76bf0f-34f9-4e7e-bf5d-0af37ae84060",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "5996c6ff-1ce2-482f-8981-c96fccb45910",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "fdb9cb9b-dde7-4234-8c9a-87425820c000",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "c534d228-e6b1-4d10-a4cb-1cefd9e29f90",
+                        "StartNode": "be76bf0f-34f9-4e7e-bf5d-0af37ae84060",
+                        "EndNode": "1548dbf2-6e32-461d-ba23-fb66f8abf3a9",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "eab03a33-e187-4e5f-bd01-5858ead94615",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "1c391f4a-2879-47d7-8f0e-376be7a8a113",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "db09607c-4268-426f-accd-a34d98fb31c1",
+                        "StartNode": "1548dbf2-6e32-461d-ba23-fb66f8abf3a9",
+                        "EndNode": "be76bf0f-34f9-4e7e-bf5d-0af37ae84060",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "68c674e1-a6f5-46bc-a630-430a40b5dbe0",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "c17aa70a-9734-4034-9ca3-f37d709dbefd",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "eaf0bd39-258f-44aa-95ed-452583688afc",
+                        "StartNode": "be76bf0f-34f9-4e7e-bf5d-0af37ae84060",
+                        "EndNode": "e5677680-1ac8-4990-bde4-fdd0f01abd4a",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "50e52df8-2889-4c4f-8376-3b9d8ce4216f",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "6a2f07f8-e3dc-4da8-a07c-9f0421c94757",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "788bac8d-ab12-4275-a910-cbb0ae5a58a9",
+                        "StartNode": "e5677680-1ac8-4990-bde4-fdd0f01abd4a",
+                        "EndNode": "e5677680-1ac8-4990-bde4-fdd0f01abd4a",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "64695850-4d99-4711-9d1a-db92f98eb2e0",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "2b28c7de-af78-4c13-b733-4693cac11751",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "85a1f603-48f5-40b6-8b09-e8727768bdb8",
+                        "StartNode": "e5677680-1ac8-4990-bde4-fdd0f01abd4a",
+                        "EndNode": "6fbddaa9-e8a9-4b81-8519-1eb67d21f5f6",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "8a74a665-1a53-4260-b390-b6cc0cb3cc3c",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "f0a0a47d-bc35-41d3-94fc-531b3f789f96",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "dd6ff796-062a-4540-b457-b85f54e0e78e",
+                        "StartNode": "6fbddaa9-e8a9-4b81-8519-1eb67d21f5f6",
+                        "EndNode": "2dc7cc42-b199-43f3-b962-298b1117f615",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "f16a500d-3958-4730-9e82-1a1708ef9079",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "d8885458-c565-493e-949c-7a580a4c53f4",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "71a40847-84f1-4332-a092-565e83d9ac15",
+                        "StartNode": "2dc7cc42-b199-43f3-b962-298b1117f615",
+                        "EndNode": "6fbddaa9-e8a9-4b81-8519-1eb67d21f5f6",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "eeaaf2aa-66d8-4dd8-8fbd-de2e6c1c944a",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "c0af2fdd-dd01-46bf-8d70-6897924f4dc6",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "0b3fcdca-b864-4f47-aeb0-1fcb2e22a14f",
+                        "StartNode": "6fbddaa9-e8a9-4b81-8519-1eb67d21f5f6",
+                        "EndNode": "e5677680-1ac8-4990-bde4-fdd0f01abd4a",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "45d098dd-ec89-4271-b346-4baa23d4c526",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "ca318bf5-bab0-496e-b944-e94376b36794",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "5477dd54-a32a-4675-8532-e754ff4ba276",
+                        "StartNode": "e5677680-1ac8-4990-bde4-fdd0f01abd4a",
+                        "EndNode": "6fbddaa9-e8a9-4b81-8519-1eb67d21f5f6",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "b43a87e0-0d86-4a14-a6a5-05c0ccac2d89",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "353f41dc-6083-42fd-b4e3-39b7189e18c1",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "1e0dad8d-3180-477f-8e9d-36385ece5d0c",
+                        "StartNode": "6fbddaa9-e8a9-4b81-8519-1eb67d21f5f6",
+                        "EndNode": "2dc7cc42-b199-43f3-b962-298b1117f615",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "b7bbf033-2f0c-40c9-b2c8-c72a4411635b",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "1c58d08a-845c-49de-95a1-918d181c752d",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "c715655d-0983-40a9-ba24-6fd17837204e",
+                        "StartNode": "e5677680-1ac8-4990-bde4-fdd0f01abd4a",
+                        "EndNode": "2c3ea44f-e2cc-46f2-bb45-7d918f2d43eb",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "16187498-87ce-4961-9534-eb97285f0736",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "18a92129-a987-4194-97a3-6cdad84255d9",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "82b4c0b4-91e3-48f5-a0bc-83670ddd4a04",
+                        "StartNode": "2c3ea44f-e2cc-46f2-bb45-7d918f2d43eb",
+                        "EndNode": "afeaeed2-dbb1-47f5-840b-5762dfc6a490",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "2ed9c9b9-066c-4e8d-9026-6ed0e89d2efa",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "fc788797-acca-45b9-894a-6787bbceb0e0",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "d7e0b4e0-6534-48c1-98ce-4981f46f4fce",
+                        "StartNode": "afeaeed2-dbb1-47f5-840b-5762dfc6a490",
+                        "EndNode": "aa5de9c8-c1b0-4723-b31f-c0c48ce9e15b",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "99de9de7-7b5f-424b-9ff8-3e500a00c79f",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "c9443740-a194-49b6-96bb-669b73386a34",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "7a2a2136-5134-43d0-80d5-73aae55bf83a",
+                        "StartNode": "2dc7cc42-b199-43f3-b962-298b1117f615",
+                        "EndNode": "9ef3c40b-979b-4d9e-8d43-b8a8e36cf8c2",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "c670e518-14fd-476c-a469-335d19350b38",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "b60fb0a4-d76c-48af-86c9-fe28d29cf1ac",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "1116833a-f804-4600-9160-81cc53080b4b",
+                        "StartNode": "9ef3c40b-979b-4d9e-8d43-b8a8e36cf8c2",
+                        "EndNode": "e5677680-1ac8-4990-bde4-fdd0f01abd4a",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "d8c44cf4-f002-46fa-8bb7-7124777f7d0b",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "bbafd2c7-2755-4ff0-a9f8-776d4e4ac144",
+                                "Direction": -1
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "cc6196d5-75a5-44ca-80ea-4ea5bdaadba3",
+                        "StartNode": "aa5de9c8-c1b0-4723-b31f-c0c48ce9e15b",
+                        "EndNode": "9ef3c40b-979b-4d9e-8d43-b8a8e36cf8c2",
+                        "Width": 7.0,
+                        "Length": 0.0,
+                        "Lanes": [
+                            {
+                                "Id": "b62a1ef6-331f-475f-a17f-0926770167f1",
+                                "Direction": 1
+                            },
+                            {
+                                "Id": "3f52912e-a352-480f-a8ba-bfa9c98043e1",
+                                "Direction": -1
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

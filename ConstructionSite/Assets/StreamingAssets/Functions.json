@@ -1,0 +1,96 @@
+{
+    "functions": [
+        {
+            "name": "Move",
+            "type": "move",
+            "compatibleWith": ["excavator", "truck"],
+            "method": "MoveFromTo",
+            "parameters": [
+                {
+                    "name": "StartingPoint",
+                    "type": "coordinate",
+                    "description": "Coordinates of the starting point",
+                    "required": true
+                },
+                {
+                    "name": "EndPoint",
+                    "type": "coordinate",
+                    "description": "Coordinates of the end point",
+                    "required": true
+                },
+                {
+                    "name": "Speed",
+                    "type": "number",
+                    "description": "Movement speed",
+                    "defaultValue": 20,
+                    "range": {
+                        "min": 1,
+                        "max": 50
+                    },
+                    "required": false
+                }
+            ]
+        },
+        {
+            "name": "Dig",
+            "type": "dig",
+            "compatibleWith": ["excavator"],
+            "method": "Dig",
+            "parameters": [
+                {
+                    "name": "DigPoint",
+                    "type": "coordinate",
+                    "description": "Coordinates of the digging point",
+                    "required": true
+                },
+		{
+                    "name": "Quantity",
+                    "type": "number",
+                    "description": "Amount to be unloaded",
+                    "defaultValue": 100,
+                    "range": {
+                        "min": 10,
+                        "max": 1000
+                    },
+                    "required": false
+                },
+                {
+                    "name": "Depth",
+                    "type": "number",
+                    "description": "Digging depth",
+                    "defaultValue": 5,
+                    "range": {
+                        "min": 1,
+                        "max": 20
+                    },
+                    "required": false
+                }
+            ]
+        },
+        {
+            "name": "Empty",
+            "type": "empty",
+            "compatibleWith": ["excavator", "truck"],
+            "method": "Unload",
+            "parameters": [
+                {
+                    "name": "UnloadPoint",
+                    "type": "coordinate",
+                    "description": "Coordinates of the unloading point",
+                    "required": true
+                },
+                {
+                    "name": "Quantity",
+                    "type": "number",
+                    "description": "Amount to be unloaded",
+                    "defaultValue": 100,
+                    "range": {
+                        "min": 10,
+                        "max": 1000
+                    },
+                    "required": false
+                }
+            ]
+        }
+    ]
+}
